@@ -4,7 +4,7 @@
 #include <QGraphicsItem>
 #include <QtCore>
 #include <QtGui>
-
+//что за бред?
 #define CIRC      0
 #define RIGTH     1
 #define LEFT      2
