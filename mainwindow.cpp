@@ -1061,7 +1061,7 @@ void MainWindow::loadFileMel(const QString &fileName)
     QString melUnitDDNum;
     QString line;
     QRegExp rxUnit("^(DD\\d{1,5})\\*(F\\d{4})");
-    QRegExp rxMacro("^(DD\\d{1,5})\\*F([A-Z0-9'_#]+)");
+    QRegExp rxMacro("^(DD\\d{1,5})\\*F([a-zA-Z0-9'_#]+)");
     QRegExp rxPin("^\\s(IN|OUT|INOUT)\\d+:\\s([A-Z0-9'_#]+)");
     QSqlQuery query;
 
@@ -1244,27 +1244,39 @@ void MainWindow::newProjectNameCommitted()
     projectName = projectMenu->getText();
     ui->sessionLabel->setText(projectName);
     iniFileName = projectMenu->getIni();
+
     ui->MenuLevelLabel->setText(projectMenu->getFileName());
 
+    QFileInfo info(projectMenu->getFileName());
+    QString path;
+    path = info.absolutePath();
+    path.append("/");
+    iniFileName.prepend(path);
+
     QSqlQuery query;
-    query.prepare("INSERT INTO projects (projectName, coreInputFile) "
-                  "VALUES (:name, :file)");
+    query.prepare("INSERT INTO projects (projectName, coreInputFile, iniPath) "
+                  "VALUES (:name, :file, :ini)");
     query.bindValue(":name", projectName);
     query.bindValue(":file", projectMenu->getFileName());
-    query.exec();
-    qDebug()<<"Error 2: "<<query.lastError().text();
+    query.bindValue(":ini", iniFileName);
+    bool res = query.exec();
+    if(!res){
+        qDebug()<<"Error: "<<query.lastError().text();
+    }
 
     query.prepare("INSERT INTO sourceData (projectName, fileName) "
                   "VALUES (:name, :file)");
     query.bindValue(":name", projectName);
     query.bindValue(":file", projectMenu->getFileName());
-    query.exec();
+    res = query.exec();
+    if(!res){
+        qDebug()<<"Error: "<<query.lastError().text();
+    }
 
-    iniFileName.prepend("D:\\Qt\\");
+
     loadFileIni(iniFileName);
     loadFileMel(projectMenu->getFileName());
-    QFileInfo info(projectMenu->getFileName());
-    QString path;
+
     query.prepare("SELECT unitNets.fortUnitName FROM unitNets, sourceData, projects WHERE "
                   "unitNets.melUnitType = 1 AND unitNets.fileId = sourceData.fileId AND "
                   "sourceData.projectName = projects.projectName AND sourceData.fileName = :file AND "
@@ -1321,7 +1333,15 @@ void MainWindow::on_openProjectWidget_openProject(QString project)
         input = query.value(0).toString();
     }
     projectName = project;
-    loadFileIni("D:\\Qt\\HRT500.INI");
+
+    QSqlQuery query2;
+    query2.prepare("SELECT iniPath FROM projects WHERE projectName = :name");
+    query2.bindValue(":name", project);
+    query2.exec();
+    while(query2.next()){
+        loadFileIni(query2.value(0).toString());
+    }
+    //loadFileIni("D:\\Qt\\HRT500.INI");
     loadFileMel(input);
     QFileInfo info(input);
     QString path;

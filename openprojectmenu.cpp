@@ -8,7 +8,7 @@ openProjectMenu::openProjectMenu(QWidget *parent) :
     okButton = new QPushButton("OK");
     okButton->setEnabled(false);
     cancelButton = new QPushButton("Cancel");
-    connectToDatabase();
+    //connectToDatabase();
 
     QSqlTableModel* model = new QSqlTableModel;
 
@@ -19,6 +19,7 @@ openProjectMenu::openProjectMenu(QWidget *parent) :
     //model->setQuery("SELECT melUnitName, fortUnitName FROM unitNets WHERE isPlaced IS NOT NULL AND isPlaced != 1");
     projectsList->setSortingEnabled(1);
     projectsList->hideColumn(0);
+    //projectsList->hideColumn(0);
     projectsList->resizeColumnsToContents();
     projectsList->show();
 
@@ -40,17 +41,19 @@ openProjectMenu::openProjectMenu(QWidget *parent) :
 
 
 void openProjectMenu::connectToDatabase(){
-    db = new QSqlDatabase;
-    db->addDatabase("QMYSQL", "openProjectConnection");
-    db->setHostName("localhost");
-    //db.setPort(3306);
-    db->setDatabaseName("hrtdb");
-    db->setUserName("root");
-    db->setPassword("123456");
-    if (!(db->open())) {
-        QString resErrorString=db->lastError().databaseText()+"\n"+db->lastError().driverText();
-        qDebug()<<resErrorString;
-    }
+    //if(!db->isValid()){
+        db = new QSqlDatabase;
+        db->addDatabase("QSQLITE", "openProjectConnection");
+        //db->setHostName("localhost");
+        //db.setPort(3306);
+        db->setDatabaseName("D:\\Qt5.3\\HRTk0.db3");
+        //db->setUserName("root");
+        //db->setPassword("123456");
+        if (!(db->open())) {
+            QString resErrorString=db->lastError().databaseText()+"\n"+db->lastError().driverText();
+            qDebug()<<"opPrMenuErr"<<resErrorString;
+        }
+    //}
 }
 
 void openProjectMenu::on_projectsList_clicked(QModelIndex mi){
