@@ -1251,15 +1251,20 @@ void MainWindow::newProjectNameCommitted()
                   "VALUES (:name, :file)");
     query.bindValue(":name", projectName);
     query.bindValue(":file", projectMenu->getFileName());
-    query.exec();
-    qDebug()<<"Error 2: "<<query.lastError().text();
+    bool res = query.exec();
+    if(!res){
+        qDebug()<<"Error: "<<query.lastError().text();
+    }
 
     query.prepare("INSERT INTO sourceData (projectName, fileName) "
                   "VALUES (:name, :file)");
     query.bindValue(":name", projectName);
     query.bindValue(":file", projectMenu->getFileName());
-    query.exec();
-
+    res = query.exec();
+    if(!res){
+        qDebug()<<"Error: "<<query.lastError().text();
+    }
+    
     iniFileName.prepend("D:\\Qt\\");
     loadFileIni(iniFileName);
     loadFileMel(projectMenu->getFileName());

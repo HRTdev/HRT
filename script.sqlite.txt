@@ -1,0 +1,60 @@
+DROP TABLE projects;
+DROP TABLE sourceData;
+DROP TABLE ports;
+DROP TABLE unitNets;
+DROP TABLE unitPorts;
+DROP TABLE route;
+DROP TABLE unitPlacement;
+CREATE TABLE `projects` (
+	projectId	INT(4) PRIMARY KEY,
+	projectName	VARCHAR(20) UNIQUE,
+	coreInputFile VARCHAR(255),
+	fortPath	VARCHAR(255),
+	iniPath		VARCHAR(255),
+	creationDate	DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP);
+
+CREATE TABLE `sourceData` (
+	fileId	INT(4) PRIMARY KEY,
+	projectName	VARCHAR(20),
+	fileType	varchar(20),
+	fileName	VARCHAR(255));
+
+CREATE TABLE `ports` (
+	fileId	INT(4),
+	portType	VARCHAR(20),
+	portName	VARCHAR(20));
+
+CREATE TABLE `unitNets` (
+	unitId	INT(4) PRIMARY KEY,
+	fileId	INT(4) DEFAULT 0,
+	melUnitName	VARCHAR(20),
+	fortUnitName	VARCHAR(20),
+	melUnitType	VARCHAR(20),
+	macroUnitName	VARCHAR(20),
+	isPlaced	BOOLEAN DEFAULT 0,
+	UNIQUE(`fileId`,`melUnitName`,`fortUnitName`));
+
+CREATE TABLE `unitPorts` (
+	unitId	INT(4),
+	portType	VARCHAR(20),sourcedata
+	portName	VARCHAR(20));
+
+CREATE TABLE `route` (
+	routeId	INT(4) PRIMARY KEY,
+	routeName	VARCHAR(20),
+	direction	VARCHAR(20),
+	begin	VARCHAR(20),
+	end		VARCHAR(20),
+	beginPoint	INT(4),
+	endPoint	INT(4),
+	routeChannel	INT(4),
+	timestamp	DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	isHidden	BOOLEAN);
+
+CREATE TABLE `unitPlacement` (
+	unitId	INT(4),
+	unitRow	INT(4),
+	unitColumn	INT(4),
+	created	DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	isHidden	BOOLEAN DEFAULT 0,
+	UNIQUE(unitId, isHidden));
