@@ -1141,6 +1141,12 @@ void MainWindow::loadFileMel(const QString &fileName)
             }
             else if((rxPin.indexIn(line) != -1) && (melUnitDDNum != 0)){
                 //dbUnitPinsInfo[dbUnitName].append(rxPinInfo.cap(1));
+            /*
+             *
+             *
+             *
+             * Здесь нужно добавить запись melUnitPinName(DD###, Macro) в базу
+             * И оттуда же потом тягать эту информацию*/
                 melUnitPinName[melUnitDDNum].append(rxPin.cap(2));
                 melUnitPinType[melUnitDDNum].append(rxPin.cap(1));
 
@@ -1609,6 +1615,7 @@ void MainWindow::on_myScene_unitPlacing()
         }
         if(cellsFreedomFlag){
             qDebug()<<"Note: Cells are free, so we can place unit "<<melUnitChosen<<" here; Type of element is: "<<fName<<" ;";
+            qDebug()<<melUnitPinType.value(melUnitChosen);
             cell[coordX][coordY]->setParams(melUnitChosen,
                                             fName,
                                             dbUnitPinsCnt.value(fName),
