@@ -69,7 +69,7 @@ private slots:
     void on_tableWidget_itemDoubleClicked(QTableWidgetItem *item);
     void on_tableView_itemDoubleClicked(QModelIndex mi);
 
-    void on_basicCell_oversizedCell(QString cellMelName, quint32 cellPlace, QPoint cellPoint);
+    void on_basicCell_oversizedCell(QString cellMelName, quint32 cellPlace, QPoint cellPoint, QString melMacro);
 
     void reactOnTestRoute(int Key);
     void reactOnNodeSelecting();
@@ -148,10 +148,12 @@ private:
     QHash< QString, QVector<QString> > dbUnitPinsInfo;
 
 
-    QHash<QString, QString> melUnitFName;
+    QHash< QString, QHash< QString, QString > > melUnitFName;
     //QHash<QString, bool> melUnitStatus;
-    QHash< QString, QVector<QString> > melUnitPinName;
-    QHash< QString, QVector<QString> > melUnitPinType;
+    QHash< QString, QHash< QString, QVector<QString> > > melUnitPinName;
+    QHash< QString, QHash< QString, QVector<QString> > > melUnitPinType;
+    //QHash< QString, QVector<QString> > melUnitPinName;
+    //QHash< QString, QVector<QString> > melUnitPinType;
     QString melUnitChosen;//Выбранный юнит с именем из MEL файла
     QString melUnitChosenMacro;//Имя родительского юнита для выбранного юнита
 

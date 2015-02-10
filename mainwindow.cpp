@@ -62,8 +62,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     drawTable();
     ui->graphicsView->update();
-    QCoreApplication::setOrganizationName("OAO NPO Fizika");
-    QCoreApplication::setOrganizationDomain("npofizika.ru");
+    QCoreApplication::setOrganizationName("Roga i kopita");
+    QCoreApplication::setOrganizationDomain("ya.ru");
     QCoreApplication::setApplicationName("HRT");
 
     ui->graphicsView->setScene(scene);
@@ -234,12 +234,12 @@ void MainWindow::drawTable(){
 
             cell[x][y] = new basicCell;
             cell[x][y]->setPos(colCnt*SIDE,SIDE*(rowCnt+traceChannel));
-            cell[x][y]->setParams("","",0,0,0,tmp,tmp,tmp);
+            cell[x][y]->setParams("","",0,0,0,tmp,tmp,tmp,"");
             cell[x][y]->setActive(false);
             cell[x][y]->setRow(y);
             cell[x][y]->setColumn(x);
 
-            connect(cell[x][y], SIGNAL(oversizedCell(QString, quint32, QPoint)), this, SLOT(on_basicCell_oversizedCell(QString, quint32, QPoint)));
+            connect(cell[x][y], SIGNAL(oversizedCell(QString, quint32, QPoint, QString)), this, SLOT(on_basicCell_oversizedCell(QString, quint32, QPoint, QString)));
             scene->addItem(cell[x][y]);
         }
     }
@@ -1043,10 +1043,10 @@ void MainWindow::openMel()
 void MainWindow::loadFileMel(const QString &fileName)
 {
     ui->horizontalSlider->setValue(100);
-    melUnitFName.clear();
+    //melUnitFName.clear();
     //melUnitStatus.clear();
-    melUnitPinName.clear();
-    melUnitPinType.clear();
+    //melUnitPinName.clear();
+    //melUnitPinType.clear();
 
     QFile file(fileName);
     if (!file.open(QFile::ReadOnly | QFile::Text)) {
@@ -1118,8 +1118,11 @@ void MainWindow::loadFileMel(const QString &fileName)
         if (rxUnit.indexIn(line) != -1){
             melUnitDDNum = rxUnit.cap(1);
             //qDebug()<<"UnitNum: "<<rxUnit.cap(2);
-            melUnitFName.insert(melUnitDDNum,rxUnit.cap(2));
-
+            melUnitFName[macroMelName].insert(melUnitDDNum,rxUnit.cap(2));
+//            if(melUnitDDNum == "DD15"){
+//                qDebug()<<"MacroMelName: "<<macroMelName<<" melName: "<<melUnitDDNum<<" fname: "<<rxUnit.cap(2);
+//                qDebug()<<"total: "<<melUnitFName[macroMelName].value("DD15");
+//            }
             query.prepare("INSERT INTO unitNets (fileId, melUnitName, fortUnitName, melUnitType, macroUnitName) "
                           "VALUES (:id, :mel, :fort, 0, :macro)");
             query.bindValue(":id", fileId);
@@ -1147,8 +1150,14 @@ void MainWindow::loadFileMel(const QString &fileName)
              *
              * Здесь нужно добавить запись melUnitPinName(DD###, Macro) в базу
              * И оттуда же потом тягать эту информацию*/
-                melUnitPinName[melUnitDDNum].append(rxPin.cap(2));
-                melUnitPinType[melUnitDDNum].append(rxPin.cap(1));
+                melUnitPinName[macroMelName][melUnitDDNum].append(rxPin.cap(2));
+                melUnitPinType[macroMelName][melUnitDDNum].append(rxPin.cap(1));
+//                if(melUnitDDNum == "DD15"){
+//                    //qDebug()<<"MacroMelName: "<<macroMelName<<" PinType: "<<rxPin.cap(1);
+//                    //qDebug()<<"MacroMelName: "<<macroMelName<<" PinName: "<<rxPin.cap(2);
+//                    qDebug()<<"MacroMelName: "<<macroMelName<<" PinName: "<<melUnitPinName[macroMelName].value("DD15");
+//                    qDebug()<<"MacroMelName: "<<macroMelName<<" PinName: "<<melUnitPinType[macroMelName].value("DD15");
+//                }
 
                 QSqlQuery query2;
                 query2.prepare("SELECT unitNets.unitId FROM unitNets, sourceData WHERE "
@@ -1176,9 +1185,11 @@ void MainWindow::loadFileMel(const QString &fileName)
     } while (!line.isNull());
     //
 
-
-
-
+//    QHash< QString, QHash< QString, QString > >::const_iterator i = melUnitFName.constBegin();
+//    while (i != melUnitFName.constEnd()) {
+//        qDebug() << i.key() << ": " << i.value() << endl;
+//        ++i;
+//    }
 
 #ifndef QT_NO_CURSOR
     QApplication::setOverrideCursor(Qt::WaitCursor);
@@ -1202,9 +1213,11 @@ void MainWindow::on_tableWidget_itemDoubleClicked(QTableWidgetItem *item)
 }
 
 
-void MainWindow::on_basicCell_oversizedCell(QString cellMelName, quint32 cellPlace, QPoint cellPoint)
+void MainWindow::on_basicCell_oversizedCell(QString cellMelName, quint32 cellPlace, QPoint cellPoint, QString melMacro)
 {
-    QString str = melUnitFName.value(cellMelName);
+    QString str = melUnitFName.value(melMacro).value(cellMelName);
+//    qDebug()<<"melUnitFName[melUnitChosenMacro]: "<<melUnitFName.value(melMacro);
+//    qDebug()<<"Note: oversized: "<<cellMelName<<" macro "<<melMacro<<" here; Type of element is: "<<str<<" ;";
     if(!cell[cellPoint.x()+1][cellPoint.y()]->isActive()){
         cell[cellPoint.x()+1][cellPoint.y()]->setParams(cellMelName,
                                                         str,
@@ -1212,12 +1225,13 @@ void MainWindow::on_basicCell_oversizedCell(QString cellMelName, quint32 cellPla
                                                         dbUnitCellCnt.value(str),
                                                         cellPlace,
                                                         dbUnitPinsInfo.value(str),
-                                                        melUnitPinName.value(cellMelName),
-                                                        melUnitPinType.value(cellMelName));
+                                                        melUnitPinName.value(melMacro).value(cellMelName),
+                                                        melUnitPinType.value(melMacro).value(cellMelName),
+                                                        melMacro);
         cell[cellPoint.x()+1][cellPoint.y()]->update();
         cell[cellPoint.x()+1][cellPoint.y()]->setActive(true);
     }else{
-        //qDebug()<<"Why are you trying to set cell, which already active?";
+        qDebug()<<"Why are you trying to set cell, which already active?";
     }
     //qDebug()<<"Oversize response"<<cellMelName<<str<<dbUnitCellCnt.value(str.toInt())<<cellPlace;
 
@@ -1330,6 +1344,10 @@ void MainWindow::on_projectMenu_checkProjectName(QString text)
 
 void MainWindow::on_openProjectWidget_openProject(QString project)
 {
+    melUnitFName.clear();
+    melUnitPinName.clear();
+    melUnitPinType.clear();
+
     QSqlQuery query;
     QString input;
     query.prepare("SELECT coreInputFile FROM projects WHERE projectName = :name");
@@ -1535,7 +1553,7 @@ void MainWindow::pointsDetection()
 void MainWindow::on_myScene_unitPlacing()
 {
 
-    qDebug()<<"Note: Unit placing function launched;";
+    //qDebug()<<"Note: Unit placing function launched;";
     //MySQL checking if unit already placed;
     QSqlQuery query;
     query.prepare("SELECT A.isPlaced FROM unitNets A, sourceData B, projects C "
@@ -1562,9 +1580,7 @@ void MainWindow::on_myScene_unitPlacing()
     query.bindValue(":name", melUnitChosen);
     query.bindValue(":projName", projectName);
     query.bindValue(":mname", melUnitChosenMacro);
-    qDebug()<<melUnitChosen;
-    qDebug()<<projectName;
-    qDebug()<<melUnitChosenMacro;
+    qDebug()<<"Unit "<<melUnitChosen<<" from project `"<<projectName<<"`, with parent: "<<melUnitChosenMacro<<" chosen for placement;";
     query.exec();
     quint32 existance;
     while (query.next()) {
@@ -1614,17 +1630,18 @@ void MainWindow::on_myScene_unitPlacing()
             }
         }
         if(cellsFreedomFlag){
-            qDebug()<<"Note: Cells are free, so we can place unit "<<melUnitChosen<<" here; Type of element is: "<<fName<<" ;";
-            qDebug()<<melUnitPinType.value(melUnitChosen);
+            qDebug()<<"Note: Cells are free, so we can place unit "<<melUnitChosen<<" macro "<<melUnitChosenMacro<<" here; Type of element is: "<<fName<<" ;";
+            qDebug()<<melUnitPinType.value(melUnitChosenMacro).value(melUnitChosen);
             cell[coordX][coordY]->setParams(melUnitChosen,
                                             fName,
                                             dbUnitPinsCnt.value(fName),
                                             dbUnitCellCnt.value(fName),
                                             0,
                                             dbUnitPinsInfo.value(fName),
-                                            melUnitPinName.value(melUnitChosen),
-                                            melUnitPinType.value(melUnitChosen));
-            qDebug()<<"here2";
+                                            melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen),
+                                            melUnitPinType.value(melUnitChosenMacro).value(melUnitChosen),
+                                            melUnitChosenMacro);
+            //qDebug()<<"here2";
             cell[coordX][coordY]->setActive(true);
             //melUnitStatus.insert(melUnitChosen, true);
             cell[coordX][coordY]->update();
@@ -1787,7 +1804,7 @@ void MainWindow::connectToDatabase(){
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     //db.setHostName("localhost");
     //db.setPort(3306);
-    db.setDatabaseName("D:\\Qt5.3\\HRT\\HRTk0.db3");
+    db.setDatabaseName("D:\\Qt5.3\\HRT\\resources\\HRTk0.db3");
     //db.setUserName("root");
     //db.setPassword("123456");
     if (!(db.open())) {

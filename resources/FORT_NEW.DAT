@@ -1,0 +1,2997 @@
+Name: F3001
+Num: 1
+Type: 0
+Buff_num: 0
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 2
+Pins_inf:
+C1P1: Y 2 0
+C1P2: X 1 0
+C1P3: X 1 0
+
+Name: F3002
+Num: 2
+Type: 0
+Buff_num: 0
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 3
+Pins_inf:
+C1P1: Y 3 0
+C1P2: X1 1 1
+C1P3: X2 2 1
+
+Name: F3003
+Num: 3
+Type: 0
+Buff_num: 0
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 3
+Pins_inf:
+C1P1: Y 3 0
+C1P2: X1 1 1
+C1P3: X2 2 1
+
+Name: F3004
+Num: 4
+Type: 0
+Buff_num: 0
+Cell_cnt: 2
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: Y 4 0
+C1P2: CN 2 0
+C1P3: C 1 0
+C2P1: X 3 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+
+Name: F3005
+Num: 5
+Type: 0
+Buff_num: 0
+Cell_cnt: 2
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X2 2 1
+C1P3: X1 1 1
+C2P1: Y 5 0
+C2P2: X4 4 1
+C2P3: X3 3 1
+
+Name: F3006
+Num: 6
+Type: 0
+Buff_num: 0
+Cell_cnt: 2
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X1 1 1
+C1P3: X3 3 1
+C2P1: Y 5 0
+C2P2: X2 2 1
+C2P3: X4 4 1
+
+Name: F3007
+Num: 7
+Type: 0
+Buff_num: 0
+Cell_cnt: 2
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X1 1 1
+C1P3: X2 2 1
+C2P1: Y 5 0
+C2P2: X3 3 2
+C2P3: X4 4 2
+
+Name: F3008
+Num: 8
+Type: 0
+Buff_num: 0
+Cell_cnt: 2
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X1 1 1
+C1P3: X2 2 1
+C2P1: Y 5 0
+C2P2: X3 3 2
+C2P3: X4 4 2
+
+Name: F3009
+Num: 9
+Type: 0
+Buff_num: 0
+Cell_cnt: 2
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X 1 0
+C1P3: X 1 0
+C2P1: Y 4 0
+C2P2: NC 3 0
+C2P3: C 2 0
+
+Name: F3010
+Num: 10
+Type: 0
+Buff_num: 0
+Cell_cnt: 2
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X2 2 1
+C1P3: X1 1 1
+C2P1: Y 5 0
+C2P2: X3 3 2
+C2P3: X4 4 2
+
+Name: F3011
+Num: 11
+Type: 0
+Buff_num: 0
+Cell_cnt: 2
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X1 1 1
+C1P3: X4 4 0
+C2P1: Y 5 0
+C2P2: X2 2 1
+C2P3: X3 3 1
+
+Name: F3012
+Num: 12
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 3
+Pins_inf:
+C1P1: Y 3 0
+C1P2: X1 1 1
+C1P3: * 65535 0
+C2P1: * 65535 0
+C2P2: X2 2 1
+C2P3: X1 1 1
+C3P1: ! 0 0
+C3P2: * 65535 0
+C3P3: X2 2 1
+
+Name: F3013
+Num: 13
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 3
+Pins_inf:
+C1P1: Y 3 0
+C1P2: X1 1 1
+C1P3: * 65535 0
+C2P1: * 65535 0
+C2P2: X2 2 1
+C2P3: X1 1 1
+C3P1: ! 0 0
+C3P2: * 65535 0
+C3P3: X2 2 1
+
+Name: F3014
+Num: 14
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 3
+Pins_inf:
+C1P1: Q 3 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+C2P1: ! 0 0
+C2P2: * 65535 0
+C2P3: S 1 0
+C3P1: ! 0 0
+C3P2: R 2 0
+C3P3: * 65535 0
+
+Name: F3015
+Num: 15
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: Q 4 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+C2P1: ! 0 0
+C2P2: S1 1 1
+C2P3: S2 2 1
+C3P1: ! 0 0
+C3P2: R 3 0
+C3P3: * 65535 0
+
+Name: F3016
+Num: 16
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: Q 4 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+C2P1: ! 0 0
+C2P2: R1 2 1
+C2P3: R2 3 1
+C3P1: ! 0 0
+C3P2: S 1 0
+C3P3: * 65535 0
+
+Name: F3017
+Num: 17
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 3
+Pins_inf:
+C1P1: Q 3 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+C2P1: ! 0 0
+C2P2: * 65535 0
+C2P3: S 1 0
+C3P1: ! 0 0
+C3P2: R 2 0
+C3P3: * 65535 0
+
+Name: F3018
+Num: 18
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: Q 4 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+C2P1: ! 0 0
+C2P2: S1 1 1
+C2P3: S2 2 1
+C3P1: ! 0 0
+C3P2: R 3 0
+C3P3: * 65535 0
+
+Name: F3019
+Num: 19
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: Q 4 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+C2P1: ! 0 0
+C2P2: R1 2 1
+C2P3: R2 3 1
+C3P1: ! 0 0
+C3P2: S 1 0
+C3P3: * 65535 0
+
+Name: F3020
+Num: 20
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: Q 4 0
+C1P2: * 65535 0
+C1P3: NE 1 0
+C2P1: ! 0 0
+C2P2: * 65535 0
+C2P3: S 2 0
+C3P1: ! 0 0
+C3P2: R 3 0
+C3P3: * 65535 0
+
+Name: F3021
+Num: 21
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: Q 4 0
+C1P2: * 65535 0
+C1P3: E 1 0
+C2P1: ! 0 0
+C2P2: * 65535 0
+C2P3: S 2 0
+C3P1: ! 0 0
+C3P2: R 3 0
+C3P3: * 65535 0
+
+Name: F3022
+Num: 22
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: Q 4 0
+C1P2: * 65535 0
+C1P3: NE 1 0
+C2P1: ! 0 0
+C2P2: * 65535 0
+C2P3: NS 2 0
+C3P1: ! 0 0
+C3P2: NR 3 0
+C3P3: * 65535 0
+
+Name: F3023
+Num: 23
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: Q 4 0
+C1P2: * 65535 0
+C1P3: E 1 0
+C2P1: ! 0 0
+C2P2: * 65535 0
+C2P3: NS 2 0
+C3P1: ! 0 0
+C3P2: NR 3 0
+C3P3: * 65535 0
+
+Name: F3024
+Num: 24
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: ! 0 0
+C1P2: NC 3 0
+C1P3: C 2 0
+C2P1: D 1 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: Q 4 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+
+Name: F3025
+Num: 25
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: ! 0 0
+C1P2: NC 3 0
+C1P3: C 2 0
+C2P1: D 1 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: NQ 4 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+
+Name: F3026
+Num: 26
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 3
+Pins_inf:
+C1P1: Q 3 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+C2P1: D 1 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: C 2 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+
+Name: F3027
+Num: 27
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 3
+Pins_inf:
+C1P1: NQ 3 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+C2P1: D 1 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: C 2 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+
+Name: F3028
+Num: 28
+Type: 0
+Buff_num: 0
+Cell_cnt: 6
+Inner_tr: 0
+Pins_cnt: 6
+Pins_inf:
+C1P1: D 1 0
+C1P2: C 2 0
+C1P3: NC 3 0
+C2P1: * 65535 0
+C2P2: NC 3 0
+C2P3: C 2 0
+C3P1: * 65535 0
+C3P2: R 4 0
+C3P3: * 65535 0
+C4P1: * 65535 0
+C4P2: * 65535 0
+C4P3: * 65535 0
+C5P1: Q 5 0
+C5P2: * 65535 0
+C5P3: R 4 0
+C6P1: NQ 6 0
+C6P2: * 65535 0
+C6P3: * 65535 0
+
+Name: F3029
+Num: 29
+Type: 0
+Buff_num: 0
+Cell_cnt: 6
+Inner_tr: 0
+Pins_cnt: 7
+Pins_inf:
+C1P1: D 1 0
+C1P2: C 2 0
+C1P3: NC 3 0
+C2P1: * 65535 0
+C2P2: NC 3 0
+C2P3: C 2 0
+C3P1: * 65535 0
+C3P2: R 4 0
+C3P3: * 65535 0
+C4P1: NQ 7 0
+C4P2: S 5 0
+C4P3: * 65535 0
+C5P1: Q 6 0
+C5P2: * 65535 0
+C5P3: R 4 0
+C6P1: ! 0 0
+C6P2: * 65535 0
+C6P3: S 5 0
+
+Name: F3030
+Num: 30
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: D 1 0
+C1P2: NC 3 0
+C1P3: C 2 0
+C2P1: Q 5 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: ! 0 0
+C3P2: * 65535 0
+C3P3: R 4 0
+
+Name: F3031
+Num: 31
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 6
+Pins_inf:
+C1P1: D 1 0
+C1P2: NC 3 0
+C1P3: C 2 0
+C2P1: Q 5 0
+C2P2: NQ 6 0
+C2P3: NQ 6 0
+C3P1: ! 0 0
+C3P2: * 65535 0
+C3P3: S 4 0
+
+Name: F3032
+Num: 32
+Type: 1
+Buff_num: 1
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 2
+Pins_inf:
+C1P1: * 65535 0
+C1P2: Y 2 0
+C1P3: * 65535 0
+
+Name: F3033
+Num: 33
+Type: 1
+Buff_num: 1
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 2
+Pins_inf:
+C1P1: * 65535 0
+C1P2: Y 2 0
+C1P3: * 65535 0
+
+Name: F3034
+Num: 34
+Type: 1
+Buff_num: 2
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 2
+Pins_inf:
+C1P1: * 65535 0
+C1P2: X 1 0
+C1P3: * 65535 0
+
+Name: F3035
+Num: 35
+Type: 1
+Buff_num: 2
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 2
+Pins_inf:
+C1P1: * 65535 0
+C1P2: X 1 0
+C1P3: * 65535 0
+
+Name: F3036
+Num: 36
+Type: 1
+Buff_num: 4
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: B 2 0
+C1P2: Z 3 0
+C1P3: A 1 0
+
+Name: F3037
+Num: 37
+Type: 1
+Buff_num: 3
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: B 2 0
+C1P2: Z 3 0
+C1P3: A 1 0
+
+Name: F3038
+Num: 38
+Type: 1
+Buff_num: 2
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 2
+Pins_inf:
+C1P1: X 1 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+
+Name: F3039
+Num: 39
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 7
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X2 2 1
+C1P3: X1 1 1
+C2P1: Y 7 0
+C2P2: X4 4 1
+C2P3: X3 3 1
+C3P1: ! 0 0
+C3P2: X6 6 1
+C3P3: X5 5 1
+
+Name: F3040
+Num: 40
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 7
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X1 1 1
+C1P3: X2 2 1
+C2P1: Y 7 0
+C2P2: X3 3 2
+C2P3: X4 4 2
+C3P1: ! 0 0
+C3P2: X5 5 3
+C3P3: X6 6 3
+
+Name: F3041
+Num: 41
+Type: 0
+Buff_num: 0
+Cell_cnt: 4
+Inner_tr: 0
+Pins_cnt: 9
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X2 2 1
+C1P3: X1 1 1
+C2P1: ! 0 0
+C2P2: X4 4 1
+C2P3: X3 3 1
+C3P1: ! 0 0
+C3P2: X6 6 2
+C3P3: X5 5 2
+C4P1: Y 9 0
+C4P2: X8 8 2
+C4P3: X7 7 2
+
+Name: F3042
+Num: 42
+Type: 0
+Buff_num: 0
+Cell_cnt: 5
+Inner_tr: 0
+Pins_cnt: 10
+Pins_inf:
+C1P1: Y 10 0
+C1P2: X2 2 1
+C1P3: X1 1 1
+C2P1: ! 0 0
+C2P2: X4 4 2
+C2P3: X3 3 2
+C3P1: ! 0 0
+C3P2: X6 6 3
+C3P3: X5 5 3
+C4P1: ! 0 0
+C4P2: X8 8 4
+C4P3: X7 7 4
+C5P1: ! 0 0
+C5P2: * 65535 0
+C5P3: X9 9 4
+
+Name: F3043
+Num: 43
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X1 1 1
+C1P3: X3 3 1
+C2P1: ! 0 0
+C2P2: X2 2 1
+C2P3: X1 1 1
+C3P1: Y 4 0
+C3P2: X3 3 1
+C3P3: X2 2 1
+
+Name: F3044
+Num: 44
+Type: 0
+Buff_num: 0
+Cell_cnt: 6
+Inner_tr: 1
+Pins_cnt: 6
+Pins_inf:
+C1P1: NQ 6 0
+C1P2: C 2 0
+C1P3: NC 3 0
+C2P1: * 65535 0
+C2P2: NC 3 0
+C2P3: C 2 0
+C3P1: Q 5 0
+C3P2: R 4 0
+C3P3: * 65535 0
+C4P1: NQ 6 0
+C4P2: S 1 0
+C4P3: * 65535 0
+C5P1: Q 5 0
+C5P2: * 65535 0
+C5P3: R 4 0
+C6P1: ! 0 0
+C6P2: * 65535 0
+C6P3: S 1 0
+
+Name: F3045
+Num: 45
+Type: 0
+Buff_num: 0
+Cell_cnt: 6
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: D 1 0
+C1P2: NC 3 0
+C1P3: C 2 0
+C2P1: * 65535 0
+C2P2: C 2 0
+C2P3: NC 3 0
+C3P1: * 65535 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+C4P1: Q 4 0
+C4P2: * 65535 0
+C4P3: * 65535 0
+C5P1: NQ 5 0
+C5P2: * 65535 0
+C5P3: * 65535 0
+C6P1: ! 0 0
+C6P2: * 65535 0
+C6P3: * 65535 0
+
+Name: F3046
+Num: 46
+Type: 0
+Buff_num: 0
+Cell_cnt: 7
+Inner_tr: 0
+Pins_cnt: 6
+Pins_inf:
+C1P1: ! 0 0
+C1P2: A 3 0
+C1P3: * 65535 0
+C2P1: * 65535 0
+C2P2: D1 2 0
+C2P3: C 4 0
+C3P1: * 65535 0
+C3P2: * 65535 0
+C3P3: A 3 0
+C4P1: ! 0 0
+C4P2: D0 1 0
+C4P3: C 4 0
+C5P1: ! 0 0
+C5P2: * 65535 0
+C5P3: * 65535 0
+C6P1: ! 0 0
+C6P2: * 65535 0
+C6P3: * 65535 0
+C7P1: NQ 6 0
+C7P2: Q 5 0
+C7P3: Q 5 0
+
+Name: F3047
+Num: 47
+Type: 0
+Buff_num: 0
+Cell_cnt: 12
+Inner_tr: 1
+Pins_cnt: 8
+Pins_inf:
+C1P1: ! 0 0
+C1P2: A0 5 0
+C1P3: A1 6 0
+C2P1: * 65535 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: * 65535 0
+C3P2: * 65535 0
+C3P3: D0 1 0
+C4P1: ! 0 0
+C4P2: D2 3 0
+C4P3: * 65535 0
+C5P1: * 65535 0
+C5P2: * 65535 0
+C5P3: A1 6 0
+C6P1: ! 0 0
+C6P2: * 65535 0
+C6P3: A0 5 0
+C7P1: * 65535 0
+C7P2: * 65535 0
+C7P3: D1 2 0
+C8P1: ! 0 0
+C8P2: D3 4 0
+C8P3: A0 5 0
+C9P1: ! 0 0
+C9P2: * 65535 0
+C9P3: A1 6 0
+C10P1: ! 0 0
+C10P2: * 65535 0
+C10P3: * 65535 0
+C11P1: Q 8 0
+C11P2: * 65535 0
+C11P3: * 65535 0
+C12P1: ! 0 0
+C12P2: * 65535 0
+C12P3: C 7 0
+
+Name: F3049
+Num: 49
+Type: 0
+Buff_num: 0
+Cell_cnt: 5
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: F1 4 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+C2P1: F0 3 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: * 65535 0
+C3P2: D 1 0
+C3P3: DE 2 0
+C4P1: * 65535 0
+C4P2: * 65535 0
+C4P3: D 1 0
+C5P1: ! 0 0
+C5P2: * 65535 0
+C5P3: DE 2 0
+
+Name: F3052
+Num: 52
+Type: 0
+Buff_num: 0
+Cell_cnt: 9
+Inner_tr: 1
+Pins_cnt: 7
+Pins_inf:
+C1P1: ! 0 0
+C1P2: A1 2 0
+C1P3: A0 1 0
+C2P1: * 65535 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: F0 4 0
+C3P2: C 3 0
+C3P3: * 65535 0
+C4P1: ! 0 0
+C4P2: C 3 0
+C4P3: * 65535 0
+C5P1: F2 6 0
+C5P2: * 65535 0
+C5P3: A1 2 0
+C6P1: ! 0 0
+C6P2: C 3 0
+C6P3: * 65535 0
+C7P1: F1 5 0
+C7P2: * 65535 0
+C7P3: * 65535 0
+C8P1: ! 0 0
+C8P2: C 3 0
+C8P3: A0 1 0
+C9P1: F3 7 0
+C9P2: * 65535 0
+C9P3: A1 2 0
+
+Name: F3053
+Num: 53
+Type: 0
+Buff_num: 0
+Cell_cnt: 18
+Inner_tr: 3
+Pins_cnt: 11
+Pins_inf:
+C1P1: * 65535 0
+C1P2: A1 2 0
+C1P3: A0 1 0
+C2P1: * 65535 0
+C2P2: A2 3 0
+C2P3: * 65535 0
+C3P1: * 65535 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+C4P1: F0 4 0
+C4P2: * 65535 0
+C4P3: * 65535 0
+C5P1: * 65535 0
+C5P2: * 65535 0
+C5P3: * 65535 0
+C6P1: F1 5 0
+C6P2: * 65535 0
+C6P3: A0 1 0
+C7P1: ! 0 0
+C7P2: A1 2 0
+C7P3: * 65535 0
+C8P1: F2 6 0
+C8P2: * 65535 0
+C8P3: * 65535 0
+C9P1: ! 0 0
+C9P2: A1 2 0
+C9P3: * 65535 0
+C10P1: F3 7 0
+C10P2: * 65535 0
+C10P3: A0 1 0
+C11P1: ! 0 0
+C11P2: * 65535 0
+C11P3: * 65535 0
+C12P1: F4 8 0
+C12P2: * 65535 0
+C12P3: A2 3 0
+C13P1: * 65535 0
+C13P2: * 65535 0
+C13P3: A2 3 0
+C14P1: F5 9 0
+C14P2: * 65535 0
+C14P3: A0 1 0
+C15P1: * 65535 0
+C15P2: A1 2 0
+C15P3: A2 3 0
+C16P1: F6 10 0
+C16P2: * 65535 0
+C16P3: * 65535 0
+C17P1: * 65535 0
+C17P2: A1 2 0
+C17P3: A2 3 0
+C18P1: F7 11 0
+C18P2: * 65535 0
+C18P3: A0 1 0
+
+Name: F3055
+Num: 55
+Type: 0
+Buff_num: 0
+Cell_cnt: 14
+Inner_tr: 1
+Pins_cnt: 10
+Pins_inf:
+C1P1: * 65535 0
+C1P2: C 1 0
+C1P3: C 1 0
+C2P1: * 65535 0
+C2P2: R 6 0
+C2P3: R 6 0
+C3P1: D0 2 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+C4P1: F0 7 0
+C4P2: * 65535 0
+C4P3: * 65535 0
+C5P1: ! 0 0
+C5P2: * 65535 0
+C5P3: * 65535 0
+C6P1: D1 3 0
+C6P2: * 65535 0
+C6P3: C 1 0
+C7P1: F1 8 0
+C7P2: * 65535 0
+C7P3: * 65535 0
+C8P1: ! 0 0
+C8P2: * 65535 0
+C8P3: * 65535 0
+C9P1: D2 4 0
+C9P2: * 65535 0
+C9P3: * 65535 0
+C10P1: F2 9 0
+C10P2: * 65535 0
+C10P3: * 65535 0
+C11P1: ! 0 0
+C11P2: * 65535 0
+C11P3: * 65535 0
+C12P1: D3 5 0
+C12P2: * 65535 0
+C12P3: C 1 0
+C13P1: F3 10 0
+C13P2: * 65535 0
+C13P3: * 65535 0
+C14P1: ! 0 0
+C14P2: * 65535 0
+C14P3: * 65535 0
+
+Name: F3061
+Num: 61
+Type: 0
+Buff_num: 0
+Cell_cnt: 15
+Inner_tr: 1
+Pins_cnt: 10
+Pins_inf:
+C1P1: ! 0 0
+C1P2: B1 5 0
+C1P3: A1 1 0
+C2P1: * 65535 0
+C2P2: * 65535 0
+C2P3: B1 5 0
+C3P1: * 65535 0
+C3P2: A1 1 0
+C3P3: * 65535 0
+C4P1: ! 0 0
+C4P2: B2 6 0
+C4P3: A2 2 0
+C5P1: * 65535 0
+C5P2: * 65535 0
+C5P3: B2 6 0
+C6P1: * 65535 0
+C6P2: A2 2 0
+C6P3: * 65535 0
+C7P1: ! 0 0
+C7P2: B3 7 0
+C7P3: A3 3 0
+C8P1: * 65535 0
+C8P2: * 65535 0
+C8P3: B3 7 0
+C9P1: * 65535 0
+C9P2: A3 3 0
+C9P3: * 65535 0
+C10P1: ! 0 0
+C10P2: B4 8 0
+C10P3: A4 4 0
+C11P1: * 65535 0
+C11P2: * 65535 0
+C11P3: B4 8 0
+C12P1: * 65535 0
+C12P2: A4 4 0
+C12P3: * 65535 0
+C13P1: ! 0 0
+C13P2: * 65535 0
+C13P3: * 65535 0
+C14P1: NE 10 0
+C14P2: * 65535 0
+C14P3: * 65535 0
+C15P1: E 9 0
+C15P2: * 65535 0
+C15P3: NE 10 0
+
+Name: F3062
+Num: 62
+Type: 0
+Buff_num: 0
+Cell_cnt: 10
+Inner_tr: 1
+Pins_cnt: 5
+Pins_inf:
+C1P1: ! 0 0
+C1P2: A1 2 0
+C1P3: A0 1 0
+C2P1: * 65535 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: * 65535 0
+C3P2: A0 1 0
+C3P3: A1 2 0
+C4P1: * 65535 0
+C4P2: A2 3 0
+C4P3: * 65535 0
+C5P1: * 65535 0
+C5P2: A0 1 0
+C5P3: A1 2 0
+C6P1: P 5 0
+C6P2: * 65535 0
+C6P3: * 65535 0
+C7P1: ! 0 0
+C7P2: A2 3 0
+C7P3: * 65535 0
+C8P1: * 65535 0
+C8P2: * 65535 0
+C8P3: * 65535 0
+C9P1: * 65535 0
+C9P2: A2 3 0
+C9P3: * 65535 0
+C10P1: S 4 0
+C10P2: * 65535 0
+C10P3: * 65535 0
+
+Name: F3063
+Num: 63
+Type: 0
+Buff_num: 0
+Cell_cnt: 2
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: D0 1 0
+C1P2: D1 2 0
+C1P3: CE 3 0
+C2P1: Y 4 0
+C2P2: CE 3 0
+C2P3: * 65535 0
+
+Name: F3101
+Num: 101
+Type: 0
+Buff_num: 0
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 1
+Pins_inf:
+C1P1: X 1 0
+C1P2: X 1 0
+C1P3: X 1 0
+
+Name: F3102
+Num: 102
+Type: 0
+Buff_num: 0
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 3
+Pins_inf:
+C1P1: Y 3 0
+C1P2: X1 1 1
+C1P3: X2 2 1
+
+Name: F3105
+Num: 105
+Type: 0
+Buff_num: 0
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 3
+Pins_inf:
+C1P1: Y 3 0
+C1P2: X1 1 1
+C1P3: X2 2 1
+
+Name: F3106
+Num: 106
+Type: 0
+Buff_num: 0
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 2
+Pins_inf:
+C1P1: Y 2 0
+C1P2: X 1 0
+C1P3: X 1 0
+
+Name: F3107
+Num: 107
+Type: 0
+Buff_num: 0
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 3
+Pins_inf:
+C1P1: Y 3 0
+C1P2: X1 1 1
+C1P3: X2 2 1
+
+Name: F3111
+Num: 111
+Type: 0
+Buff_num: 0
+Cell_cnt: 5
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: ! 0 0
+C1P2: RI 3 0
+C1P3: RI 3 0
+C2P1: ! 0 0
+C2P2: R2 5 1
+C2P3: RH 2 1
+C3P1: ! 0 0
+C3P2: R2 5 1
+C3P3: RH 2 1
+C4P1: ! 0 0
+C4P2: R1 4 2
+C4P3: RL 1 2
+C5P1: ! 0 0
+C5P2: R1 4 2
+C5P3: RL 1 2
+
+Name: F3119
+Num: 119
+Type: 0
+Buff_num: 0
+Cell_cnt: 7
+Inner_tr: 0
+Pins_cnt: 6
+Pins_inf:
+C1P1: P 3 0
+C1P2: ZI 1 0
+C1P3: * 65535 0
+C2P1: ! 0 0
+C2P2: * 65535 0
+C2P3: N 4 0
+C3P1: EI 2 0
+C3P2: * 65535 0
+C3P3: EI 2 0
+C4P1: EO 5 0
+C4P2: EO 5 0
+C4P3: * 65535 0
+C5P1: ! 0 0
+C5P2: ZO 6 0
+C5P3: ZO 6 0
+C6P1: ZI 1 0
+C6P2: ZI 1 0
+C6P3: EO 5 0
+C7P1: N 4 0
+C7P2: * 65535 0
+C7P3: P 3 0
+
+Name: F3120
+Num: 120
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: N 4 0
+C1P2: * 65535 0
+C1P3: D 1 0
+C2P1: E 2 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: P 3 0
+C3P2: D 1 0
+C3P3: * 65535 0
+
+Name: F3121
+Num: 121
+Type: 0
+Buff_num: 0
+Cell_cnt: 4
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: P 4 0
+C1P2: D 1 0
+C1P3: * 65535 0
+C2P1: EP 2 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: EN 3 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+C4P1: N 5 0
+C4P2: * 65535 0
+C4P3: D 1 0
+
+Name: F3122
+Num: 122
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 3
+Pins_inf:
+C1P1: P 2 0
+C1P2: * 65535 0
+C1P3: D 1 0
+C2P1: ! 0 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: N 3 0
+C3P2: D 1 0
+C3P3: * 65535 0
+
+Name: F3123
+Num: 123
+Type: 0
+Buff_num: 0
+Cell_cnt: 2
+Inner_tr: 0
+Pins_cnt: 6
+Pins_inf:
+C1P1: Y2 6 0
+C1P2: X2 2 1
+C1P3: X4 4 0
+C2P1: Y1 5 0
+C2P2: X3 3 1
+C2P3: X1 1 1
+
+Name: F3124
+Num: 124
+Type: 0
+Buff_num: 0
+Cell_cnt: 2
+Inner_tr: 0
+Pins_cnt: 6
+Pins_inf:
+C1P1: Y2 6 0
+C1P2: X2 2 1
+C1P3: X4 4 0
+C2P1: Y1 5 0
+C2P2: X3 3 1
+C2P3: X1 1 1
+
+Name: F3126
+Num: 126
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: Q 3 0
+C1P2: * 65535 0
+C1P3: NQ 4 0
+C2P1: D 1 0
+C2P2: C 2 0
+C2P3: * 65535 0
+C3P1: ! 0 0
+C3P2: NQ 4 0
+C3P3: C 2 0
+
+Name: F3127
+Num: 127
+Type: 0
+Buff_num: 0
+Cell_cnt: 6
+Inner_tr: 0
+Pins_cnt: 6
+Pins_inf:
+C1P1: D 1 0
+C1P2: * 65535 0
+C1P3: CO 6 0
+C2P1: C 2 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: Q 4 0
+C3P2: CO 6 0
+C3P3: * 65535 0
+C4P1: * 65535 0
+C4P2: NQ 5 0
+C4P3: * 65535 0
+C5P1: Q 4 0
+C5P2: S 3 0
+C5P3: * 65535 0
+C6P1: NQ 5 0
+C6P2: * 65535 0
+C6P3: S 3 0
+
+Name: F3128
+Num: 128
+Type: 0
+Buff_num: 0
+Cell_cnt: 6
+Inner_tr: 0
+Pins_cnt: 6
+Pins_inf:
+C1P1: D 1 0
+C1P2: * 65535 0
+C1P3: CO 6 0
+C2P1: C 2 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: Q 4 0
+C3P2: CO 6 0
+C3P3: * 65535 0
+C4P1: * 65535 0
+C4P2: NQ 5 0
+C4P3: * 65535 0
+C5P1: Q 4 0
+C5P2: NR 3 0
+C5P3: * 65535 0
+C6P1: NQ 5 0
+C6P2: * 65535 0
+C6P3: NR 3 0
+
+Name: F3129
+Num: 129
+Type: 0
+Buff_num: 0
+Cell_cnt: 5
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: ! 0 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+C2P1: D 1 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: CO 5 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+C4P1: C 2 0
+C4P2: * 65535 0
+C4P3: * 65535 0
+C5P1: Q 3 0
+C5P2: NQ 4 0
+C5P3: * 65535 0
+
+Name: F3130
+Num: 130
+Type: 0
+Buff_num: 0
+Cell_cnt: 5
+Inner_tr: 0
+Pins_cnt: 6
+Pins_inf:
+C1P1: D 1 0
+C1P2: C 2 0
+C1P3: NC 3 0
+C2P1: * 65535 0
+C2P2: NC 3 0
+C2P3: C 2 0
+C3P1: Q 5 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+C4P1: NQ 6 0
+C4P2: NS 4 0
+C4P3: * 65535 0
+C5P1: ! 0 0
+C5P2: NQ 6 0
+C5P3: NS 4 0
+
+Name: F3131
+Num: 131
+Type: 0
+Buff_num: 0
+Cell_cnt: 5
+Inner_tr: 0
+Pins_cnt: 6
+Pins_inf:
+C1P1: D 1 0
+C1P2: C 2 0
+C1P3: NC 3 0
+C2P1: ! 0 0
+C2P2: NC 3 0
+C2P3: C 2 0
+C3P1: Q 5 0
+C3P2: * 65535 0
+C3P3: NQ 6 0
+C4P1: * 65535 0
+C4P2: S 4 0
+C4P3: * 65535 0
+C5P1: NQ 6 0
+C5P2: * 65535 0
+C5P3: S 4 0
+
+Name: F3132
+Num: 132
+Type: 0
+Buff_num: 0
+Cell_cnt: 5
+Inner_tr: 0
+Pins_cnt: 6
+Pins_inf:
+C1P1: D 1 0
+C1P2: C 2 0
+C1P3: NC 3 0
+C2P1: * 65535 0
+C2P2: NC 3 0
+C2P3: C 2 0
+C3P1: Q 5 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+C4P1: NQ 6 0
+C4P2: R 4 0
+C4P3: * 65535 0
+C5P1: ! 0 0
+C5P2: NQ 6 0
+C5P3: R 4 0
+
+Name: F3133
+Num: 133
+Type: 0
+Buff_num: 0
+Cell_cnt: 6
+Inner_tr: 0
+Pins_cnt: 7
+Pins_inf:
+C1P1: D 1 0
+C1P2: C 2 0
+C1P3: NC 3 0
+C2P1: * 65535 0
+C2P2: NC 3 0
+C2P3: C 2 0
+C3P1: Q 6 0
+C3P2: S 4 0
+C3P3: * 65535 0
+C4P1: ! 0 0
+C4P2: * 65535 0
+C4P3: S 4 0
+C5P1: NQ 7 0
+C5P2: R 5 0
+C5P3: * 65535 0
+C6P1: ! 0 0
+C6P2: NQ 7 0
+C6P3: R 5 0
+
+Name: F3134
+Num: 134
+Type: 0
+Buff_num: 0
+Cell_cnt: 4
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: D 1 0
+C1P2: C 2 0
+C1P3: * 65535 0
+C2P1: Q 4 0
+C2P2: NQ 5 0
+C2P3: C 2 0
+C3P1: ! 0 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+C4P1: ! 0 0
+C4P2: S 3 0
+C4P3: S 3 0
+
+Name: F3135
+Num: 135
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: D 1 0
+C1P2: C 2 0
+C1P3: * 65535 0
+C2P1: Q 4 0
+C2P2: NQ 5 0
+C2P3: C 2 0
+C3P1: S 3 0
+C3P2: * 65535 0
+C3P3: S 3 0
+
+Name: F3136
+Num: 136
+Type: 0
+Buff_num: 0
+Cell_cnt: 4
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: D 1 0
+C1P2: C 2 0
+C1P3: * 65535 0
+C2P1: Q 4 0
+C2P2: NQ 5 0
+C2P3: C 2 0
+C3P1: ! 0 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+C4P1: ! 0 0
+C4P2: R 3 0
+C4P3: R 3 0
+
+Name: F3137
+Num: 137
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: D 1 0
+C1P2: C 2 0
+C1P3: * 65535 0
+C2P1: Q 4 0
+C2P2: NQ 5 0
+C2P3: C 2 0
+C3P1: ! 0 0
+C3P2: * 65535 0
+C3P3: R 3 0
+
+Name: F3138
+Num: 138
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 6
+Pins_inf:
+C1P1: D 1 0
+C1P2: C 2 0
+C1P3: NC 3 0
+C2P1: Q 5 0
+C2P2: R 4 0
+C2P3: NQ 6 0
+C3P1: ! 0 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+
+Name: F3139
+Num: 139
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X2 2 0
+C1P3: X1 1 0
+C2P1: ! 0 0
+C2P2: Y1 3 0
+C2P3: X2 2 0
+C3P1: Y1 3 0
+C3P2: X1 1 0
+C3P3: Y2 4 0
+
+Name: F3140
+Num: 140
+Type: 0
+Buff_num: 0
+Cell_cnt: 4
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X2 2 0
+C1P3: X1 1 0
+C2P1: ! 0 0
+C2P2: X3 3 0
+C2P3: X3 3 0
+C3P1: ! 0 0
+C3P2: Y1 4 0
+C3P3: X2 2 0
+C4P1: Y1 4 0
+C4P2: X1 1 0
+C4P3: Y2 5 0
+
+Name: F3141
+Num: 141
+Type: 0
+Buff_num: 0
+Cell_cnt: 5
+Inner_tr: 0
+Pins_cnt: 6
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X2 2 0
+C1P3: X1 1 0
+C2P1: ! 0 0
+C2P2: X4 4 0
+C2P3: X3 3 0
+C3P1: ! 0 0
+C3P2: X3 3 0
+C3P3: X4 4 0
+C4P1: ! 0 0
+C4P2: Y1 5 0
+C4P3: X2 2 0
+C5P1: Y1 5 0
+C5P2: X1 1 0
+C5P3: Y2 6 0
+
+Name: F3142
+Num: 142
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: F 5 0
+C1P2: B1 3 0
+C1P3: A1 1 0
+C2P1: ! 0 0
+C2P2: A1 1 0
+C2P3: B1 3 0
+C3P1: B0 4 0
+C3P2: A0 2 0
+C3P3: B0 4 0
+
+Name: F3143
+Num: 143
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: B0 4 0
+C1P2: A0 2 0
+C1P3: B0 4 0
+C2P1: ! 0 0
+C2P2: B1 3 0
+C2P3: A1 1 0
+C3P1: F 5 0
+C3P2: A1 1 0
+C3P3: B1 3 0
+
+Name: F3145
+Num: 145
+Type: 0
+Buff_num: 0
+Cell_cnt: 6
+Inner_tr: 0
+Pins_cnt: 6
+Pins_inf:
+C1P1: D 5 0
+C1P2: VL 2 0
+C1P3: B0 4 0
+C2P1: ! 0 0
+C2P2: VH 1 0
+C2P3: VL 2 0
+C3P1: ! 0 0
+C3P2: B0 4 0
+C3P3: * 65535 0
+C4P1: ! 0 0
+C4P2: B1 3 0
+C4P3: VH 1 0
+C5P1: ! 0 0
+C5P2: * 65535 0
+C5P3: * 65535 0
+C6P1: ER 6 0
+C6P2: * 65535 0
+C6P3: * 65535 0
+
+Name: F3146
+Num: 146
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: D 1 0
+C1P2: NC 3 0
+C1P3: C 2 0
+C2P1: Q 4 0
+C2P2: * 65535 0
+C2P3: NC 3 0
+C3P1: ! 0 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+
+Name: F3147
+Num: 147
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: D 1 0
+C1P2: C 2 0
+C1P3: NC 3 0
+C2P1: Q 4 0
+C2P2: * 65535 0
+C2P3: C 2 0
+C3P1: ! 0 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+
+Name: F3148
+Num: 148
+Type: 0
+Buff_num: 0
+Cell_cnt: 4
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: NQ 4 0
+C1P2: C 2 0
+C1P3: * 65535 0
+C2P1: D 1 0
+C2P2: * 65535 0
+C2P3: C 2 0
+C3P1: Q 3 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+C4P1: ! 0 0
+C4P2: * 65535 0
+C4P3: * 65535 0
+
+Name: F3149
+Num: 149
+Type: 0
+Buff_num: 0
+Cell_cnt: 4
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: Q 3 0
+C1P2: C 2 0
+C1P3: * 65535 0
+C2P1: D 1 0
+C2P2: * 65535 0
+C2P3: C 2 0
+C3P1: NQ 4 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+C4P1: ! 0 0
+C4P2: * 65535 0
+C4P3: * 65535 0
+
+Name: F3150
+Num: 150
+Type: 0
+Buff_num: 0
+Cell_cnt: 4
+Inner_tr: 0
+Pins_cnt: 6
+Pins_inf:
+C1P1: D 1 0
+C1P2: NC 3 0
+C1P3: C 2 0
+C2P1: Q 5 0
+C2P2: * 65535 0
+C2P3: NC 3 0
+C3P1: ! 0 0
+C3P2: NR 4 1
+C3P3: * 65535 0
+C4P1: NQ 6 0
+C4P2: * 65535 0
+C4P3: * 65535 0
+
+Name: F3151
+Num: 151
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 7
+Pins_inf:
+C1P1: D 1 0
+C1P2: NC 3 0
+C1P3: C 2 0
+C2P1: ! 0 0
+C2P2: R1 4 1
+C2P3: * 65535 0
+C3P1: Q 6 0
+C3P2: NQ 7 0
+C3P3: R2 5 1
+
+Name: F3152
+Num: 152
+Type: 1
+Buff_num: 3
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 3
+Pins_inf:
+C1P1: * 65535 0
+C1P2: Y 2 0
+C1P3: X 1 0
+
+Name: F3201
+Num: 201
+Type: 0
+Buff_num: 0
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 3
+Pins_inf:
+C1P1: Y 2 0
+C1P2: X 1 0
+C1P3: NY 3 0
+
+Name: F3202
+Num: 202
+Type: 0
+Buff_num: 0
+Cell_cnt: 2
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X1 1 1
+C1P3: NY 5 0
+C2P1: Y1 4 0
+C2P2: X3 3 1
+C2P3: X2 2 1
+
+Name: F3203
+Num: 203
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 7
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X2 2 1
+C1P3: X1 1 1
+C2P1: ! 0 0
+C2P2: X4 4 1
+C2P3: X3 3 1
+C3P1: Y 6 0
+C3P2: NY 7 0
+C3P3: X5 5 1
+
+Name: F3204
+Num: 204
+Type: 0
+Buff_num: 0
+Cell_cnt: 2
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X1 1 1
+C1P3: NY 5 0
+C2P1: Y1 4 0
+C2P2: X3 3 1
+C2P3: X2 2 1
+
+Name: F3205
+Num: 205
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 7
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X2 2 1
+C1P3: X1 1 1
+C2P1: ! 0 0
+C2P2: X4 4 1
+C2P3: X3 3 1
+C3P1: Y 6 0
+C3P2: NY 7 0
+C3P3: X5 5 1
+
+Name: F3206
+Num: 206
+Type: 0
+Buff_num: 0
+Cell_cnt: 2
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X2 2 1
+C1P3: X1 1 1
+C2P1: Y 5 0
+C2P2: X3 3 2
+C2P3: X4 4 2
+
+Name: F3207
+Num: 207
+Type: 0
+Buff_num: 0
+Cell_cnt: 5
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: ! 0 0
+C1P2: C0 3 0
+C1P3: A 1 1
+C2P1: * 65535 0
+C2P2: * 65535 0
+C2P3: C0 3 0
+C3P1: C 5 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+C4P1: B 2 1
+C4P2: B 2 1
+C4P3: * 65535 0
+C5P1: S 4 0
+C5P2: * 65535 0
+C5P3: * 65535 0
+
+Name: F3208
+Num: 208
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: ! 0 0
+C1P2: B 2 1
+C1P3: * 65535 0
+C2P1: S 3 0
+C2P2: A 1 1
+C2P3: B 2 1
+C3P1: P 4 0
+C3P2: * 65535 0
+C3P3: A 1 1
+
+Name: F3209
+Num: 209
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: ! 0 0
+C1P2: DC 3 0
+C1P3: DC 3 0
+C2P1: Y 5 0
+C2P2: ND 4 0
+C2P3: ND 4 0
+C3P1: ! 0 0
+C3P2: B 2 0
+C3P3: A 1 0
+
+Name: F3210
+Num: 210
+Type: 0
+Buff_num: 0
+Cell_cnt: 2
+Inner_tr: 0
+Pins_cnt: 3
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X1 1 1
+C1P3: * 65535 0
+C2P1: NY 3 0
+C2P2: X2 2 1
+C2P3: X1 1 1
+
+Name: F3211
+Num: 211
+Type: 0
+Buff_num: 0
+Cell_cnt: 2
+Inner_tr: 0
+Pins_cnt: 3
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X1 1 1
+C1P3: * 65535 0
+C2P1: Y 3 0
+C2P2: X2 2 1
+C2P3: X1 1 1
+
+Name: F3212
+Num: 212
+Type: 0
+Buff_num: 0
+Cell_cnt: 4
+Inner_tr: 0
+Pins_cnt: 6
+Pins_inf:
+C1P1: Q 4 0
+C1P2: * 65535 0
+C1P3: NQ 5 0
+C2P1: D 1 0
+C2P2: C 2 0
+C2P3: * 65535 0
+C3P1: ! 0 0
+C3P2: E 3 0
+C3P3: C 2 0
+C4P1: Z 6 0
+C4P2: * 65535 0
+C4P3: E 3 0
+
+Name: F3213
+Num: 213
+Type: 0
+Buff_num: 0
+Cell_cnt: 2
+Inner_tr: 0
+Pins_cnt: 2
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X 1 0
+C1P3: X 1 0
+C2P1: NY 2 0
+C2P2: * 65535 0
+C2P3: NY 2 0
+
+Name: F3214
+Num: 214
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 2
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X 1 0
+C1P3: X 1 0
+C2P1: ! 0 0
+C2P2: * 65535 0
+C2P3: X 1 0
+C3P1: ! 0 0
+C3P2: Y 2 0
+C3P3: Y 2 0
+
+Name: F3215
+Num: 215
+Type: 0
+Buff_num: 0
+Cell_cnt: 4
+Inner_tr: 0
+Pins_cnt: 2
+Pins_inf:
+C1P1: ! 0 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+C2P1: ! 0 0
+C2P2: X 1 0
+C2P3: X 1 0
+C3P1: ! 0 0
+C3P2: * 65535 0
+C3P3: X 1 0
+C4P1: ! 0 0
+C4P2: Y 2 0
+C4P3: Y 2 0
+
+Name: F3216
+Num: 216
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: ! 0 0
+C1P2: X 1 0
+C1P3: X 1 0
+C2P1: ! 0 0
+C2P2: C 2 0
+C2P3: C 2 0
+C3P1: Y 4 0
+C3P2: NC 3 0
+C3P3: NC 3 0
+
+Name: F3217
+Num: 217
+Type: 0
+Buff_num: 0
+Cell_cnt: 7
+Inner_tr: 1
+Pins_cnt: 7
+Pins_inf:
+C1P1: ! 0 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+C2P1: NC 2 0
+C2P2: C 3 0
+C2P3: NC 2 0
+C3P1: D 1 0
+C3P2: NC 2 0
+C3P3: C 3 0
+C4P1: Q 6 0
+C4P2: * 65535 0
+C4P3: NQ 7 0
+C5P1: * 65535 0
+C5P2: E 5 0
+C5P3: * 65535 0
+C6P1: SR 4 0
+C6P2: * 65535 0
+C6P3: E 5 0
+C7P1: * 65535 0
+C7P2: * 65535 0
+C7P3: E 5 0
+
+Name: F3218
+Num: 218
+Type: 0
+Buff_num: 0
+Cell_cnt: 6
+Inner_tr: 0
+Pins_cnt: 7
+Pins_inf:
+C1P1: E 3 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+C2P1: D1 2 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: D0 1 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+C4P1: * 65535 0
+C4P2: C 5 0
+C4P3: NC 4 0
+C5P1: Q 6 0
+C5P2: NC 4 0
+C5P3: C 5 0
+C6P1: NC 4 0
+C6P2: NQ 7 0
+C6P3: * 65535 0
+
+Name: F3219
+Num: 219
+Type: 0
+Buff_num: 0
+Cell_cnt: 6
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: A 1 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+C2P1: B 2 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: Y 5 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+C4P1: ! 0 0
+C4P2: DC 3 0
+C4P3: * 65535 0
+C5P1: ! 0 0
+C5P2: E 4 0
+C5P3: DC 3 0
+C6P1: ! 0 0
+C6P2: * 65535 0
+C6P3: E 4 0
+
+Name: F3220
+Num: 220
+Type: 0
+Buff_num: 0
+Cell_cnt: 5
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: A 1 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+C2P1: Y 4 0
+C2P2: U 3 0
+C2P3: * 65535 0
+C3P1: ! 0 0
+C3P2: * 65535 0
+C3P3: U 3 0
+C4P1: * 65535 0
+C4P2: * 65535 0
+C4P3: * 65535 0
+C5P1: B 2 0
+C5P2: * 65535 0
+C5P3: * 65535 0
+
+Name: F3221
+Num: 221
+Type: 0
+Buff_num: 0
+Cell_cnt: 5
+Inner_tr: 0
+Pins_cnt: 8
+Pins_inf:
+C1P1: ! 0 0
+C1P2: U1 3 0
+C1P3: * 65535 0
+C2P1: F1 6 0
+C2P2: U2 4 0
+C2P3: U1 3 0
+C3P1: F2 7 0
+C3P2: * 65535 0
+C3P3: U2 4 0
+C4P1: B 2 0
+C4P2: U3 5 0
+C4P3: * 65535 0
+C5P1: F3 8 0
+C5P2: A 1 0
+C5P3: U3 5 0
+
+Name: F3222
+Num: 222
+Type: 0
+Buff_num: 0
+Cell_cnt: 7
+Inner_tr: 0
+Pins_cnt: 11
+Pins_inf:
+C1P1: 1 2 0
+C1P2: S 1 0
+C1P3: U1 4 0
+C2P1: 2 3 0
+C2P2: U1 4 0
+C2P3: S 1 0
+C3P1: F1 7 0
+C3P2: * 65535 0
+C3P3: U1 4 0
+C4P1: A 10 0
+C4P2: U2 5 0
+C4P3: * 65535 0
+C5P1: F2 8 0
+C5P2: U3 6 0
+C5P3: U2 5 0
+C6P1: F3 9 0
+C6P2: * 65535 0
+C6P3: U3 6 0
+C7P1: B 11 0
+C7P2: ! 0 0
+C7P3: ! 0 0
+
+Name: F3223
+Num: 223
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: ! 0 0
+C1P2: U 4 0
+C1P3: * 65535 0
+C2P1: Y 5 0
+C2P2: S 1 0
+C2P3: U 4 0
+C3P1: 1 2 0
+C3P2: 2 3 0
+C3P3: * 65535 0
+
+Name: F3224
+Num: 224
+Type: 0
+Buff_num: 0
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 2
+Pins_inf:
+C1P1: Z 2 0
+C1P2: Y 1 0
+C1P3: Z 2 0
+
+Name: F3225
+Num: 225
+Type: 0
+Buff_num: 0
+Cell_cnt: 2
+Inner_tr: 0
+Pins_cnt: 3
+Pins_inf:
+C1P1: ! 0 0
+C1P2: C 2 0
+C1P3: X 1 0
+C2P1: Y 3 0
+C2P2: * 65535 0
+C2P3: C 2 0
+
+Name: F3226
+Num: 226
+Type: 0
+Buff_num: 0
+Cell_cnt: 2
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: Y 5 0
+C1P2: X1 1 1
+C1P3: NY 4 0
+C2P1: ! 0 0
+C2P2: X2 2 1
+C2P3: X3 3 0
+
+Name: F3227
+Num: 227
+Type: 0
+Buff_num: 0
+Cell_cnt: 2
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: Y 5 0
+C1P2: X1 1 1
+C1P3: NY 4 0
+C2P1: ! 0 0
+C2P2: X2 2 1
+C2P3: X3 3 0
+
+Name: F3228
+Num: 228
+Type: 0
+Buff_num: 0
+Cell_cnt: 5
+Inner_tr: 0
+Pins_cnt: 6
+Pins_inf:
+C1P1: D 1 0
+C1P2: C 2 0
+C1P3: NC 3 0
+C2P1: ! 0 0
+C2P2: NC 3 0
+C2P3: C 2 0
+C3P1: Q 5 0
+C3P2: * 65535 0
+C3P3: NQ 6 0
+C4P1: * 65535 0
+C4P2: NR 4 0
+C4P3: * 65535 0
+C5P1: NQ 6 0
+C5P2: * 65535 0
+C5P3: NR 4 0
+
+Name: F3229
+Num: 229
+Type: 0
+Buff_num: 0
+Cell_cnt: 4
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: ! 0 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+C2P1: NC 2 0
+C2P2: C 3 0
+C2P3: NC 2 0
+C3P1: D 1 0
+C3P2: NC 2 0
+C3P3: C 3 0
+C4P1: Q 4 0
+C4P2: NQ 5 0
+C4P3: * 65535 0
+
+Name: F3230
+Num: 230
+Type: 0
+Buff_num: 0
+Cell_cnt: 9
+Inner_tr: 0
+Pins_cnt: 8
+Pins_inf:
+C1P1: ! 0 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+C2P1: D1 1 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: ! 0 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+C4P1: Y1 4 0
+C4P2: * 65535 0
+C4P3: Y2 5 0
+C5P1: * 65535 0
+C5P2: C 2 0
+C5P3: * 65535 0
+C6P1: ! 0 0
+C6P2: Y4 7 0
+C6P3: * 65535 0
+C7P1: Y3 6 0
+C7P2: * 65535 0
+C7P3: * 65535 0
+C8P1: D2 3 0
+C8P2: * 65535 0
+C8P3: * 65535 0
+C9P1: * 65535 0
+C9P2: * 65535 0
+C9P3: * 65535 0
+
+Name: F3231
+Num: 231
+Type: 1
+Buff_num: 2
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 2
+Pins_inf:
+C1P1: Y 1 0
+C1P2: Y 1 0
+C1P3: Y 1 0
+
+Name: F3232
+Num: 232
+Type: 1
+Buff_num: 2
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 2
+Pins_inf:
+C1P1: * 65535 0
+C1P2: Y 1 0
+C1P3: * 65535 0
+
+Name: F3233
+Num: 233
+Type: 1
+Buff_num: 2
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 2
+Pins_inf:
+C1P1: * 65535 0
+C1P2: Y 1 0
+C1P3: * 65535 0
+
+Name: F3234
+Num: 234
+Type: 1
+Buff_num: 4
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: Y2 4 0
+C1P2: X1 1 0
+C1P3: X2 3 0
+
+Name: F3235
+Num: 235
+Type: 1
+Buff_num: 4
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: X 1 0
+C1P2: Y1 2 0
+C1P3: Y2 3 0
+
+Name: F3236
+Num: 236
+Type: 1
+Buff_num: 4
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: B 2 0
+C1P2: Z 3 0
+C1P3: A 1 0
+
+Name: F3237
+Num: 237
+Type: 1
+Buff_num: 4
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: B 2 0
+C1P2: Z 3 0
+C1P3: A 1 0
+
+Name: F3238
+Num: 238
+Type: 1
+Buff_num: 4
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: C2 2 0
+C1P2: Z1 3 0
+C1P3: C1 1 0
+
+Name: F3239
+Num: 239
+Type: 1
+Buff_num: 4
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: C 2 0
+C1P2: Z1 3 0
+C1P3: X 1 0
+
+Name: F3241
+Num: 241
+Type: 0
+Buff_num: 0
+Cell_cnt: 3
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: D 1 0
+C1P2: C 2 0
+C1P3: * 65535 0
+C2P1: Q 4 0
+C2P2: NQ 5 0
+C2P3: C 2 0
+C3P1: R 3 0
+C3P2: R 3 0
+C3P3: * 65535 0
+
+Name: F3242
+Num: 242
+Type: 1
+Buff_num: 4
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: B 2 0
+C1P2: Z 3 0
+C1P3: A 1 0
+
+Name: F3243
+Num: 243
+Type: 1
+Buff_num: 4
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: B 2 0
+C1P2: Z 3 0
+C1P3: A 1 0
+
+Name: F3244
+Num: 244
+Type: 1
+Buff_num: 4
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: X2 2 0
+C1P2: Y1 3 0
+C1P3: X1 1 0
+
+Name: F3246
+Num: 246
+Type: 0
+Buff_num: 0
+Cell_cnt: 14
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: Y 5 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+C2P1: ! 0 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: ! 0 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+C4P1: ! 0 0
+C4P2: * 65535 0
+C4P3: * 65535 0
+C5P1: ! 0 0
+C5P2: * 65535 0
+C5P3: * 65535 0
+C6P1: * 65535 0
+C6P2: * 65535 0
+C6P3: * 65535 0
+C7P1: ! 0 0
+C7P2: * 65535 0
+C7P3: * 65535 0
+C8P1: ! 0 0
+C8P2: * 65535 0
+C8P3: * 65535 0
+C9P1: ! 0 0
+C9P2: CM 3 0
+C9P3: * 65535 0
+C10P1: ! 0 0
+C10P2: P 2 0
+C10P3: P 2 0
+C11P1: ! 0 0
+C11P2: * 65535 0
+C11P3: * 65535 0
+C12P1: ! 0 0
+C12P2: N 1 0
+C12P3: N 1 0
+C13P1: ! 0 0
+C13P2: * 65535 0
+C13P3: CP 4 0
+C14P1: ! 0 0
+C14P2: * 65535 0
+C14P3: * 65535 0
+
+Name: F3247
+Num: 247
+Type: 0
+Buff_num: 0
+Cell_cnt: 9
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: Y 4 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+C2P1: * 65535 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: ! 0 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+C4P1: ! 0 0
+C4P2: * 65535 0
+C4P3: * 65535 0
+C5P1: ! 0 0
+C5P2: P 2 2
+C5P3: P 2 2
+C6P1: ! 0 0
+C6P2: P 2 2
+C6P3: P 2 2
+C7P1: ! 0 0
+C7P2: N 1 1
+C7P3: N 1 1
+C8P1: ! 0 0
+C8P2: N 1 1
+C8P3: N 1 1
+C9P1: C 3 0
+C9P2: * 65535 0
+C9P3: C 3 0
+
+Name: F3248
+Num: 248
+Type: 0
+Buff_num: 0
+Cell_cnt: 40
+Inner_tr: 0
+Pins_cnt: 5
+Pins_inf:
+C1P1: * 65535 0
+C1P2: * 65535 0
+C1P3: * 65535 0
+C2P1: * 65535 0
+C2P2: * 65535 0
+C2P3: * 65535 0
+C3P1: * 65535 0
+C3P2: * 65535 0
+C3P3: * 65535 0
+C4P1: * 65535 0
+C4P2: * 65535 0
+C4P3: * 65535 0
+C5P1: * 65535 0
+C5P2: * 65535 0
+C5P3: * 65535 0
+C6P1: * 65535 0
+C6P2: * 65535 0
+C6P3: * 65535 0
+C7P1: * 65535 0
+C7P2: * 65535 0
+C7P3: * 65535 0
+C8P1: * 65535 0
+C8P2: * 65535 0
+C8P3: * 65535 0
+C9P1: * 65535 0
+C9P2: * 65535 0
+C9P3: * 65535 0
+C10P1: * 65535 0
+C10P2: * 65535 0
+C10P3: * 65535 0
+C11P1: * 65535 0
+C11P2: * 65535 0
+C11P3: * 65535 0
+C12P1: * 65535 0
+C12P2: * 65535 0
+C12P3: * 65535 0
+C13P1: * 65535 0
+C13P2: * 65535 0
+C13P3: * 65535 0
+C14P1: * 65535 0
+C14P2: * 65535 0
+C14P3: * 65535 0
+C15P1: * 65535 0
+C15P2: * 65535 0
+C15P3: * 65535 0
+C16P1: * 65535 0
+C16P2: * 65535 0
+C16P3: * 65535 0
+C17P1: * 65535 0
+C17P2: * 65535 0
+C17P3: * 65535 0
+C18P1: * 65535 0
+C18P2: * 65535 0
+C18P3: * 65535 0
+C19P1: * 65535 0
+C19P2: * 65535 0
+C19P3: * 65535 0
+C20P1: * 65535 0
+C20P2: * 65535 0
+C20P3: * 65535 0
+C21P1: H1 2 0
+C21P2: * 65535 0
+C21P3: * 65535 0
+C22P1: * 65535 0
+C22P2: * 65535 0
+C22P3: * 65535 0
+C23P1: H2 3 0
+C23P2: * 65535 0
+C23P3: * 65535 0
+C24P1: * 65535 0
+C24P2: * 65535 0
+C24P3: * 65535 0
+C25P1: UB 1 0
+C25P2: * 65535 0
+C25P3: * 65535 0
+C26P1: * 65535 0
+C26P2: * 65535 0
+C26P3: * 65535 0
+C27P1: L2 5 0
+C27P2: * 65535 0
+C27P3: * 65535 0
+C28P1: * 65535 0
+C28P2: * 65535 0
+C28P3: * 65535 0
+C29P1: L1 4 0
+C29P2: * 65535 0
+C29P3: * 65535 0
+C30P1: * 65535 0
+C30P2: * 65535 0
+C30P3: * 65535 0
+C31P1: * 65535 0
+C31P2: * 65535 0
+C31P3: * 65535 0
+C32P1: * 65535 0
+C32P2: * 65535 0
+C32P3: * 65535 0
+C33P1: * 65535 0
+C33P2: * 65535 0
+C33P3: * 65535 0
+C34P1: * 65535 0
+C34P2: * 65535 0
+C34P3: * 65535 0
+C35P1: * 65535 0
+C35P2: * 65535 0
+C35P3: * 65535 0
+C36P1: * 65535 0
+C36P2: * 65535 0
+C36P3: * 65535 0
+C37P1: * 65535 0
+C37P2: * 65535 0
+C37P3: * 65535 0
+C38P1: * 65535 0
+C38P2: * 65535 0
+C38P3: * 65535 0
+C39P1: * 65535 0
+C39P2: * 65535 0
+C39P3: * 65535 0
+C40P1: * 65535 0
+C40P2: * 65535 0
+C40P3: * 65535 0
+
+Name: F3249
+Num: 249
+Type: 1
+Buff_num: 4
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: B 1 0
+C1P2: C 2 0
+C1P3: A 3 0
+
+Name: F3250
+Num: 250
+Type: 0
+Buff_num: 0
+Cell_cnt: 23
+Inner_tr: 0
+Pins_cnt: 2
+Pins_inf:
+C1P1: * 65535 0
+C1P2: P 1 1
+C1P3: P 1 1
+C2P1: * 65535 0
+C2P2: P 1 1
+C2P3: P 1 1
+C3P1: * 65535 0
+C3P2: P 1 1
+C3P3: P 1 1
+C4P1: * 65535 0
+C4P2: P 1 1
+C4P3: P 1 1
+C5P1: P 1 1
+C5P2: P 1 1
+C5P3: P 1 1
+C6P1: * 65535 0
+C6P2: * 65535 0
+C6P3: * 65535 0
+C7P1: * 65535 0
+C7P2: * 65535 0
+C7P3: * 65535 0
+C8P1: * 65535 0
+C8P2: * 65535 0
+C8P3: * 65535 0
+C9P1: * 65535 0
+C9P2: * 65535 0
+C9P3: * 65535 0
+C10P1: * 65535 0
+C10P2: * 65535 0
+C10P3: * 65535 0
+C11P1: * 65535 0
+C11P2: * 65535 0
+C11P3: * 65535 0
+C12P1: * 65535 0
+C12P2: * 65535 0
+C12P3: * 65535 0
+C13P1: * 65535 0
+C13P2: * 65535 0
+C13P3: * 65535 0
+C14P1: * 65535 0
+C14P2: * 65535 0
+C14P3: * 65535 0
+C15P1: * 65535 0
+C15P2: * 65535 0
+C15P3: * 65535 0
+C16P1: * 65535 0
+C16P2: * 65535 0
+C16P3: * 65535 0
+C17P1: * 65535 0
+C17P2: * 65535 0
+C17P3: * 65535 0
+C18P1: * 65535 0
+C18P2: * 65535 0
+C18P3: * 65535 0
+C19P1: * 65535 0
+C19P2: N 2 2
+C19P3: N 2 2
+C20P1: * 65535 0
+C20P2: N 2 2
+C20P3: N 2 2
+C21P1: * 65535 0
+C21P2: N 2 2
+C21P3: N 2 2
+C22P1: N 2 2
+C22P2: N 2 2
+C22P3: N 2 2
+C23P1: * 65535 0
+C23P2: N 2 2
+C23P3: N 2 2
+
+Name: F3251
+Num: 251
+Type: 1
+Buff_num: 2
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 2
+Pins_inf:
+C1P1: * 65535 0
+C1P2: * 65535 0
+C1P3: X 1 0
+
+Name: F3252
+Num: 252
+Type: 1
+Buff_num: 4
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: B 1 0
+C1P2: C 2 0
+C1P3: A 3 0
+
+Name: F3253
+Num: 253
+Type: 1
+Buff_num: 2
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 2
+Pins_inf:
+C1P1: * 65535 0
+C1P2: Y 1 0
+C1P3: * 65535 0
+
+Name: F3254
+Num: 254
+Type: 1
+Buff_num: 4
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 4
+Pins_inf:
+C1P1: B 2 0
+C1P2: Z 3 0
+C1P3: A 1 0
+
+Name: F3255
+Num: 255
+Type: 1
+Buff_num: 1
+Cell_cnt: 1
+Inner_tr: 0
+Pins_cnt: 2
+Pins_inf:
+C1P1: * 65535 0
+C1P2: Y 2 0
+C1P3: * 65535 0
+

@@ -49,12 +49,12 @@ public:
     quint16 getMacro() const;
 
 signals:
-    void oversizedCell(QString m_cellMelName, quint32 m_cellPlace, QPoint m_cellPoint);
+    void oversizedCell(QString m_cellMelName, quint32 m_cellPlace, QPoint m_cellPoint, QString m_cellMelMacro);
 
 public slots:
     void setParams(QString cellMelName, QString cellDbName, quint32 cellDbPinsCnt, quint32 cellCnt,
                    quint32 cellPlace, QVector<QString> cellDbPinsInfo, QVector<QString> cellMelPinsInfo,
-                   QVector<QString> cellMelPinsType);
+                   QVector<QString> cellMelPinsType, QString melMacro);
     void setRow(quint16 arg);
     void setColumn(quint16 arg);
     void setActive(bool arg);
@@ -80,6 +80,7 @@ private:
     QVector<QString> m_cellMelPinsInfo;
     QVector<QString> m_cellMelPinsType;
     bool m_selected;
+    QString m_cellMelMacro;
     quint16 m_macro;
     QVector< QVector<quint8> > m_map;//Карта линий металлизации
     QVector<QString> m_nets;//Карта названий цепей, длина вектора - 3.

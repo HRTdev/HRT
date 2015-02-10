@@ -10,7 +10,7 @@ newProjectMenu::newProjectMenu(QWidget *parent) :
     projectName = new QLineEdit;
     projectName->setPlaceholderText("Name...");
     projectName->setFrame(true);
-    fileNameField = new QLineEdit("D:\\Qt\\HV154k2_new.mel");
+    fileNameField = new QLineEdit("D:\\Qt5.3\\HRT\\resources\\K11053.mel");
     projectName->setMaxLength(20);
     fileNameField->setMaxLength(255);
     iniSelection = new QComboBox();

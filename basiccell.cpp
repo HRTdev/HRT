@@ -43,7 +43,8 @@ void basicCell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
         if(m_active){
             str.append("\nact");
         }
-
+        str.append("\nM: ");
+        str.append(m_cellMelMacro);
         painter->setBrush(Qt::NoBrush);
         QRect basic(0,0,4*SIDE,8*SIDE);
         if(!m_active){
@@ -63,7 +64,7 @@ void basicCell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
         if(m_cellPlace < m_cellCnt-1){
             painter->setPen(QPen(Qt::darkCyan));
             painter->drawLine(4*SIDE,0,4*SIDE, 8*SIDE);
-            emit oversizedCell(m_cellMelName, m_cellPlace + 1, QPoint(m_column, m_row));
+            emit oversizedCell(m_cellMelName, m_cellPlace + 1, QPoint(m_column, m_row), m_cellMelMacro);
         }
         painter->setPen(borderPen);
         //QRect textRect(-m_cellCnt*SIDE,0,4*m_cellCnt*SIDE,8*SIDE);
@@ -131,7 +132,7 @@ void basicCell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
 void basicCell::setParams(QString cellMelName, QString cellDbName, quint32 cellDbPinsCnt, quint32 cellCnt,
                           quint32 cellPlace, QVector<QString> cellDbPinsInfo, QVector<QString> cellMelPinsInfo,
-                          QVector<QString> cellMelPinsType)
+                          QVector<QString> cellMelPinsType, QString melMacro)
 {
 
     m_cellMelName       = cellMelName;    //Имя элемента типа DD
@@ -144,6 +145,7 @@ void basicCell::setParams(QString cellMelName, QString cellDbName, quint32 cellD
     m_cellMelPinsInfo   = cellMelPinsInfo;//Имена пинов
     //qDebug()<<m_cellMelPinsInfo;
     m_cellMelPinsType   = cellMelPinsType;//Тип пина: вход, выход, двунаправленный
+    m_cellMelMacro      = melMacro;       //Имя макроэлемента, которому принадлежит элемент
     //qDebug()<<"set"<<m_cellMelName<<m_cellDbName<<m_cellDbPinsCnt<<m_cellDbPinsInfo<<m_cellPlace;
 
     m_nets.clear();

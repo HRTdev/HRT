@@ -41,19 +41,13 @@ openProjectMenu::openProjectMenu(QWidget *parent) :
 
 
 void openProjectMenu::connectToDatabase(){
-    //if(!db->isValid()){
-        db = new QSqlDatabase;
-        db->addDatabase("QSQLITE", "openProjectConnection");
-        //db->setHostName("localhost");
-        //db.setPort(3306);
-        db->setDatabaseName("D:\\Qt5.3\\HRTk0.db3");
-        //db->setUserName("root");
-        //db->setPassword("123456");
+        //db = new QSqlDatabase;
+        //db->addDatabase("QSQLITE", "openProjectConnection");
+        //db->setDatabaseName("D:\\Qt5.3\\HRTk0.db3");
         if (!(db->open())) {
             QString resErrorString=db->lastError().databaseText()+"\n"+db->lastError().driverText();
             qDebug()<<"opPrMenuErr"<<resErrorString;
         }
-    //}
 }
 
 void openProjectMenu::on_projectsList_clicked(QModelIndex mi){
