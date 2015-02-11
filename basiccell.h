@@ -33,7 +33,6 @@ class basicCell : public QObject, public QGraphicsItem
     Q_PROPERTY(quint16 column   READ getColumn    WRITE setColumn)
     Q_PROPERTY(bool active      READ isActive     WRITE setActive)
     Q_PROPERTY(bool selected    READ isSelected   WRITE setSelected)
-    Q_PROPERTY(quint16 macro    READ getMacro     WRITE setMacro)
 public:
     basicCell( QGraphicsItem * parent = 0) : QGraphicsItem (parent){};
 
@@ -44,9 +43,14 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     quint16 getRow() const;
     quint16 getColumn() const;
+    QString getName() const;
+    QString getDBName() const;
+    quint32 getSize();
+    QVector<QString> getMelPinsInfo();
+    QVector<QString> getMelPinsType();
     bool isActive() const;
     bool isSelected() const;
-    quint16 getMacro() const;
+    QString getMacro() const;
 
 signals:
     void oversizedCell(QString m_cellMelName, quint32 m_cellPlace, QPoint m_cellPoint, QString m_cellMelMacro);
@@ -59,7 +63,7 @@ public slots:
     void setColumn(quint16 arg);
     void setActive(bool arg);
     void setSelected(bool arg);
-    void setMacro(quint16 arg);
+    void setMacro(QString arg);
     void setMap(QVector< QVector<quint8> > map);
 
 private:

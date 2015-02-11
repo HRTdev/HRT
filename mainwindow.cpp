@@ -371,8 +371,8 @@ void MainWindow::on_hoverEnter(QPointF point){
     //qDebug()<<"Square enter";
     //Далее код, относящийся к отрисовке линии трассировки.
 
-    int x = MainWindow::returnX(point);//Координаты по х и у текущего элементарного квадратика на сцене размером SIDE*SIDE
-    int y = MainWindow::returnY(point);
+    quint32 x = MainWindow::returnX(point);//Координаты по х и у текущего элементарного квадратика на сцене размером SIDE*SIDE
+    quint32 y = MainWindow::returnY(point);
 
     //Check if it in a grid area(but inside cell area), and detect in which cell
     if(x >= horPeriodicBegin && y>=verPeriodicBegin-1 && x <= TABLE_WIDTH - horPeriodicBegin + 1 && y<= TABLE_HEIGTH - verPeriodicBegin){
@@ -1231,7 +1231,7 @@ void MainWindow::on_basicCell_oversizedCell(QString cellMelName, quint32 cellPla
         cell[cellPoint.x()+1][cellPoint.y()]->update();
         cell[cellPoint.x()+1][cellPoint.y()]->setActive(true);
     }else{
-        qDebug()<<"Why are you trying to set cell, which already active?";
+        //qDebug()<<"Why are you trying to set cell, which already active?";
     }
     //qDebug()<<"Oversize response"<<cellMelName<<str<<dbUnitCellCnt.value(str.toInt())<<cellPlace;
 
@@ -1546,6 +1546,63 @@ void MainWindow::pointsDetection()
     ui->typeLabel->setText(area);
     area = "";
     //qDebug()<<"Type: "<<unitType<<";x y: "<<unitX<<unitY<<";x y in: "<<xInUnit<<yInUnit<<";coursor x y: "<<coursorX<<coursorY;
+
+    //Заполнение информации о размещенных юнитах.
+    quint32 coordX = (lastPoint.x() - horPeriodicBegin)/unitWidth;
+    quint32 coordY = (lastPoint.y() - verPeriodicBegin)/(cellHeigth + traceChannel);//8+6
+    if(coordX < unitsInRow && coordY < unitsInColumn && lastPoint.y() >= verPeriodicBegin+traceChannel && lastPoint.x() >= horPeriodicBegin){
+        QString infoName = "";
+        QString infoPos = "";
+        QString infoMacro = "";
+        QString infoNames = "";
+        QString infoTypes = "";
+        QVector<QString> melPinsInfo;
+        QVector<QString> melPinsType;
+        if(cell[coordX][coordY]->isUnderMouse()){
+            infoPos.append(QString::number(cell[coordX][coordY]->getColumn()));
+            infoPos.append("x");
+            infoPos.append(QString::number(cell[coordX][coordY]->getRow()));
+
+            if(cell[coordX][coordY]->getName() != ""){
+                infoPos.append(", ");
+                infoPos.append(QString::number(cell[coordX][coordY]->getSize()));
+
+                infoName.append(cell[coordX][coordY]->getName());
+                infoName.append(", ");
+                infoName.append(cell[coordX][coordY]->getDBName());
+
+                infoMacro = cell[coordX][coordY]->getMacro();
+
+                melPinsInfo = cell[coordX][coordY]->getMelPinsInfo();
+                for (qint32 i = 0; i < melPinsInfo.size(); ++i) {
+                    infoNames.append(melPinsInfo.at(i));
+                    if (i != melPinsInfo.size() - 1){
+                        infoNames.append(", ");
+                    }
+                }
+
+                melPinsType = cell[coordX][coordY]->getMelPinsType();
+                for (qint32 i = 0; i < melPinsType.size(); ++i) {
+                    infoTypes.append(melPinsType.at(i));
+                    if (i != melPinsType.size() - 1){
+                        infoTypes.append(", ");
+                    }
+                }
+            }
+        }else{
+            infoName = "";
+            infoPos = "";
+            infoMacro = "";
+            infoNames = "";
+            infoTypes = "";
+        }
+        ui->unitNameLabel->setText(infoName);
+        ui->unitPosLabel->setText(infoPos);
+        ui->unitMacroLabel->setText(infoMacro);
+        ui->unitPinNamesLabel->setText(infoNames);
+        ui->unitPinTypesLabel->setText(infoTypes);
+    }
+
 }
 
 

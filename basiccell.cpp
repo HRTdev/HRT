@@ -205,9 +205,9 @@ void basicCell::setSelected(bool arg)
     m_selected = arg;
 }
 
-void basicCell::setMacro(quint16 arg)
+void basicCell::setMacro(QString arg)
 {
-    m_macro = arg;
+    m_cellMelMacro = arg;
 }
 
 void basicCell::setMap(QVector<QVector<quint8> > map)
@@ -215,7 +215,32 @@ void basicCell::setMap(QVector<QVector<quint8> > map)
     m_map = map;
 }
 
-quint16 basicCell::getMacro() const
+QString basicCell::getMacro() const
 {
-    return m_macro;
+    return m_cellMelMacro;
+}
+
+QString basicCell::getName() const
+{
+    return m_cellMelName;
+}
+
+QString basicCell::getDBName() const
+{
+    return m_cellDbName;
+}
+
+quint32 basicCell::getSize()
+{
+    return m_cellCnt;
+}
+
+QVector<QString> basicCell::getMelPinsInfo()
+{
+    return m_cellMelPinsInfo;
+}
+
+QVector<QString> basicCell::getMelPinsType()
+{
+    return m_cellMelPinsType;
 }
