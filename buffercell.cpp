@@ -11,6 +11,8 @@ void bufferCell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     cellPen = QPen(Qt::yellow);
     cellBrush = QBrush(Qt::darkCyan);
 
+    QRect basic;
+
     if(m_orientation == "VLB"){
         painter->setPen(borderPen);
         if(m_positionData.size()>0){
@@ -19,7 +21,8 @@ void bufferCell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
             quint32 pos3 = m_positionData[2];
             //qDebug()<<pos1<<pos2<<pos3;
             //painter->drawRect(0, 0, 10*SIDE, pos1*SIDE);
-            painter->drawRect(0,0,10*SIDE, (pos1+1)*SIDE);
+            basic = QRect(0,0,10*SIDE, (pos1+1)*SIDE);
+
             painter->drawRect(9*SIDE, pos2*SIDE, SIDE, SIDE);
             painter->drawRect(9*SIDE, pos3*SIDE, SIDE, SIDE);
             painter->drawRect(9*SIDE, pos1*SIDE, SIDE, SIDE);
@@ -35,7 +38,8 @@ void bufferCell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
             quint32 pos3 = m_positionData[2];
             //qDebug()<<pos1<<pos2<<pos3;
             //painter->drawRect(0, 0, 10*SIDE, pos1*SIDE);
-            painter->drawRect(0,0,10*SIDE, (pos1+1)*SIDE);
+            basic = QRect(0,0,10*SIDE, (pos1+1)*SIDE);
+
             painter->drawRect(0, pos2*SIDE, SIDE, SIDE);
             painter->drawRect(0, pos3*SIDE, SIDE, SIDE);
             painter->drawRect(0, pos1*SIDE, SIDE, SIDE);
@@ -51,7 +55,8 @@ void bufferCell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
             quint32 pos3 = m_positionData[2];
             //qDebug()<<pos1<<pos2<<pos3;
             //painter->drawRect(0, 0, 10*SIDE, pos1*SIDE);
-            painter->drawRect(0,0,(pos1+1)*SIDE,10*SIDE);
+            basic = QRect(0,0,(pos1+1)*SIDE,10*SIDE);
+
             painter->drawRect(pos2*SIDE,0, SIDE, SIDE);
             painter->drawRect(pos3*SIDE,0, SIDE, SIDE);
             painter->drawRect(pos1*SIDE,0, SIDE, SIDE);
@@ -67,15 +72,25 @@ void bufferCell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
             quint32 pos3 = m_positionData[2];
             //qDebug()<<pos1<<pos2<<pos3;
             //painter->drawRect(0, 0, 10*SIDE, pos1*SIDE);
-            painter->drawRect(0,0,(pos1+1)*SIDE,10*SIDE);
+            basic = QRect(0,0,(pos1+1)*SIDE,10*SIDE);
+
             painter->drawRect(pos2*SIDE,9*SIDE, SIDE, SIDE);
             painter->drawRect(pos3*SIDE,9*SIDE, SIDE, SIDE);
             painter->drawRect(pos1*SIDE,9*SIDE, SIDE, SIDE);
             painter->drawRect(pos3*SIDE,9*SIDE, (pos1+1)*SIDE, SIDE);
             //painter->drawRect(10*SIDE,0,11*SIDE,1*SIDE);
+
         }
     }
 
+
+    //specify a new font.
+    QFont newFont = painter->font();
+    newFont.setPointSize(basic.height() / 3);
+    painter->setFont(newFont);
+
+    painter->drawRect(basic);
+    painter->drawText(basic, Qt::AlignCenter, QString::number(m_number));
 
 
     bool trueMapIndexes;
