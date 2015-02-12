@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     buffercell.cpp \
     gridcell.cpp \
     menuclass.cpp \
-    openprojectmenu.cpp
+    openprojectmenu.cpp \
+    bufgrid.cpp
 
 HEADERS  += mainwindow.h \
     squareitem.h \
@@ -27,7 +28,8 @@ HEADERS  += mainwindow.h \
     buffercell.h \
     gridcell.h \
     menuclass.h \
-    openprojectmenu.h
+    openprojectmenu.h \
+    bufgrid.h
 
 FORMS    += mainwindow.ui
 

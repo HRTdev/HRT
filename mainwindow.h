@@ -21,6 +21,7 @@
 #include "basiccell.h"
 #include "buffercell.h"
 #include "gridcell.h"
+#include "bufgrid.h"
 #include "menuclass.h"
 #include "ui_mainwindow.h"
 #include "openprojectmenu.h"
@@ -84,6 +85,7 @@ private:
     QVector< QVector<basicCell*> > cell;
     QVector< QVector<gridCell*> > grid;
     QVector< QVector<bufferCell*> > buffer;
+    QVector< QVector<bufGrid*> > bGrid;
     newProjectMenu *projectMenu;
     openProjectMenu *openProjectWidget;
     qreal scaleFactor;

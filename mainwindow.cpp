@@ -57,8 +57,8 @@ MainWindow::MainWindow(QWidget *parent) :
     loadFileIni("D:\\Qt\\HRT500.INI");
 
     loadFileDb("D:\\Qt\\FORT_NEW.DAT");
-    loadFileMel("D:\\Qt\\HV154k2_new.mel");
-    fillInfoTable();
+    //loadFileMel("D:\\Qt\\HV154k2_new.mel");
+    //fillInfoTable();
 
     drawTable();
     ui->graphicsView->update();
@@ -123,6 +123,18 @@ void MainWindow::drawTable(){
         buffer.append(gridOfBufs);
     }
 
+    bufGrid* newBufGrid = new bufGrid;
+    QVector<bufGrid*> arrOfBufGrids;
+    arrOfBufGrids.clear();
+    bGrid.clear();
+    for (quint32 x = 0; x < unitsInColumn + 1; x++){
+        arrOfBufGrids.append(newBufGrid);
+    }
+    for (quint32 y = 0; y < unitsInRow; y++){
+        bGrid.append(arrOfBufGrids);
+    }
+
+
     QPen temppe;
     temppe = QPen(Qt::darkMagenta);
     temppe.setWidth(4);
@@ -149,15 +161,22 @@ void MainWindow::drawTable(){
              postData[2] = t;
          }
          buffer[0].append(new bufferCell);
+
+         bGrid[0].append(new bufGrid);
+
          postData[0] -= 1;
          postData[1] -= 1;
          postData[2] -= 1;
          buffer[0][buffer[0].size()-1]->setPos(0,postData[2]*SIDE);
+         bGrid[0][bGrid[0].size()-1]->setPos(10*SIDE,postData[2]*SIDE);
          postData[0] -= postData[2];
          postData[1] -= postData[2];
          postData[2] -= postData[2];
          buffer[0][buffer[0].size()-1]->initialSet("VLB", posData[0], postData);
+         bGrid[0][bGrid[0].size()-1]->setPolyPos(postData);
+         bGrid[0][bGrid[0].size()-1]->setType(0);
          scene->addItem(buffer[0][buffer[0].size()-1]);
+         scene->addItem(bGrid[0][bGrid[0].size()-1]);
          posData.remove(0,4);
     }
 
@@ -233,7 +252,7 @@ void MainWindow::drawTable(){
             rowCnt = y * unitHeigth + verPeriodicBegin;
 
             cell[x][y] = new basicCell;
-            cell[x][y]->setPos(colCnt*SIDE,SIDE*(rowCnt+traceChannel));
+            cell[x][y]->setPos((colCnt-1)*SIDE,SIDE*((rowCnt-1)+traceChannel));
             cell[x][y]->setParams("","",0,0,0,tmp,tmp,tmp,"");
             cell[x][y]->setActive(false);
             cell[x][y]->setRow(y);
@@ -250,7 +269,7 @@ void MainWindow::drawTable(){
             rowCnt = y * unitHeigth + verPeriodicBegin;
 
             grid[x][y] = new gridCell;
-            grid[x][y]->setPos(colCnt*SIDE,SIDE*rowCnt);
+            grid[x][y]->setPos((colCnt-1)*SIDE,SIDE*(rowCnt-1));
             grid[x][y]->setRow(y);
             grid[x][y]->setColumn(x);
             grid[x][y]->setHeigth(traceChannel);
@@ -1469,40 +1488,12 @@ void MainWindow::pointsDetection()
         }
     }
     }
-
-    //Check if it in a cell area, and detect in which cell
-    if(x >= horPeriodicBegin && y>=verPeriodicBegin && x <= TABLE_WIDTH - horPeriodicBegin + 1 && y<= TABLE_HEIGTH - verPeriodicBegin){
-        for (quint32 rowNum = 0; rowNum<unitsInColumn; rowNum++){
-            quint32 cell_max_y = verPeriodicBegin + unitHeigth * (rowNum+1);
-            quint32 cell_min_y = verPeriodicBegin + unitHeigth * rowNum + traceChannel;
-            if(y>= cell_min_y-1 && y<cell_max_y-1){
-                quint32 coordX = (x - horPeriodicBegin)/unitWidth;
-                quint32 coordY = (y - verPeriodicBegin)/(cellHeigth + traceChannel);
-                area = "cell";
-                unitType = "cell";
-                unitX = coordX;
-                unitY = coordY;
-
-                    QPointF pointInCell = cell[unitX][unitY]->mapFromScene(point);
-                    xInUnit = pointInCell.x()/SIDE;
-                    yInUnit = pointInCell.y()/SIDE;
-                    //cell[unitX][unitY]->
-
-                QString str;
-                str.setNum(coordX);
-                area.append(" ");
-                area.append(str);
-                area.append(" ");
-                str.setNum(coordY);
-                area.append(str);
-            }
-        }
-    }
-    */
+*/
 
 
 
 
+/*
     //Check if it in a grid area(but inside cell area), and detect in which cell
     if(x >= horPeriodicBegin && y>=verPeriodicBegin-1 && x <= TABLE_WIDTH - horPeriodicBegin + 1 && y<= TABLE_HEIGTH - verPeriodicBegin){
         for (quint32 rowNum = 0; rowNum<=unitsInColumn; rowNum++){
@@ -1540,12 +1531,58 @@ void MainWindow::pointsDetection()
         xInUnit = 0;
         yInUnit = 0;
     }
-
+*/
 
     //Show information
     ui->typeLabel->setText(area);
     area = "";
     //qDebug()<<"Type: "<<unitType<<";x y: "<<unitX<<unitY<<";x y in: "<<xInUnit<<yInUnit<<";coursor x y: "<<coursorX<<coursorY;
+
+
+    //Заполнение информации о размещенных юнитах элементах трассировочной решетки
+    quint32 gCoordX = (lastPoint.x() - horPeriodicBegin)/unitWidth;
+    quint32 gCoordY = (lastPoint.y() - verPeriodicBegin)/(cellHeigth + traceChannel);//8+6
+    if(gCoordX < unitsInRow && gCoordY < unitsInColumn && lastPoint.y() >= verPeriodicBegin && lastPoint.x() >= horPeriodicBegin){
+        QString gridInfoPos = "";
+        QString gridInfoOwner = "";
+        QString gridInfoName = "";
+        QString gridInfoNet = "";
+        QString gridInfoMetal = "";
+        QVector< QVector<quint8> > traceMetal;
+
+        gridInfoNet.append(QString::number(gCoordX));
+        gridInfoNet.append("x");
+        gridInfoNet.append(QString::number(gCoordY));
+
+
+        if(grid[gCoordX][gCoordY]->isUnderMouse()){
+            gridInfoPos.append(QString::number(grid[gCoordX][gCoordY]->getColumn()));
+            gridInfoPos.append("x");
+            gridInfoPos.append(QString::number(grid[gCoordX][gCoordY]->getRow()));
+
+            traceMetal = grid[gCoordX][gCoordY]->getMetal();
+            &gridInfoMetal << traceMetal;
+//            for (qint32 i = 0; i < traceMetal.size(); ++i) {
+//                gridInfoMetal.append(traceMetal.at(i));
+//                if (i != traceMetal.size() - 1){
+//                    gridInfoMetal.append(", ");
+//                }
+//            }
+
+
+        }else{
+            gridInfoPos = "";
+            gridInfoOwner = "";
+            gridInfoName = "";
+            //gridInfoNet = "";
+            gridInfoMetal = "";
+        }
+        ui->gridPosLabel->setText(gridInfoPos);
+        ui->pinOwnerLabel->setText(gridInfoOwner);
+        ui->pinNameLabel->setText(gridInfoName);
+        ui->pinNetLabel->setText(gridInfoNet);
+        ui->pinMetalLabel->setText(gridInfoMetal);
+    }
 
     //Заполнение информации о размещенных юнитах.
     quint32 coordX = (lastPoint.x() - horPeriodicBegin)/unitWidth;

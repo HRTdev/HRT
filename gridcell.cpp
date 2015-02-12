@@ -18,17 +18,17 @@ void gridCell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     //m_heigth = 6;
     painter->setPen(polyPen);
     switch(m_type){
-        case 0:     painter->drawLine(QLine(SIDE/2,POLY_PEN_WIDTH/2,SIDE/2,m_heigth*SIDE-SIDE/2-POLY_PEN_WIDTH/2));
-                    painter->drawLine(QLine(5*SIDE/2,POLY_PEN_WIDTH/2,5*SIDE/2,m_heigth*SIDE-SIDE/2-POLY_PEN_WIDTH/2));
-                    painter->drawLine(QLine(3*SIDE/2,SIDE/2+POLY_PEN_WIDTH/2,3*SIDE/2,m_heigth*SIDE-POLY_PEN_WIDTH/2));
-                    painter->drawLine(QLine(7*SIDE/2,SIDE/2+POLY_PEN_WIDTH/2,7*SIDE/2,m_heigth*SIDE-POLY_PEN_WIDTH/2));
-                    break;
-        case 1:     painter->drawLine(QLine(SIDE/2,POLY_PEN_WIDTH/2,SIDE/2,m_heigth*SIDE-SIDE/2-POLY_PEN_WIDTH/2));
-                    painter->drawLine(QLine(5*SIDE/2,POLY_PEN_WIDTH/2,5*SIDE/2,m_heigth*SIDE-SIDE/2-POLY_PEN_WIDTH/2));
-                    break;
-        case 2:     painter->drawLine(QLine(3*SIDE/2,SIDE/2+POLY_PEN_WIDTH/2,3*SIDE/2,m_heigth*SIDE-POLY_PEN_WIDTH/2));
-                    painter->drawLine(QLine(7*SIDE/2,SIDE/2+POLY_PEN_WIDTH/2,7*SIDE/2,m_heigth*SIDE-POLY_PEN_WIDTH/2));
-                    break;
+        case USUAL_GRID:     painter->drawLine(QLine(SIDE/2,POLY_PEN_WIDTH/2,SIDE/2,m_heigth*SIDE-SIDE/2-POLY_PEN_WIDTH/2));
+                             painter->drawLine(QLine(5*SIDE/2,POLY_PEN_WIDTH/2,5*SIDE/2,m_heigth*SIDE-SIDE/2-POLY_PEN_WIDTH/2));
+                             painter->drawLine(QLine(3*SIDE/2,SIDE/2+POLY_PEN_WIDTH/2,3*SIDE/2,m_heigth*SIDE-POLY_PEN_WIDTH/2));
+                             painter->drawLine(QLine(7*SIDE/2,SIDE/2+POLY_PEN_WIDTH/2,7*SIDE/2,m_heigth*SIDE-POLY_PEN_WIDTH/2));
+                             break;
+        case TOP_GRID:       painter->drawLine(QLine(SIDE/2,POLY_PEN_WIDTH/2,SIDE/2,m_heigth*SIDE-SIDE/2-POLY_PEN_WIDTH/2));
+                             painter->drawLine(QLine(5*SIDE/2,POLY_PEN_WIDTH/2,5*SIDE/2,m_heigth*SIDE-SIDE/2-POLY_PEN_WIDTH/2));
+                             break;
+        case BOTTOM_GRID:    painter->drawLine(QLine(3*SIDE/2,SIDE/2+POLY_PEN_WIDTH/2,3*SIDE/2,m_heigth*SIDE-POLY_PEN_WIDTH/2));
+                             painter->drawLine(QLine(7*SIDE/2,SIDE/2+POLY_PEN_WIDTH/2,7*SIDE/2,m_heigth*SIDE-POLY_PEN_WIDTH/2));
+                             break;
         default:    break;
 
     }
@@ -147,6 +147,7 @@ void gridCell::setMap(QVector<QVector<quint8> > map)
     m_map = map;
 }
 
+
 quint16 gridCell::getMacro() const
 {
     return m_macro;
@@ -162,9 +163,24 @@ void gridCell::setType(quint8 arg)
     m_type = arg;
 }
 
+void gridCell::setNets(QVector<QString> arg)
+{
+    m_nets = arg;
+}
+
 quint8  gridCell::getHeigth() const
 {
     return m_heigth;
+}
+
+QVector<QString> gridCell::getNets() const
+{
+    return m_nets;
+}
+
+QVector<QVector<quint8> > gridCell::getMetal() const
+{
+    return m_map;
 }
 
 void  gridCell::setHeigth(quint8 arg)

@@ -36,7 +36,7 @@ openProjectMenu::openProjectMenu(QWidget *parent) :
     //connect(okButton, SIGNAL(clicked()),
 
 
-    this->resize(500, 500);
+    this->resize(800, 500);
 }
 
 

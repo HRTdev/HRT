@@ -4,7 +4,6 @@
 #include <QGraphicsItem>
 #include <QtCore>
 #include <QtGui>
-#include "gridcell.h"
 
 #define CIRC      0
 #define RIGTH     1
@@ -15,6 +14,10 @@
 #define ME_PEN_WIDTH 2
 #define POLY_PEN_WIDTH 4
 #define SCENE_COLOR Qt::black
+
+#define USUAL_GRID  0
+#define TOP_GRID    1
+#define BOTTOM_GRID 2
 
 #define M_OFFSET ME_PEN_WIDTH / 2
 #define M_HALF SIDE / 2 - M_OFFSET
@@ -46,10 +49,10 @@ public:
     bool isActive() const;
     bool isSelected() const;
     quint16 getMacro() const;
-
     quint8 getType() const;
-
     quint8 getHeigth() const;
+    QVector<QString> getNets() const;
+    QVector< QVector<quint8> > getMetal() const;
 
 signals:
     void oversizedCell(QString m_cellMelName, quint32 m_cellPlace, QPoint m_cellPoint);
@@ -66,7 +69,7 @@ public slots:
     void setMap(QVector< QVector<quint8> > map);
 
     void setType(quint8 arg);
-
+    void setNets(QVector<QString> arg);
     void setHeigth(quint8 arg);
 
 private:
@@ -92,6 +95,7 @@ private:
     QVector< QVector<quint8> > m_map;//Карта линий металлизации
     QVector<QString> m_nets;//Карта названий цепей поликремниевых дорожек. Длина вектора - 4.
     quint8 m_heigth;
+
 };
 
 #endif // GRIDCELL_H
