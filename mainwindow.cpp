@@ -303,9 +303,16 @@ void MainWindow::drawTable(){
             tmpvec.append(tmpvec1);
             tmpvec.append(tmpvec1);
             tmpvec[1][0] = 1;
-            grid[x][y]->setMap(tmpvec);
-            cell[0][0]->setMap(tmpvec);
+            //grid[x][y]->setMap(tmpvec);
+            //cell[0][0]->setMap(tmpvec);
             //End of test
+            QVector<QString> temp;
+            QString tmp = "";
+            temp.append(tmp);
+            temp.append(tmp);
+            temp.append(tmp);
+            temp.append(tmp);
+            grid[x][y]->setNets(temp);
 
             scene->addItem(grid[x][y]);
         }
@@ -1040,13 +1047,13 @@ void MainWindow::loadFileDb(const QString &fileName)
         }
     } while (!line.isNull());
     //
-//    qDebug()<<"Name: 3006";
-//    qDebug()<<"Type: "<<dbUnitType.value("F3006");
-//    qDebug()<<"Cell_cnt: "<<dbUnitCellCnt.value("F3006");
-//    qDebug()<<"Inner_trs: :"<<dbUnitInnerTrs.value("F3006");
-//    qDebug()<<"Pins_cnt: "<<dbUnitPinsCnt.value("F3006");
-//    qDebug()<<"Pins info: "<<dbUnitPinsInfo.value("F3006");
-//    cell[2][2]->setParams(3006,1,dbUnitPinsCnt.value(3006),dbUnitPinsInfo.value(3006));
+    qDebug()<<"Name: 3028";
+    qDebug()<<"Type: "<<dbUnitType.value("F3028");
+    qDebug()<<"Cell_cnt: "<<dbUnitCellCnt.value("F3028");
+    qDebug()<<"Inner_trs: :"<<dbUnitInnerTrs.value("F3028");
+    qDebug()<<"Pins_cnt: "<<dbUnitPinsCnt.value("F3028");
+    qDebug()<<"Pins info: "<<dbUnitPinsInfo.value("F3028");
+    //cell[2][2]->setParams(3006,1,dbUnitPinsCnt.value(3006),dbUnitPinsInfo.value(3006));
 #ifndef QT_NO_CURSOR
     QApplication::setOverrideCursor(Qt::WaitCursor);
 #endif
@@ -1264,6 +1271,34 @@ void MainWindow::on_basicCell_oversizedCell(QString cellMelName, quint32 cellPla
                                                         melMacro);
         cell[cellPoint.x()+1][cellPoint.y()]->update();
         cell[cellPoint.x()+1][cellPoint.y()]->setActive(true);
+
+        QVector<QString> temp;
+        temp = grid[cellPoint.x()+1][cellPoint.y()]->getNets();
+        //qDebug()<<"here2"<<dbUnitPinsInfo.value(fName).at(1+0).toInt()-1<<melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen);
+        quint32 pinNum = dbUnitPinsInfo.value(str).at(cellPlace*9+1+3).toInt();
+        if(pinNum != 0 && pinNum != 65535){
+            temp[3] = melUnitPinName.value(melMacro).value(cellMelName).at(pinNum-1);
+        }
+        pinNum = dbUnitPinsInfo.value(str).at(cellPlace*9+1+0).toInt();
+        if(pinNum != 0 && pinNum != 65535){
+            temp[1] = melUnitPinName.value(melMacro).value(cellMelName).at(pinNum-1);
+        }
+        grid[cellPoint.x()+1][cellPoint.y()]->setNets(temp);
+
+        qDebug()<<"here3";
+        temp.clear();
+        temp = grid[cellPoint.x()+1][cellPoint.y()+1]->getNets();
+        pinNum = dbUnitPinsInfo.value(str).at(cellPlace*9+1+0).toInt();
+        if(pinNum != 0 && pinNum != 65535){
+            temp[0] = melUnitPinName.value(melMacro).value(cellMelName).at(pinNum-1);
+        }
+        pinNum = dbUnitPinsInfo.value(str).at(cellPlace*9+1+3*2).toInt();
+        if(pinNum != 0 && pinNum != 65535){
+            temp[2] = melUnitPinName.value(melMacro).value(cellMelName).at(pinNum-1);
+        }
+        grid[cellPoint.x()+1][cellPoint.y()+1]->setNets(temp);
+
+
     }else{
         //qDebug()<<"Why are you trying to set cell, which already active?";
     }
@@ -1505,49 +1540,6 @@ void MainWindow::pointsDetection()
     }
 */
 
-
-
-
-/*
-    //Check if it in a grid area(but inside cell area), and detect in which cell
-    if(x >= horPeriodicBegin && y>=verPeriodicBegin-1 && x <= TABLE_WIDTH - horPeriodicBegin + 1 && y<= TABLE_HEIGTH - verPeriodicBegin){
-        for (quint32 rowNum = 0; rowNum<=unitsInColumn; rowNum++){
-            quint32 grid_max_y = verPeriodicBegin + unitHeigth * rowNum + traceChannel;
-            quint32 grid_min_y = verPeriodicBegin + unitHeigth * rowNum;
-            if(y>= grid_min_y-1 && y<grid_max_y-1){
-                quint32 coordX = (x - horPeriodicBegin)/unitWidth;
-                quint32 coordY = (y - verPeriodicBegin + 1)/unitHeigth;
-                area = "grid";
-                unitType = "grid";
-                unitX = coordX;
-                unitY = coordY;
-
-                    QPointF pointInCell = grid[unitX][unitY]->mapFromScene(point);
-                    //grid[unitX][unitY]->hide();
-                    xInUnit = pointInCell.x()/SIDE;
-                    yInUnit = pointInCell.y()/SIDE;
-                    //qDebug()<<"Point in cell: "<<pointInCell.y();
-
-                QString str;
-                str.setNum(coordX);
-                area.append(" ");
-                area.append(str);
-                area.append(" ");
-                str.setNum(coordY);
-                area.append(str);
-            }
-        }
-    }else{
-        coursorX = 0;
-        coursorY = 0;
-        unitType = "";
-        unitX = 0;
-        unitY = 0;
-        xInUnit = 0;
-        yInUnit = 0;
-    }
-*/
-
     //Show information
     ui->typeLabel->setText(area);
     area = "";
@@ -1577,13 +1569,15 @@ void MainWindow::pointsDetection()
 
             traceMetal = grid[gCoordX][gCoordY]->getMetal();
             &gridInfoMetal << traceMetal;
-//            for (qint32 i = 0; i < traceMetal.size(); ++i) {
-//                gridInfoMetal.append(traceMetal.at(i));
-//                if (i != traceMetal.size() - 1){
-//                    gridInfoMetal.append(", ");
-//                }
-//            }
 
+            for (qint32 i = 0; i < grid[gCoordX][gCoordY]->getNets().size(); ++i) {
+                gridInfoName.append(grid[gCoordX][gCoordY]->getNets().at(i));
+                if (i != grid[gCoordX][gCoordY]->getNets().size() - 1){
+                    gridInfoName.append(", ");
+                }
+            }
+
+            //&gridInfoName << grid[gCoordX][gCoordY]->getNets();
 
         }else{
             gridInfoPos = "";
@@ -1750,6 +1744,32 @@ void MainWindow::on_myScene_unitPlacing()
                                             melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen),
                                             melUnitPinType.value(melUnitChosenMacro).value(melUnitChosen),
                                             melUnitChosenMacro);
+            QVector<QString> temp;
+            temp = grid[coordX][coordY]->getNets();
+            qDebug()<<"here2"<<dbUnitPinsInfo.value(fName).at(1+0).toInt()-1<<melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen);
+            quint32 pinNum = dbUnitPinsInfo.value(fName).at(1+3).toInt();
+            if(pinNum != 0 && pinNum != 65535){
+                temp[3] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
+            }
+            pinNum = dbUnitPinsInfo.value(fName).at(1+0).toInt();
+            if(pinNum != 0 && pinNum != 65535){
+                temp[1] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
+            }
+            grid[coordX][coordY]->setNets(temp);
+
+            //qDebug()<<"here3";
+            temp.clear();
+            temp = grid[coordX][coordY+1]->getNets();
+            pinNum = dbUnitPinsInfo.value(fName).at(1+0).toInt();
+            if(pinNum != 0 && pinNum != 65535){
+                temp[0] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
+            }
+            pinNum = dbUnitPinsInfo.value(fName).at(1+3*2).toInt();
+            if(pinNum != 0 && pinNum != 65535){
+                temp[2] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
+            }
+            grid[coordX][coordY+1]->setNets(temp);
+
             //qDebug()<<"here2";
             cell[coordX][coordY]->setActive(true);
             //melUnitStatus.insert(melUnitChosen, true);
