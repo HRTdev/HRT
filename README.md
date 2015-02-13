@@ -1,7 +1,9 @@
 HRT
 ===
 
-Topology editor for ULA ASICs
+Topology editor for ULA ASICs.
+
+ULA ASIC - uncommitted logic array ASIC. In my case it has one metal layer and Si+ layer for interconnections. Structure of ASIC is matrix with routing channels. In one row each available position for library unit is side-by-side with other positions. And in one column each position divided from others with routing channel. This ASIC doesnt have predefined contact windows from metal layer to Si+, so to manufacture ASIC we need 2 masks set. First - for contact windows, second - for metal layer.
 
 This programm created in QtCreator 5.3.
 Input/output files format will be reviewed later.
