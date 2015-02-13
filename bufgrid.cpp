@@ -21,10 +21,22 @@ void bufGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     quint32 pos1 = m_polyPos[0];
     quint32 pos2 = m_polyPos[1];
     quint32 pos3 = m_polyPos[2];
-    switch(m_type){
+    switch(m_type){//10 - опытно полученная длина линий поликремния
         case VLB:    painter->drawLine(QLine(2,pos1*SIDE+SIDE/2,10*SIDE-SIDE/2,pos1*SIDE+SIDE/2));
                      painter->drawLine(QLine(2,pos2*SIDE+SIDE/2,10*SIDE-SIDE/2,pos2*SIDE+SIDE/2));
                      painter->drawLine(QLine(2,pos3*SIDE+SIDE/2,10*SIDE-SIDE/2,pos3*SIDE+SIDE/2));
+                     break;
+        case VRB:    painter->drawLine(QLine(SIDE/2,pos1*SIDE+SIDE/2,10*SIDE-2,pos1*SIDE+SIDE/2));
+                     painter->drawLine(QLine(SIDE/2,pos2*SIDE+SIDE/2,10*SIDE-2,pos2*SIDE+SIDE/2));
+                     painter->drawLine(QLine(SIDE/2,pos3*SIDE+SIDE/2,10*SIDE-2,pos3*SIDE+SIDE/2));
+                     break;
+        case HDB:    painter->drawLine(QLine(pos1*SIDE+SIDE/2,SIDE/2,pos1*SIDE+SIDE/2,10*SIDE-2));
+                     painter->drawLine(QLine(pos2*SIDE+SIDE/2,SIDE/2,pos2*SIDE+SIDE/2,10*SIDE-2));
+                     painter->drawLine(QLine(pos3*SIDE+SIDE/2,SIDE/2,pos3*SIDE+SIDE/2,10*SIDE-2));
+                     break;
+        case HUB:    painter->drawLine(QLine(pos1*SIDE+SIDE/2,10*SIDE-SIDE/2,pos1*SIDE+SIDE/2,2));
+                     painter->drawLine(QLine(pos2*SIDE+SIDE/2,10*SIDE-SIDE/2,pos2*SIDE+SIDE/2,2));
+                     painter->drawLine(QLine(pos3*SIDE+SIDE/2,10*SIDE-SIDE/2,pos3*SIDE+SIDE/2,2));
                      break;
         default:    break;
 

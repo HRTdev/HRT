@@ -27,8 +27,8 @@
 
 #define VLB 0
 #define VRB 1
-#define HUB 2
-#define HDB 3
+#define HDB 2
+#define HUB 3
 
 
 class bufGrid : public QObject, public QGraphicsItem

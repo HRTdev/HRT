@@ -191,15 +191,20 @@ void MainWindow::drawTable(){
              postData[2] = t;
          }
          buffer[1].append(new bufferCell);
+         bGrid[1].append(new bufGrid);
          postData[0] -= 1;
          postData[1] -= 1;
          postData[2] -= 1;
          buffer[1][buffer[1].size()-1]->setPos((TABLE_WIDTH - 10)*SIDE,postData[2]*SIDE);
+         bGrid[1][bGrid[1].size()-1]->setPos((TABLE_WIDTH - 20)*SIDE,postData[2]*SIDE);
          postData[0] -= postData[2];
          postData[1] -= postData[2];
          postData[2] -= postData[2];
          buffer[1][buffer[1].size()-1]->initialSet("VRB", posData[0], postData);
+         bGrid[1][bGrid[1].size()-1]->setPolyPos(postData);
+         bGrid[1][bGrid[1].size()-1]->setType(1);
          scene->addItem(buffer[1][buffer[1].size()-1]);
+         scene->addItem(bGrid[1][bGrid[1].size()-1]);
          posData.remove(0,4);
     }
 
@@ -215,12 +220,17 @@ void MainWindow::drawTable(){
          }
 
          buffer[2].append(new bufferCell);
+         bGrid[2].append(new bufGrid);
          buffer[2][buffer[2].size()-1]->setPos(postData[2]*SIDE,(TABLE_HEIGTH - 10)*SIDE);
+         bGrid[2][bGrid[2].size()-1]->setPos(postData[2]*SIDE,(TABLE_HEIGTH - 20)*SIDE);
          postData[0] -= postData[2];
          postData[1] -= postData[2];
          postData[2] -= postData[2];
          buffer[2][buffer[2].size()-1]->initialSet("HDB", posData[0], postData);
+         bGrid[2][bGrid[2].size()-1]->setPolyPos(postData);
+         bGrid[2][bGrid[2].size()-1]->setType(2);
          scene->addItem(buffer[2][buffer[2].size()-1]);
+         scene->addItem(bGrid[2][bGrid[2].size()-1]);
          posData.remove(0,4);
     }
 
@@ -235,12 +245,17 @@ void MainWindow::drawTable(){
              postData[2] = t;
          }
          buffer[3].append(new bufferCell);
+         bGrid[3].append(new bufGrid);
          buffer[3][buffer[3].size()-1]->setPos(postData[2]*SIDE,0);
+         bGrid[3][bGrid[3].size()-1]->setPos(postData[2]*SIDE,10*SIDE);
          postData[0] -= postData[2];
          postData[1] -= postData[2];
          postData[2] -= postData[2];
          buffer[3][buffer[3].size()-1]->initialSet("HUB", posData[0], postData);
+         bGrid[3][bGrid[3].size()-1]->setPolyPos(postData);
+         bGrid[3][bGrid[3].size()-1]->setType(3);
          scene->addItem(buffer[3][buffer[3].size()-1]);
+         scene->addItem(bGrid[3][bGrid[3].size()-1]);
          posData.remove(0,4);
     }
 
@@ -1542,7 +1557,7 @@ void MainWindow::pointsDetection()
     //Заполнение информации о размещенных юнитах элементах трассировочной решетки
     quint32 gCoordX = (lastPoint.x() - horPeriodicBegin)/unitWidth;
     quint32 gCoordY = (lastPoint.y() - verPeriodicBegin)/(cellHeigth + traceChannel);//8+6
-    if(gCoordX < unitsInRow && gCoordY < unitsInColumn && lastPoint.y() >= verPeriodicBegin && lastPoint.x() >= horPeriodicBegin){
+    if(gCoordX < unitsInRow && gCoordY < unitsInColumn+1 && lastPoint.y() >= verPeriodicBegin && lastPoint.x() >= horPeriodicBegin){
         QString gridInfoPos = "";
         QString gridInfoOwner = "";
         QString gridInfoName = "";
