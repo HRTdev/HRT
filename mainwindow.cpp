@@ -1611,6 +1611,7 @@ void MainWindow::on_myScene_unitPlacing()
         getMacroFortName.first();
         QString macroFortName = getMacroFortName.value(0).toString();
         */
+        /*
         QSqlQuery query;
         query.prepare("SELECT A.fortUnitName FROM unitNets A, sourceData B, projects C "
                       "WHERE A.fileId = B.fileId AND C.projectName = :projName "
@@ -1622,6 +1623,8 @@ void MainWindow::on_myScene_unitPlacing()
         query.exec();
         query.first();
         fName = query.value(0).toString();
+        */
+        fName = melUnitFName.value(melUnitChosenMacro).value(melUnitChosen);
         //qDebug()<<"fname: "<<fName;
 
         if(coordX + dbUnitCellCnt.value(fName) - 1 < unitsInRow){//Maybe we just have not enough cells to place this unit?
@@ -1633,13 +1636,14 @@ void MainWindow::on_myScene_unitPlacing()
             }
         }else{
             cellsFreedomFlag = false;
+            qDebug()<<"NOTE: Unit "<<fName<<" requires more cells than available;";
         }
         if (dbUnitType.value(fName) == 1){
             cellsFreedomFlag = false;
-            qDebug()<<"NOTE: This unit must be placed in buffer cell, not in the matrix;";
+            qDebug()<<"NOTE: Unit "<<fName<<" must be placed in buffer cell, not in the matrix;";
         }
         if(cellsFreedomFlag){
-            //qDebug()<<"Note: Cells are free, so we can place unit "<<melUnitChosen<<" macro "<<melUnitChosenMacro<<" here; Type of element is: "<<fName<<" ;";
+            //qDebug()<<"NOTE: Cells are free, so we can place unit "<<melUnitChosen<<" macro "<<melUnitChosenMacro<<" here; Type of element is: "<<fName<<" ;";
             //qDebug()<<melUnitPinType.value(melUnitChosenMacro).value(melUnitChosen);
             cell[coordX][coordY]->setParams(melUnitChosen,
                                             fName,
