@@ -1285,7 +1285,7 @@ void MainWindow::on_basicCell_oversizedCell(QString cellMelName, quint32 cellPla
         }
         grid[cellPoint.x()+1][cellPoint.y()]->setNets(temp);
 
-        qDebug()<<"here3";
+        //qDebug()<<"here3";
         temp.clear();
         temp = grid[cellPoint.x()+1][cellPoint.y()+1]->getNets();
         pinNum = dbUnitPinsInfo.value(str).at(cellPlace*9+1+0).toInt();
@@ -1473,6 +1473,21 @@ void MainWindow::pointsDetection()
     quint32 tmpy = 1+TABLE_HEIGTH - point.y()/SIDE;
     coursorX = point.x()/SIDE;
     coursorY = point.y()/SIDE;
+
+    /* Boundary check */
+    if (coursorX > TABLE_WIDTH){
+        coursorX = TABLE_WIDTH;
+    }
+    if(coursorY > TABLE_HEIGTH){
+        coursorY = TABLE_HEIGTH;
+    }
+    if(coursorX < 0){
+        coursorX = 0;
+    }
+    if(coursorY < 0){
+        coursorY = 0;
+    }
+
     lastPoint.setX(coursorX);
     lastPoint.setY(coursorY);
 
@@ -1484,13 +1499,11 @@ void MainWindow::pointsDetection()
         ui->RowLabel->setText(QString::number(tmpy));
     }
 
-
-    quint32 x = coursorX;
-    //quint32 y = TABLE_HEIGTH - coursorY;
-    quint32 y = coursorY;
     QString area = "";
 
-
+    if(grid[1][1]->isUnderMouse()){
+        area = "bingo! grid under mouse";
+    }
     //Check if it in buffer area
     //Проверка простая: берем из хэша типа (типа буфера; координаты буферов такого типа по 4 на буфер) собственно
     //координаты и проверяем, находится ли наш курсор внутри оных.
@@ -1547,106 +1560,113 @@ void MainWindow::pointsDetection()
 
 
     //Заполнение информации о размещенных юнитах элементах трассировочной решетки
-    quint32 gCoordX = (lastPoint.x() - horPeriodicBegin)/unitWidth;
-    quint32 gCoordY = (lastPoint.y() - verPeriodicBegin)/(cellHeigth + traceChannel);//8+6
-    if(gCoordX < unitsInRow && gCoordY < unitsInColumn+1 && lastPoint.y() >= verPeriodicBegin && lastPoint.x() >= horPeriodicBegin){
-        QString gridInfoPos = "";
-        QString gridInfoOwner = "";
-        QString gridInfoName = "";
-        QString gridInfoNet = "";
-        QString gridInfoMetal = "";
-        QVector< QVector<quint8> > traceMetal;
+    if(lastPoint.y() >= verPeriodicBegin && lastPoint.x() >= horPeriodicBegin){
+        qint32 gCoordX = (lastPoint.x() - horPeriodicBegin + 1)/unitWidth;
+        qint32 gCoordY = (lastPoint.y() - verPeriodicBegin + 1)/(cellHeigth + traceChannel);//8+6
 
-        gridInfoNet.append(QString::number(gCoordX));
-        gridInfoNet.append("x");
-        gridInfoNet.append(QString::number(gCoordY));
+        qDebug()<<"X-Y: "<<gCoordX<<"-"<<gCoordY;
+        if(gCoordX < unitsInRow && gCoordY < unitsInColumn+1){
+            QString gridInfoPos = "";
+            QString gridInfoOwner = "";
+            QString gridInfoName = "";
+            QString gridInfoNet = "";
+            QString gridInfoMetal = "";
+            QVector< QVector<quint8> > traceMetal;
+
+            gridInfoNet.append(QString::number(gCoordX));
+            gridInfoNet.append("x");
+            gridInfoNet.append(QString::number(gCoordY));
 
 
-        if(grid[gCoordX][gCoordY]->isUnderMouse()){
-            gridInfoPos.append(QString::number(grid[gCoordX][gCoordY]->getColumn()));
-            gridInfoPos.append("x");
-            gridInfoPos.append(QString::number(grid[gCoordX][gCoordY]->getRow()));
+            if(grid[gCoordX][gCoordY]->isUnderMouse()){
+                //grid[gCoordX][gCoordY]->setCursor(Qt::CrossCursor);
+                gridInfoPos.append(QString::number(grid[gCoordX][gCoordY]->getColumn()));
+                gridInfoPos.append("x");
+                gridInfoPos.append(QString::number(grid[gCoordX][gCoordY]->getRow()));
 
-            traceMetal = grid[gCoordX][gCoordY]->getMetal();
-            &gridInfoMetal << traceMetal;
+                traceMetal = grid[gCoordX][gCoordY]->getMetal();
+                &gridInfoMetal << traceMetal;
 
-            for (qint32 i = 0; i < grid[gCoordX][gCoordY]->getNets().size(); ++i) {
-                gridInfoName.append(grid[gCoordX][gCoordY]->getNets().at(i));
-                if (i != grid[gCoordX][gCoordY]->getNets().size() - 1){
-                    gridInfoName.append(", ");
+                for (qint32 i = 0; i < grid[gCoordX][gCoordY]->getNets().size(); ++i) {
+                    gridInfoName.append(grid[gCoordX][gCoordY]->getNets().at(i));
+                    if (i != grid[gCoordX][gCoordY]->getNets().size() - 1){
+                        gridInfoName.append(", ");
+                    }
                 }
+
+                //&gridInfoName << grid[gCoordX][gCoordY]->getNets();
+
+            }else{
+                gridInfoPos = "";
+                gridInfoOwner = "";
+                gridInfoName = "";
+                //gridInfoNet = "";
+                gridInfoMetal = "";
             }
-
-            //&gridInfoName << grid[gCoordX][gCoordY]->getNets();
-
-        }else{
-            gridInfoPos = "";
-            gridInfoOwner = "";
-            gridInfoName = "";
-            //gridInfoNet = "";
-            gridInfoMetal = "";
+            ui->gridPosLabel->setText(gridInfoPos);
+            ui->pinOwnerLabel->setText(gridInfoOwner);
+            ui->pinNameLabel->setText(gridInfoName);
+            ui->pinNetLabel->setText(gridInfoNet);
+            ui->pinMetalLabel->setText(gridInfoMetal);
         }
-        ui->gridPosLabel->setText(gridInfoPos);
-        ui->pinOwnerLabel->setText(gridInfoOwner);
-        ui->pinNameLabel->setText(gridInfoName);
-        ui->pinNetLabel->setText(gridInfoNet);
-        ui->pinMetalLabel->setText(gridInfoMetal);
     }
 
     //Заполнение информации о размещенных юнитах.
-    quint32 coordX = (lastPoint.x() - horPeriodicBegin)/unitWidth;
-    quint32 coordY = (lastPoint.y() - verPeriodicBegin)/(cellHeigth + traceChannel);//8+6
-    if(coordX < unitsInRow && coordY < unitsInColumn && lastPoint.y() >= verPeriodicBegin+traceChannel && lastPoint.x() >= horPeriodicBegin){
-        QString infoName = "";
-        QString infoPos = "";
-        QString infoMacro = "";
-        QString infoNames = "";
-        QString infoTypes = "";
-        QVector<QString> melPinsInfo;
-        QVector<QString> melPinsType;
-        if(cell[coordX][coordY]->isUnderMouse()){
-            infoPos.append(QString::number(cell[coordX][coordY]->getColumn()));
-            infoPos.append("x");
-            infoPos.append(QString::number(cell[coordX][coordY]->getRow()));
+    if(lastPoint.y() >= verPeriodicBegin+traceChannel && lastPoint.x() >= horPeriodicBegin){
+        quint32 coordX = (lastPoint.x() - horPeriodicBegin + 1)/unitWidth;
+        quint32 coordY = (lastPoint.y() - verPeriodicBegin)/(cellHeigth + traceChannel);//8+6
+        if(coordX < unitsInRow && coordY < unitsInColumn){
+            QString infoName = "";
+            QString infoPos = "";
+            QString infoMacro = "";
+            QString infoNames = "";
+            QString infoTypes = "";
+            QVector<QString> melPinsInfo;
+            QVector<QString> melPinsType;
+            if(cell[coordX][coordY]->isUnderMouse()){
+                infoPos.append(QString::number(cell[coordX][coordY]->getColumn()));
+                infoPos.append("x");
+                infoPos.append(QString::number(cell[coordX][coordY]->getRow()));
 
-            if(cell[coordX][coordY]->getName() != ""){
-                infoPos.append(", ");
-                infoPos.append(QString::number(cell[coordX][coordY]->getSize()));
+                if(cell[coordX][coordY]->getName() != ""){
+                    infoPos.append(", ");
+                    infoPos.append(QString::number(cell[coordX][coordY]->getSize()));
 
-                infoName.append(cell[coordX][coordY]->getName());
-                infoName.append(", ");
-                infoName.append(cell[coordX][coordY]->getDBName());
+                    infoName.append(cell[coordX][coordY]->getName());
+                    infoName.append(", ");
+                    infoName.append(cell[coordX][coordY]->getDBName());
 
-                infoMacro = cell[coordX][coordY]->getMacro();
+                    infoMacro = cell[coordX][coordY]->getMacro();
 
-                melPinsInfo = cell[coordX][coordY]->getMelPinsInfo();
-                for (qint32 i = 0; i < melPinsInfo.size(); ++i) {
-                    infoNames.append(melPinsInfo.at(i));
-                    if (i != melPinsInfo.size() - 1){
-                        infoNames.append(", ");
+                    melPinsInfo = cell[coordX][coordY]->getMelPinsInfo();
+                    for (qint32 i = 0; i < melPinsInfo.size(); ++i) {
+                        infoNames.append(melPinsInfo.at(i));
+                        if (i != melPinsInfo.size() - 1){
+                            infoNames.append(", ");
+                        }
+                    }
+
+                    melPinsType = cell[coordX][coordY]->getMelPinsType();
+                    for (qint32 i = 0; i < melPinsType.size(); ++i) {
+                        infoTypes.append(melPinsType.at(i));
+                        if (i != melPinsType.size() - 1){
+                            infoTypes.append(", ");
+                        }
                     }
                 }
-
-                melPinsType = cell[coordX][coordY]->getMelPinsType();
-                for (qint32 i = 0; i < melPinsType.size(); ++i) {
-                    infoTypes.append(melPinsType.at(i));
-                    if (i != melPinsType.size() - 1){
-                        infoTypes.append(", ");
-                    }
-                }
+            }else{
+                infoName = "";
+                infoPos = "";
+                infoMacro = "";
+                infoNames = "";
+                infoTypes = "";
             }
-        }else{
-            infoName = "";
-            infoPos = "";
-            infoMacro = "";
-            infoNames = "";
-            infoTypes = "";
+            ui->unitNameLabel->setText(infoName);
+            ui->unitPosLabel->setText(infoPos);
+            ui->unitMacroLabel->setText(infoMacro);
+            ui->unitPinNamesLabel->setText(infoNames);
+            ui->unitPinTypesLabel->setText(infoTypes);
         }
-        ui->unitNameLabel->setText(infoName);
-        ui->unitPosLabel->setText(infoPos);
-        ui->unitMacroLabel->setText(infoMacro);
-        ui->unitPinNamesLabel->setText(infoNames);
-        ui->unitPinTypesLabel->setText(infoTypes);
     }
 
 }

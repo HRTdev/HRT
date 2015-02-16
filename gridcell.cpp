@@ -15,6 +15,8 @@ void gridCell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
     cellPen = QPen(Qt::yellow);
     cellBrush = QBrush(Qt::darkCyan);
+    //painter->drawLine(QLine(0,0,0,m_heigth*SIDE));
+    //painter->drawLine(QLine(4*SIDE,0,4*SIDE,m_heigth*SIDE));
     //m_heigth = 6;
     painter->setPen(polyPen);
     switch(m_type){

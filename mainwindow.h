@@ -162,8 +162,8 @@ private:
     QString projectName;//Текущее имя проекта
     QString iniFileName;//Текущий ini файл
 
-    quint32 coursorX;//Координаты курсора на графическом планшете
-    quint32 coursorY;
+    qint32 coursorX;//Координаты курсора на графическом планшете
+    qint32 coursorY;
     QString unitType;//cell, grid, buffer
     quint32 unitX;//Координаты юнита, находящегося под курсором.
     quint32 unitY;
