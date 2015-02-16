@@ -66,6 +66,7 @@ private slots:
     void openDb();         //
     void openMel();        //
     void on_myScene_unitPlacing();
+    void on_myScene_initialUnitPlacing();
     void update();
     void on_tableWidget_itemDoubleClicked(QTableWidgetItem *item);
     void on_tableView_itemDoubleClicked(QModelIndex mi);
@@ -78,7 +79,7 @@ private slots:
     void on_projectMenu_checkProjectName(QString text);
     void on_openProjectWidget_openProject(QString project);
     void on_wiringAction();
-    void pointsDetection();
+    QString pointsDetection();
 private:
     Ui::MainWindow *ui;
     QVector< QVector<SquareItem*> > square;
@@ -94,7 +95,6 @@ private:
     void fillInfoTable();
     void createActions();
     void createMenus();
-    void getItemType(QPointF point);
     void adjustTableSize();
     void connectToDatabase();
     QAction *createProject;
@@ -112,8 +112,6 @@ private:
     qint32 returnX(QPointF point);
     qint32 returnY(QPointF point);
     QPointF lastPoint;
-    QPoint lastCellPos;
-    QPoint lastGridPos;
 
     qint32 max_pos_delta;
     qint32 max_neg_delta;
@@ -169,6 +167,8 @@ private:
     quint32 unitY;
     quint32 xInUnit;//Координаты курсора внутри юнита.
     quint32 yInUnit;
+
+    QTimer* m_timer;
 
 signals:
    // void itemDoubleClicked(QTableWidgetItem *item);

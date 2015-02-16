@@ -79,9 +79,10 @@ void bufferCell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
             painter->drawRect(pos1*SIDE,9*SIDE, SIDE, SIDE);
             painter->drawRect(pos3*SIDE,9*SIDE, (pos1+1)*SIDE, SIDE);
             //painter->drawRect(10*SIDE,0,11*SIDE,1*SIDE);
-
+            //painter->boundingRect(basic);
         }
     }
+
 
 
     //specify a new font.
@@ -143,7 +144,18 @@ void bufferCell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
 QRectF bufferCell::boundingRect() const
 {
-    return QRectF(0,0,4*SIDE,8*SIDE);
+    QRectF basic = QRectF(0,0,10*SIDE,10*SIDE);
+    if(m_positionData.size()>0){
+        if(m_orientation == "VLB")
+            basic = QRectF(0,0,10*SIDE, (m_positionData[0]+1)*SIDE);
+        if(m_orientation == "VRB")
+            basic = QRectF(0,0,10*SIDE, (m_positionData[0]+1)*SIDE);
+        if(m_orientation == "HDB")
+            basic = QRectF(0,0,(m_positionData[0]+1)*SIDE,10*SIDE);
+        if(m_orientation == "HUB")
+            basic = QRectF(0,0,(m_positionData[0]+1)*SIDE,10*SIDE);
+        }
+    return basic;
 }
 
 

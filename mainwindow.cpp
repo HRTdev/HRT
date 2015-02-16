@@ -44,12 +44,15 @@ MainWindow::MainWindow(QWidget *parent) :
     max_pos_delta = 0;
     max_neg_delta = 0;
     sessionCounter = 0;
-
-
-
-
     TABLE_HEIGTH = 1;
     TABLE_WIDTH = 1;
+
+
+    m_timer = new QTimer(this);
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(pointsDetection()));
+    m_timer->start(25);
+
 
     connectToDatabase();
     createActions();
@@ -71,12 +74,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->lineEdit->setText("Waiting for user interaction...");
 
-    QTimer *timer = new QTimer(this);
-    QTimer *timer2 = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-    connect(timer, SIGNAL(timeout()), this, SLOT(pointsDetection()));
-    timer->start(25);
-    timer2->start(700);
+
+
 }
 
 void MainWindow::update(){
@@ -84,6 +83,7 @@ void MainWindow::update(){
 }
 
 void MainWindow::drawTable(){
+    m_timer->stop();
     quint32 colCnt = 0;
     quint32 rowCnt = 0;
 
@@ -333,28 +333,15 @@ void MainWindow::drawTable(){
         melUnitChosen = query.value(0).toString();
         quint32 unitRow = query.value(1).toInt();
         quint32 unitColumn = query.value(2).toInt();
-        quint32 unitId = query.value(3).toInt();
         melUnitChosenMacro = query.value(4).toString();
 
-        QSqlQuery q3;
-        q3.prepare("UPDATE unitNets SET isPlaced = 0 WHERE unitId = :id");
-        q3.bindValue(":id",unitId);
-        q3.exec();
-
-        if(unitColumn == 0){
-            lastPoint.setX(unitWidth+horPeriodicBegin-1);//Костыль для обхода проверки на положение курсора при unitPlacment'e
-        }else{
-            lastPoint.setX(unitColumn*unitWidth+horPeriodicBegin);
-        }
-        if (unitRow == 0){
-            lastPoint.setY((cellHeigth+traceChannel)+verPeriodicBegin-1);//Костыль для обхода проверки на положение курсора при unitPlacment'e
-        }else{
-            lastPoint.setY(unitRow*(cellHeigth+traceChannel)+verPeriodicBegin);
-        }
-        on_myScene_unitPlacing();
+        lastPoint.setX(unitWidth * unitColumn + horPeriodicBegin - 1);
+        lastPoint.setY((cellHeigth + traceChannel) * unitRow + verPeriodicBegin );
+        on_myScene_initialUnitPlacing();
         //qDebug() << "Note: Element loading function is working;";
     }
     ui->graphicsView->update();
+    m_timer->start(25);
 }
 
 
@@ -548,8 +535,8 @@ void MainWindow::on_hoverMove(QPointF point)
         on_hoverEnter(point);
         update();
     }
-    lastPoint.setX(currentSquare_x);
-    lastPoint.setY(currentSquare_y);
+    //lastPoint.setX(currentSquare_x);
+    //lastPoint.setY(currentSquare_y);
     ui->MenuLevelLabel->setText(QString::number(square[currentSquare_x][currentSquare_y]->getType()));
     ui->ColumnLabel->setText(QString::number(currentSquare_x));
     ui->RowLabel->setText(QString::number(currentSquare_y));
@@ -723,98 +710,7 @@ void MainWindow::on_deletingTrace(int delKey)
 }
 
 
-void MainWindow::getItemType(QPointF point)
-{
-    quint32 x = point.x();
-    quint32 y = point.y();
-    y = TABLE_HEIGTH - y;
-    QString area;
-    //Check if it in buffer area
 
-    {
-    if ( y < 10 ){
-        QVector<quint32> temp = iniBufPos["HDB"];
-        while (temp.size()>=4){
-            if( ((temp[1] <= x) && (x <= temp[3])) || ((temp[3] <= x) && (x <= temp[1])) ){
-                area = "Down buffer";
-            }
-            temp.remove(0,4);
-        }
-    }
-    if ( y >= TABLE_HEIGTH - 10 ){
-        QVector<quint32> temp = iniBufPos["HUB"];
-        while (temp.size()>=4){
-            if( ((temp[1] <= x) && (x <= temp[3])) || ((temp[3] <= x) && (x <= temp[1])) ){
-                area = "Up buffer";
-            }
-            temp.remove(0,4);
-        }
-    }
-    if ( x >= TABLE_WIDTH - 10 ){
-        QVector<quint32> temp = iniBufPos["VRB"];
-        while (temp.size()>=4){
-            if( ((temp[1] < y) && (y <= temp[3]+1)) || ((temp[3] < y) && (y <= temp[1]+1)) ){
-                area = "Right buffer";
-            }
-            temp.remove(0,4);
-        }
-    }
-    if ( x < 10 ){
-        QVector<quint32> temp = iniBufPos["VLB"];
-        while (temp.size()>=4){
-            if( ((temp[1] < y) && (y <= temp[3]+1)) || ((temp[3] < y) && (y <= temp[1]+1)) ){
-                area = "Left buffer";
-            }
-            temp.remove(0,4);
-        }
-    }
-    }
-
-    //Check if it in a cell area, and detect in which cell
-    if(x >= horPeriodicBegin && y>=verPeriodicBegin && x <= TABLE_WIDTH - horPeriodicBegin + 1 && y<= TABLE_HEIGTH - verPeriodicBegin){
-        for (quint32 rowNum = 0; rowNum<unitsInColumn; rowNum++){
-            quint32 cell_max_y = verPeriodicBegin + unitHeigth * (rowNum+1);
-            quint32 cell_min_y = verPeriodicBegin + unitHeigth * rowNum + traceChannel;
-            if(y>= cell_min_y-1 && y<cell_max_y-1){
-                quint32 coordX = (x - horPeriodicBegin)/unitWidth;
-                quint32 coordY = (y - verPeriodicBegin)/(cellHeigth + traceChannel);
-                area = "cell";
-                QString str;
-                str.setNum(coordX);
-                area.append(" ");
-                area.append(str);
-                area.append(" ");
-                str.setNum(coordY);
-                area.append(str);
-            }
-        }
-    }
-
-    //Check if it in a grid area(but inside cell area), and detect in which cell
-    if(x >= horPeriodicBegin && y>=verPeriodicBegin-1 && x <= TABLE_WIDTH - horPeriodicBegin + 1 && y<= TABLE_HEIGTH - verPeriodicBegin){
-        for (quint32 rowNum = 0; rowNum<=unitsInColumn; rowNum++){
-            quint32 grid_max_y = verPeriodicBegin + unitHeigth * rowNum + traceChannel;
-            quint32 grid_min_y = verPeriodicBegin + unitHeigth * rowNum;
-            if(y>= grid_min_y-1 && y<grid_max_y-1){
-                quint32 coordX = (x - horPeriodicBegin)/unitWidth;
-                quint32 coordY = (y - verPeriodicBegin + 1)/unitHeigth;
-                area = "grid";
-                QString str;
-                str.setNum(coordX);
-                area.append(" ");
-                area.append(str);
-                area.append(" ");
-                str.setNum(coordY);
-                area.append(str);
-            }
-        }
-    }
-
-
-    //Show information
-    ui->typeLabel->setText(area);
-    area = "";
-}
 
 
 
@@ -1100,6 +996,7 @@ void MainWindow::loadFileMel(const QString &fileName)
 
     QTextStream in(&file);
     QString melUnitDDNum;
+    QString fortUnitNum;
     QString line;
     QRegExp rxUnit("^(DD\\d{1,5})\\*(F\\d{4})");
     QRegExp rxMacro("^(DD\\d{1,5})\\*F([a-zA-Z0-9'_#]+)");
@@ -1139,36 +1036,27 @@ void MainWindow::loadFileMel(const QString &fileName)
         getMacroMelName.bindValue(":fileName", coreInputAbsFilePath);
         getMacroMelName.bindValue(":fort",fileBaseName);
         getMacroMelName.exec();
-        //qDebug()<<"SELECT unitNets.melUnitName FROM unitNets, sourceData WHERE unitNets.melUnitType = 1 AND unitNets.fileId = sourceData.fileId AND unitNets.fortUnitName = "<<fileBaseName;
-        //qDebug()<<"AND sourceData.projectName = "<<projectName<<" AND sourceData.fileName = "<<coreInputAbsFilePath;
-        //qDebug()<<getMacroMelName.lastError().text();
-       // qDebug()<<getMacroMelName.value(0).toString();
+
         if( getMacroMelName.isSelect() ){
             getMacroMelName.first();
         }
-        //qDebug()<<getMacroMelName.value(0).toString();
         if(getMacroMelName.isValid()){
              macroMelName = getMacroMelName.value(0).toString();
            }
-        //qDebug()<<getMacroMelName.value(0).toString();
-        //qDebug()<<macroMelName<<" :macroMelName";
+
     }
 
     do {
         line = in.readLine();
         if (rxUnit.indexIn(line) != -1){
             melUnitDDNum = rxUnit.cap(1);
-            //qDebug()<<"UnitNum: "<<rxUnit.cap(2);
-            melUnitFName[macroMelName].insert(melUnitDDNum,rxUnit.cap(2));
-//            if(melUnitDDNum == "DD15"){
-//                qDebug()<<"MacroMelName: "<<macroMelName<<" melName: "<<melUnitDDNum<<" fname: "<<rxUnit.cap(2);
-//                qDebug()<<"total: "<<melUnitFName[macroMelName].value("DD15");
-//            }
+            fortUnitNum = rxUnit.cap(2);
+            melUnitFName[macroMelName].insert(melUnitDDNum,fortUnitNum);
             query.prepare("INSERT INTO unitNets (fileId, melUnitName, fortUnitName, melUnitType, macroUnitName) "
                           "VALUES (:id, :mel, :fort, 0, :macro)");
             query.bindValue(":id", fileId);
-            query.bindValue(":mel", rxUnit.cap(1));
-            query.bindValue(":fort", rxUnit.cap(2));
+            query.bindValue(":mel", melUnitDDNum);
+            query.bindValue(":fort", fortUnitNum);
             query.bindValue(":macro", macroMelName);
             query.exec();
 
@@ -1184,53 +1072,34 @@ void MainWindow::loadFileMel(const QString &fileName)
 
             }
             else if((rxPin.indexIn(line) != -1) && (melUnitDDNum != 0)){
-                //dbUnitPinsInfo[dbUnitName].append(rxPinInfo.cap(1));
-            /*
-             *
-             *
-             *
-             * Здесь нужно добавить запись melUnitPinName(DD###, Macro) в базу
-             * И оттуда же потом тягать эту информацию*/
                 melUnitPinName[macroMelName][melUnitDDNum].append(rxPin.cap(2));
                 melUnitPinType[macroMelName][melUnitDDNum].append(rxPin.cap(1));
-//                if(melUnitDDNum == "DD15"){
-//                    //qDebug()<<"MacroMelName: "<<macroMelName<<" PinType: "<<rxPin.cap(1);
-//                    //qDebug()<<"MacroMelName: "<<macroMelName<<" PinName: "<<rxPin.cap(2);
-//                    qDebug()<<"MacroMelName: "<<macroMelName<<" PinName: "<<melUnitPinName[macroMelName].value("DD15");
-//                    qDebug()<<"MacroMelName: "<<macroMelName<<" PinName: "<<melUnitPinType[macroMelName].value("DD15");
-//                }
 
                 QSqlQuery query2;
                 query2.prepare("SELECT unitNets.unitId FROM unitNets, sourceData WHERE "
                                "unitNets.melUnitName = :name AND unitNets.fileId = sourceData.fileId "
                                "AND sourceData.projectName = :projectName AND sourceData.fileName = :fileName");
-                query2.bindValue(":name", rxUnit.cap(1));
+                query2.bindValue(":name", melUnitDDNum);
                 query2.bindValue(":projectName", projectName);
                 query2.bindValue(":fileName", fileName);
                 query2.exec();
 
-                while (query2.next()) {
-                    query.bindValue(":id", query2.value(0));
-                    //qDebug() << name;
-                }
+                query2.first();
+                //qDebug()<<query2.executedQuery()<<query2.boundValues()<<melUnitDDNum<<projectName<<fileName;
+
 
                 query.prepare("INSERT INTO unitPorts (unitId, portType, portName) "
                               "VALUES (:id, :type, :name)");
+                query.bindValue(":id", query2.value(0));
                 query.bindValue(":type", rxPin.cap(1));
                 query.bindValue(":name", rxPin.cap(2));
                 query.exec();
-
+                qDebug()<<query.executedQuery()<<query.boundValues();
 
                 }
 
     } while (!line.isNull());
-    //
 
-//    QHash< QString, QHash< QString, QString > >::const_iterator i = melUnitFName.constBegin();
-//    while (i != melUnitFName.constEnd()) {
-//        qDebug() << i.key() << ": " << i.value() << endl;
-//        ++i;
-//    }
 
 #ifndef QT_NO_CURSOR
     QApplication::setOverrideCursor(Qt::WaitCursor);
@@ -1413,9 +1282,15 @@ void MainWindow::on_projectMenu_checkProjectName(QString text)
 
 void MainWindow::on_openProjectWidget_openProject(QString project)
 {
+    scene->clear();
     melUnitFName.clear();
     melUnitPinName.clear();
     melUnitPinType.clear();
+    square.clear();
+    cell.clear();
+    grid.clear();
+    buffer.clear();
+    bGrid.clear();
 
     QSqlQuery query;
     QString input;
@@ -1465,14 +1340,17 @@ void MainWindow::on_wiringAction()
 
 }
 
-void MainWindow::pointsDetection()
+QString MainWindow::pointsDetection()
 {
+    QString type = "";   /* grid, cell, buffer, bufGrid, addGrid */
     QPoint point2 = ui->graphicsView->mapFromGlobal(QCursor::pos());//Находим глобальную позицию курсора
     QPointF point = ui->graphicsView->mapToScene(point2);           //Маппим позицию курсора на сцену
-    quint32 tmpx = 1+point.x()/SIDE;
-    quint32 tmpy = 1+TABLE_HEIGTH - point.y()/SIDE;
-    coursorX = point.x()/SIDE;
-    coursorY = point.y()/SIDE;
+    quint32 tmpx = 1 + point.x()/SIDE;
+    quint32 tmpy = 1 + TABLE_HEIGTH - point.y() / SIDE;
+
+    coursorX = point.x() / SIDE;
+    coursorY = point.y() / SIDE;
+
 
     /* Boundary check */
     if (coursorX > TABLE_WIDTH){
@@ -1487,6 +1365,7 @@ void MainWindow::pointsDetection()
     if(coursorY < 0){
         coursorY = 0;
     }
+    /* End of boundary check */
 
     lastPoint.setX(coursorX);
     lastPoint.setY(coursorY);
@@ -1501,9 +1380,6 @@ void MainWindow::pointsDetection()
 
     QString area = "";
 
-    if(grid[1][1]->isUnderMouse()){
-        area = "bingo! grid under mouse";
-    }
     //Check if it in buffer area
     //Проверка простая: берем из хэша типа (типа буфера; координаты буферов такого типа по 4 на буфер) собственно
     //координаты и проверяем, находится ли наш курсор внутри оных.
@@ -1561,10 +1437,10 @@ void MainWindow::pointsDetection()
 
     //Заполнение информации о размещенных юнитах элементах трассировочной решетки
     if(lastPoint.y() >= verPeriodicBegin && lastPoint.x() >= horPeriodicBegin){
-        qint32 gCoordX = (lastPoint.x() - horPeriodicBegin + 1)/unitWidth;
-        qint32 gCoordY = (lastPoint.y() - verPeriodicBegin + 1)/(cellHeigth + traceChannel);//8+6
+        quint32 gCoordX = (lastPoint.x() - horPeriodicBegin + 1)/unitWidth;
+        quint32 gCoordY = (lastPoint.y() - verPeriodicBegin + 1)/(cellHeigth + traceChannel);//8+6
 
-        qDebug()<<"X-Y: "<<gCoordX<<"-"<<gCoordY;
+        //qDebug()<<"X-Y: "<<gCoordX<<"-"<<gCoordY;
         if(gCoordX < unitsInRow && gCoordY < unitsInColumn+1){
             QString gridInfoPos = "";
             QString gridInfoOwner = "";
@@ -1579,6 +1455,7 @@ void MainWindow::pointsDetection()
 
 
             if(grid[gCoordX][gCoordY]->isUnderMouse()){
+                type = "grid";
                 //grid[gCoordX][gCoordY]->setCursor(Qt::CrossCursor);
                 gridInfoPos.append(QString::number(grid[gCoordX][gCoordY]->getColumn()));
                 gridInfoPos.append("x");
@@ -1624,6 +1501,7 @@ void MainWindow::pointsDetection()
             QVector<QString> melPinsInfo;
             QVector<QString> melPinsType;
             if(cell[coordX][coordY]->isUnderMouse()){
+                type = "cell";
                 infoPos.append(QString::number(cell[coordX][coordY]->getColumn()));
                 infoPos.append("x");
                 infoPos.append(QString::number(cell[coordX][coordY]->getRow()));
@@ -1668,16 +1546,14 @@ void MainWindow::pointsDetection()
             ui->unitPinTypesLabel->setText(infoTypes);
         }
     }
-
+    return type;
 }
 
 
 
 void MainWindow::on_myScene_unitPlacing()
 {
-
-    //qDebug()<<"Note: Unit placing function launched;";
-    //MySQL checking if unit already placed;
+    /* Check if this unit not placed already */
     QSqlQuery query;
     query.prepare("SELECT A.isPlaced FROM unitNets A, sourceData B, projects C "
                   "WHERE A.fileId = B.fileId AND C.projectName = :projName "
@@ -1695,7 +1571,10 @@ void MainWindow::on_myScene_unitPlacing()
         qDebug() << isPlaced << "Error: Cant place unit, cause it's already placed;";
         return;
     }
+    /* End of check */
 
+
+    /* Check if this unit exists in database */
     query.prepare("SELECT COUNT(*) FROM unitNets A, sourceData B, projects C "
                   "WHERE A.fileId = B.fileId AND C.projectName = :projName "
                   "AND A.melUnitName = :name AND A.macroUnitName = :mname "
@@ -1703,7 +1582,7 @@ void MainWindow::on_myScene_unitPlacing()
     query.bindValue(":name", melUnitChosen);
     query.bindValue(":projName", projectName);
     query.bindValue(":mname", melUnitChosenMacro);
-    qDebug()<<"Unit "<<melUnitChosen<<" from project `"<<projectName<<"`, with parent: "<<melUnitChosenMacro<<" chosen for placement;";
+    //qDebug()<<"Unit "<<melUnitChosen<<" from project `"<<projectName<<"`, with parent: "<<melUnitChosenMacro<<" chosen for placement;";
     query.exec();
     quint32 existance;
     while (query.next()) {
@@ -1714,14 +1593,13 @@ void MainWindow::on_myScene_unitPlacing()
         qDebug() << existance << "Error: Cant place unit, which is not exist in mysql db;";
         return;
     }
+    /* End of check */
 
-    quint32 coordX = (lastPoint.x() - horPeriodicBegin)/unitWidth;
-    quint32 coordY = (lastPoint.y() - verPeriodicBegin)/(cellHeigth + traceChannel);//8+6
-    bool cellsFreedomFlag = true;
-    qDebug()<<"Ok element?"<<coordX<<coordY<<melUnitChosen<<unitsInRow<<unitsInColumn<<lastPoint.y()<<verPeriodicBegin<<traceChannel;
-    if(coordX < unitsInRow && coordY < unitsInColumn && lastPoint.y() >= verPeriodicBegin+traceChannel && lastPoint.x() >= horPeriodicBegin){
-        qDebug()<<"here";
-        //QString fName = melUnitFName.value(melUnitChosen);
+    //if (pointsDetection() == "cell"){
+    if(1){
+        quint32 coordX = (lastPoint.x() - horPeriodicBegin + 1)/unitWidth;
+        quint32 coordY = (lastPoint.y() - verPeriodicBegin)/(cellHeigth + traceChannel);//8+6
+        bool cellsFreedomFlag = true;
         QString fName;
         /*
         QSqlQuery getMacroFortName;
@@ -1745,16 +1623,21 @@ void MainWindow::on_myScene_unitPlacing()
         query.exec();
         query.first();
         fName = query.value(0).toString();
-        qDebug()<<"fname: "<<fName;
+        //qDebug()<<"fname: "<<fName;
+
         for (quint16 i = 0; i< dbUnitCellCnt.value(fName); i++){
             if (cell[coordX+i][coordY]->isActive()){
                 cellsFreedomFlag = false;
-                qDebug()<<"False. why?";
+                qDebug()<<"NOTE: Some cell are already occupied, try other free cell;";
             }
         }
+        if (dbUnitType.value(fName) == 1){
+            cellsFreedomFlag = false;
+            qDebug()<<"NOTE: This unit must be placed in buffer cell, not in the matrix;";
+        }
         if(cellsFreedomFlag){
-            qDebug()<<"Note: Cells are free, so we can place unit "<<melUnitChosen<<" macro "<<melUnitChosenMacro<<" here; Type of element is: "<<fName<<" ;";
-            qDebug()<<melUnitPinType.value(melUnitChosenMacro).value(melUnitChosen);
+            //qDebug()<<"Note: Cells are free, so we can place unit "<<melUnitChosen<<" macro "<<melUnitChosenMacro<<" here; Type of element is: "<<fName<<" ;";
+            //qDebug()<<melUnitPinType.value(melUnitChosenMacro).value(melUnitChosen);
             cell[coordX][coordY]->setParams(melUnitChosen,
                                             fName,
                                             dbUnitPinsCnt.value(fName),
@@ -1764,40 +1647,9 @@ void MainWindow::on_myScene_unitPlacing()
                                             melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen),
                                             melUnitPinType.value(melUnitChosenMacro).value(melUnitChosen),
                                             melUnitChosenMacro);
-            QVector<QString> temp;
-            temp = grid[coordX][coordY]->getNets();
-            qDebug()<<"here2"<<dbUnitPinsInfo.value(fName).at(1+0).toInt()-1<<melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen);
-            quint32 pinNum = dbUnitPinsInfo.value(fName).at(1+3).toInt();
-            if(pinNum != 0 && pinNum != 65535){
-                temp[3] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
-            }
-            pinNum = dbUnitPinsInfo.value(fName).at(1+0).toInt();
-            if(pinNum != 0 && pinNum != 65535){
-                temp[1] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
-            }
-            grid[coordX][coordY]->setNets(temp);
 
-            //qDebug()<<"here3";
-            temp.clear();
-            temp = grid[coordX][coordY+1]->getNets();
-            pinNum = dbUnitPinsInfo.value(fName).at(1+0).toInt();
-            if(pinNum != 0 && pinNum != 65535){
-                temp[0] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
-            }
-            pinNum = dbUnitPinsInfo.value(fName).at(1+3*2).toInt();
-            if(pinNum != 0 && pinNum != 65535){
-                temp[2] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
-            }
-            grid[coordX][coordY+1]->setNets(temp);
-
-            //qDebug()<<"here2";
             cell[coordX][coordY]->setActive(true);
-            //melUnitStatus.insert(melUnitChosen, true);
             cell[coordX][coordY]->update();
-            qDebug()<<"Note: Unit "<<melUnitChosen<<", type: "<<fName<<" placed here: "<<coordX<<coordY;
-            //qDebug()<<melUnitFName;
-
-
 
             QSqlQuery query4;
             query4.prepare("SELECT A.unitId FROM unitNets A, sourceData B, projects C "
@@ -1811,7 +1663,7 @@ void MainWindow::on_myScene_unitPlacing()
             quint32 unitId;
             while (query4.next()) {
                 unitId = query4.value(0).toInt();
-                qDebug() << unitId << "unitId for UPDATE";
+                //qDebug() << unitId << "unitId for UPDATE";
             }
 
 
@@ -1826,8 +1678,6 @@ void MainWindow::on_myScene_unitPlacing()
             //#################end of refreshing
 
 
-
-
             QSqlQuery query3;
             query3.prepare("INSERT INTO unitPlacement (unitId, unitRow, unitColumn) "
                            "VALUES (:id,:row,:col)");
@@ -1837,9 +1687,92 @@ void MainWindow::on_myScene_unitPlacing()
             query3.exec();
 
 
+            /* Some code to assign to Si+ names of nets, which belongs to corresponding unit we are placing now */
+            QVector<QString> temp = grid[coordX][coordY]->getNets();
+            quint32 pinNum;
+
+            pinNum = dbUnitPinsInfo.value(fName).at(1+3).toInt();
+            if(pinNum != 0 && pinNum != 65535)
+                temp[3] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
+
+            pinNum = dbUnitPinsInfo.value(fName).at(1+0).toInt();
+            if(pinNum != 0 && pinNum != 65535)
+                temp[1] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
+
+            grid[coordX][coordY]->setNets(temp);
+            temp.clear();
+            temp = grid[coordX][coordY+1]->getNets();
+
+            pinNum = dbUnitPinsInfo.value(fName).at(1+0).toInt();
+            if(pinNum != 0 && pinNum != 65535)
+                temp[0] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
+
+            pinNum = dbUnitPinsInfo.value(fName).at(1+3*2).toInt();
+            if(pinNum != 0 && pinNum != 65535)
+                temp[2] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
+
+            grid[coordX][coordY+1]->setNets(temp);
 
         }
     }
+}
+
+void MainWindow::on_myScene_initialUnitPlacing()
+{
+    quint32 coordX = (lastPoint.x() - horPeriodicBegin + 1)/unitWidth;
+    quint32 coordY = (lastPoint.y() - verPeriodicBegin)/(cellHeigth + traceChannel);//8+6
+    QString fName;
+
+    QSqlQuery query;
+    query.prepare("SELECT A.fortUnitName FROM unitNets A, sourceData B, projects C "
+                  "WHERE A.fileId = B.fileId AND C.projectName = :projName "
+                  "AND A.melUnitName = :name AND A.macroUnitName = :mname "
+                  "AND C.projectName = B.projectName");
+    query.bindValue(":name", melUnitChosen);
+    query.bindValue(":projName", projectName);
+    query.bindValue(":mname", melUnitChosenMacro);
+    query.exec();
+    query.first();
+    fName = query.value(0).toString();
+
+    cell[coordX][coordY]->setParams(melUnitChosen,
+                                    fName,
+                                    dbUnitPinsCnt.value(fName),
+                                    dbUnitCellCnt.value(fName),
+                                    0,
+                                    dbUnitPinsInfo.value(fName),
+                                    melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen),
+                                    melUnitPinType.value(melUnitChosenMacro).value(melUnitChosen),
+                                    melUnitChosenMacro);
+
+    cell[coordX][coordY]->setActive(true);
+    cell[coordX][coordY]->update();
+
+    /* Some code to assign to Si+ names of nets, which belongs to corresponding unit we are placing now */
+    QVector<QString> temp = grid[coordX][coordY]->getNets();
+    quint32 pinNum;
+
+    pinNum = dbUnitPinsInfo.value(fName).at(1+3).toInt();
+    if(pinNum != 0 && pinNum != 65535)
+        temp[3] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
+
+    pinNum = dbUnitPinsInfo.value(fName).at(1+0).toInt();
+    if(pinNum != 0 && pinNum != 65535)
+        temp[1] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
+
+    grid[coordX][coordY]->setNets(temp);
+    temp.clear();
+    temp = grid[coordX][coordY+1]->getNets();
+
+    pinNum = dbUnitPinsInfo.value(fName).at(1+0).toInt();
+    if(pinNum != 0 && pinNum != 65535)
+        temp[0] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
+
+    pinNum = dbUnitPinsInfo.value(fName).at(1+3*2).toInt();
+    if(pinNum != 0 && pinNum != 65535)
+        temp[2] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
+
+    grid[coordX][coordY+1]->setNets(temp);
 }
 
 void MainWindow::fillInfoTable()
@@ -1925,7 +1858,7 @@ void MainWindow::fillInfoTable()
     ui->tableView->setSortingEnabled(1);
     //ui->tableView->hideColumn(0);
     ui->tableView->hideColumn(1);
-    ui->tableView->hideColumn(4);
+    //ui->tableView->hideColumn(4);
     ui->tableView->hideColumn(6);
     ui->tableView->show();
 }
@@ -1960,4 +1893,12 @@ void MainWindow::connectToDatabase(){
         QString resErrorString=db.lastError().databaseText()+"\n"+db.lastError().driverText();
         qDebug()<<"DB not open with: "<<resErrorString;
     }
+    QSqlQuery("PRAGMA page_size = 4096");
+    QSqlQuery("PRAGMA cache_size = 16384");
+    QSqlQuery("PRAGMA temp_store = MEMORY");
+    QSqlQuery("PRAGMA journal_mode = OFF");
+    QSqlQuery("PRAGMA locking_mode = EXCLUSIVE");
+    QSqlQuery("PRAGMA synchronous = OFF");
+
+
 }
