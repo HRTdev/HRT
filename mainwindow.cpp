@@ -1595,8 +1595,7 @@ void MainWindow::on_myScene_unitPlacing()
     }
     /* End of check */
 
-    //if (pointsDetection() == "cell"){
-    if(1){
+    if (pointsDetection() == "cell"){
         quint32 coordX = (lastPoint.x() - horPeriodicBegin + 1)/unitWidth;
         quint32 coordY = (lastPoint.y() - verPeriodicBegin)/(cellHeigth + traceChannel);//8+6
         bool cellsFreedomFlag = true;
@@ -1625,11 +1624,15 @@ void MainWindow::on_myScene_unitPlacing()
         fName = query.value(0).toString();
         //qDebug()<<"fname: "<<fName;
 
-        for (quint16 i = 0; i< dbUnitCellCnt.value(fName); i++){
-            if (cell[coordX+i][coordY]->isActive()){
-                cellsFreedomFlag = false;
-                qDebug()<<"NOTE: Some cell are already occupied, try other free cell;";
+        if(coordX + dbUnitCellCnt.value(fName) - 1 < unitsInRow){//Maybe we just have not enough cells to place this unit?
+            for (quint16 i = 0; i< dbUnitCellCnt.value(fName); i++){
+                    if (cell.at(coordX+i).at(coordY)->isActive()){
+                        cellsFreedomFlag = false;
+                        qDebug()<<"NOTE: Some cell are already occupied, try other free cell;";
+                }
             }
+        }else{
+            cellsFreedomFlag = false;
         }
         if (dbUnitType.value(fName) == 1){
             cellsFreedomFlag = false;
@@ -1897,7 +1900,7 @@ void MainWindow::connectToDatabase(){
     QSqlQuery("PRAGMA cache_size = 16384");
     QSqlQuery("PRAGMA temp_store = MEMORY");
     QSqlQuery("PRAGMA journal_mode = OFF");
-    QSqlQuery("PRAGMA locking_mode = EXCLUSIVE");
+    //QSqlQuery("PRAGMA locking_mode = EXCLUSIVE");
     QSqlQuery("PRAGMA synchronous = OFF");
 
 
