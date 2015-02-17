@@ -33,25 +33,33 @@ class bufferCell : public QObject, public QGraphicsItem
     Q_PROPERTY(QVector<quint32> positionData    READ getPositionData    WRITE setPositionData)
     Q_PROPERTY(bool active                      READ isActive           WRITE setActive)
     Q_PROPERTY(bool selected                    READ isSelected         WRITE setSelected)
-    Q_PROPERTY(quint16 macro                    READ getMacro           WRITE setMacro)
 public:
     bufferCell( QGraphicsItem * parent = 0) : QGraphicsItem (parent){};
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;
     QString getOrientation() const;
+    quint32 getNumber() const;
     QVector<quint32> getPositionData() const;
     bool isActive() const;
     bool isSelected() const;
-    quint16 getMacro() const;
+
+    QString getName() const;
+    QString getDBName() const;
+    QVector<QString> getMelPinsInfo() const;
+    QVector<QString> getMelPinsType() const;
+    QString getMacro() const;
 
 signals:
     
 public slots:
+    void setParams(QString cellMelName, QString cellDbName, quint32 cellDbPinsCnt,
+                   QVector<QString> cellDbPinsInfo, QVector<QString> cellMelPinsInfo,
+                   QVector<QString> cellMelPinsType, QString melMacro);
     void setOrientation(QString arg);
     void setPositionData(QVector<quint32> arg);
     void setActive(bool arg);
     void setSelected(bool arg);
-    void setMacro(quint16 arg);
+    void setMacro(QString arg);
     //void setParams(QString bufferNetListName, QString);
     void initialSet(QString orientation, quint16 number, QVector<quint32> positionData);
 
@@ -66,17 +74,20 @@ private:
     QPen mePen;
     QBrush cellBrush;
 
+    quint32 m_cellDbPinsCnt;
+    QString m_cellMelName;
+    QString m_cellDbName;
+    QString m_cellMelMacro;
+    QVector<QString> m_cellDbPinsInfo;
+    QVector<QString> m_cellMelPinsInfo;
+    QVector<QString> m_cellMelPinsType;
+    QVector<QString> m_nets;//Карта названий цепей, длина вектора - 3.
 
-    QString m_bufferNetListName;
-    QString m_bufferDbName;
-    quint32 m_bufferDbPinsCnt;
-    QVector<QString> m_bufferDbPinsInfo;
-    QVector<QString> m_bufferNetListPinsInfo;
-    QVector<QString> m_bufferNetListPinsType;
-    bool m_selected;
+
     quint16 m_macro;
+
     bool m_active;
-    QVector< QVector<quint8> > m_map;
+    bool m_selected;
 };
 
 #endif // BUFFERCELL_H
