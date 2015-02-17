@@ -92,52 +92,36 @@ void bufferCell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
     painter->drawRect(basic);
     painter->drawText(basic, Qt::AlignCenter, QString::number(m_number));
+}
 
+void bufferCell::setParams(QString cellMelName, QString cellDbName, quint32 cellDbPinsCnt, QVector<QString> cellDbPinsInfo, QVector<QString> cellMelPinsInfo,
+                          QVector<QString> cellMelPinsType, QString melMacro)
+{
 
-    bool trueMapIndexes;
-    if(!m_map.isEmpty()){
-        qDebug()<<m_map;
-        if (m_map.size()<5){
-            trueMapIndexes = true;
-            for (quint8 i = 0; i<m_map.size(); i++){
-                if (m_map[i].size()>=9){
-                    trueMapIndexes = false;
-                }
-            }
+    m_cellMelName       = cellMelName;    //Имя элемента типа DD
+    m_cellDbName        = cellDbName;     //Имя элемента в базе данных F
+    m_cellDbPinsCnt     = cellDbPinsCnt;  //Количество пинов из БД
+    m_cellDbPinsInfo    = cellDbPinsInfo; //Названия пинов типа Х1, Х2...
+    //qDebug()<<m_cellDbPinsInfo;
+    m_cellMelPinsInfo   = cellMelPinsInfo;//Имена пинов
+    //qDebug()<<m_cellMelPinsInfo;
+    m_cellMelPinsType   = cellMelPinsType;//Тип пина: вход, выход, двунаправленный
+    m_cellMelMacro      = melMacro;       //Имя макроэлемента, которому принадлежит элемент
+    //qDebug()<<"set"<<m_cellMelName<<m_cellDbName<<m_cellDbPinsCnt<<m_cellDbPinsInfo<<m_cellPlace;
 
-            if(trueMapIndexes){
-                for(quint8 x = 0; x<m_map.size(); x++){
-                    //qDebug()<<"m_mapWHAT?1";
-                    for(quint8 y = 0; y<m_map[x].size();y++){
-                        //qDebug()<<"m_mapWHAT?";
-                        ///#####################
-                        mePen = QPen(QColor(233,233,233));
-                        mePen.setWidth(ME_PEN_WIDTH);
-                        painter->setPen(mePen);
-                        if (m_map[x][y] & (1<<LEFT)){
-                            painter->drawLine(QLine(SIDE*x + M_OFFSET, SIDE*y + HALF, SIDE*x + HALF, SIDE*y + HALF));
-                        }
-                        if (m_map[x][y] & (1<<RIGTH)){
-                            painter->drawLine(QLine(SIDE*x + HALF, SIDE*y + HALF, SIDE*x + M_FULL,SIDE*y +  HALF));
-                        }
-                        if (m_map[x][y] & (1<<TOP)){
-                            painter->drawLine(QLine(SIDE*x + HALF, SIDE*y + M_OFFSET, SIDE*x + HALF, SIDE*y + HALF));
-                        }
-                        if (m_map[x][y] & (1<<DOWN)){
-                            painter->drawLine(QLine(SIDE*x + HALF, SIDE*y + HALF, SIDE*x + HALF, SIDE*y + M_FULL));
-                        }
-                        if (m_map[x][y] & (1<<CIRC)){
-                            painter->setBrush(SCENE_COLOR);
-                            painter->setRenderHint(QPainter::Antialiasing, true);
-                            painter->drawRoundedRect(SIDE*x + SIDE/4,  SIDE*y + SIDE/4, SIDE/2, SIDE/2, SIDE/3, SIDE/3);
-                            painter->setRenderHint(QPainter::Antialiasing, false);
-                        }
-                        ///#####################
-
-                    }
-                }
+    m_nets.clear();
+    if(m_cellMelPinsInfo.size()>=2 && m_cellDbPinsInfo.size()>=9){
+        for (quint8 i = 0; i<3;i++){
+            quint32 str = m_cellDbPinsInfo[1+3*(i+3)].toInt();
+            //qDebug()<<str<<1+3*(i+3*m_cellPlace);
+            if (str != 65535 && str !=0){
+                m_nets.append(m_cellMelPinsInfo[str-1]);
+                //qDebug()<<i<<m_cellMelPinsInfo[str-1]<<str-1;
+            }else{
+                m_nets.append(" ");
             }
         }
+        //qDebug()<<m_nets;
     }
 }
 
@@ -162,6 +146,11 @@ QRectF bufferCell::boundingRect() const
 QString bufferCell::getOrientation() const
 {
     return m_orientation;
+}
+
+quint32 bufferCell::getNumber() const
+{
+    return m_number;
 }
 
 QVector<quint32> bufferCell::getPositionData() const
@@ -189,12 +178,6 @@ bool bufferCell::isSelected() const
     return m_selected;
 }
 
-quint16 bufferCell::getMacro() const
-{
-    return m_macro;
-}
-
-
 void bufferCell::setActive(bool arg)
 {
     m_active = arg;
@@ -205,9 +188,9 @@ void bufferCell::setSelected(bool arg)
     m_selected = arg;
 }
 
-void bufferCell::setMacro(quint16 arg)
+void bufferCell::setMacro(QString arg)
 {
-    m_macro = arg;
+    m_cellMelMacro = arg;
 }
 
 void bufferCell::initialSet(QString orientation, quint16 number, QVector<quint32> positionData)
@@ -215,4 +198,30 @@ void bufferCell::initialSet(QString orientation, quint16 number, QVector<quint32
     m_orientation = orientation;
     m_number = number;
     m_positionData = positionData;
+}
+
+QString bufferCell::getMacro() const
+{
+    return m_cellMelMacro;
+}
+
+QString bufferCell::getName() const
+{
+    return m_cellMelName;
+}
+
+QString bufferCell::getDBName() const
+{
+    return m_cellDbName;
+}
+
+
+QVector<QString> bufferCell::getMelPinsInfo() const
+{
+    return m_cellMelPinsInfo;
+}
+
+QVector<QString> bufferCell::getMelPinsType() const
+{
+    return m_cellMelPinsType;
 }

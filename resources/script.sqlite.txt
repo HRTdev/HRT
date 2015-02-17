@@ -36,7 +36,7 @@ CREATE TABLE `unitNets` (
 
 CREATE TABLE `unitPorts` (
 	unitId	INT(4),
-	portType	VARCHAR(20),sourcedata
+	portType	VARCHAR(20),
 	portName	VARCHAR(20));
 
 CREATE TABLE `route` (

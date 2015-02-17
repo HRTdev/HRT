@@ -151,112 +151,107 @@ void MainWindow::drawTable(){
     QVector<quint32> posData;
     QVector<quint32> postData(3);
     posData = iniBufPos["VLB"];
-    while (posData.size()>2) {
-         postData[0] = TABLE_HEIGTH - posData[1];
-         postData[1] = TABLE_HEIGTH - posData[2];
-         postData[2] = TABLE_HEIGTH - posData[3];
-         if(postData[0]<postData[2]){
-             quint32 t = postData[0];
-             postData[0] = postData[2];
-             postData[2] = t;
-         }
-         buffer[0].append(new bufferCell);
+    for(quint32 i = 0; i < posData.size()/4; i++){
+        postData[0] = TABLE_HEIGTH - posData[1+4*i];
+        postData[1] = TABLE_HEIGTH - posData[2+4*i];
+        postData[2] = TABLE_HEIGTH - posData[3+4*i];
+        if(postData[0]<postData[2]){
+            quint32 t = postData[0];
+            postData[0] = postData[2];
+            postData[2] = t;
+        }
+        buffer[0][i] = new bufferCell;
+        bGrid[0][i] = new bufGrid;
 
-         bGrid[0].append(new bufGrid);
-
-         postData[0] -= 1;
-         postData[1] -= 1;
-         postData[2] -= 1;
-         buffer[0][buffer[0].size()-1]->setPos(0,postData[2]*SIDE);
-         bGrid[0][bGrid[0].size()-1]->setPos(10*SIDE,postData[2]*SIDE);
-         postData[0] -= postData[2];
-         postData[1] -= postData[2];
-         postData[2] -= postData[2];
-         buffer[0][buffer[0].size()-1]->initialSet("VLB", posData[0], postData);
-         bGrid[0][bGrid[0].size()-1]->setPolyPos(postData);
-         bGrid[0][bGrid[0].size()-1]->setType(0);
-         scene->addItem(buffer[0][buffer[0].size()-1]);
-         scene->addItem(bGrid[0][bGrid[0].size()-1]);
-         posData.remove(0,4);
+        postData[0] -= 1;
+        postData[1] -= 1;
+        postData[2] -= 1;
+        buffer[0][i]->setPos(0,postData[2]*SIDE);
+        bGrid[0][i]->setPos(10*SIDE,postData[2]*SIDE);
+        postData[0] -= postData[2];
+        postData[1] -= postData[2];
+        postData[2] -= postData[2];
+        buffer[0][i]->initialSet("VLB", posData[0+4*i], postData);
+        bGrid[0][i]->setPolyPos(postData);
+        bGrid[0][i]->setType(0);
+        scene->addItem(buffer[0][i]);
+        scene->addItem(bGrid[0][i]);
     }
 
     posData = iniBufPos["VRB"];
-    while (posData.size()>2) {
-         postData[0] = TABLE_HEIGTH - posData[1];
-         postData[1] = TABLE_HEIGTH - posData[2];
-         postData[2] = TABLE_HEIGTH - posData[3];
+    for(quint32 i = 0; i < posData.size()/4; i++){
+         postData[0] = TABLE_HEIGTH - posData[1+4*i];
+         postData[1] = TABLE_HEIGTH - posData[2+4*i];
+         postData[2] = TABLE_HEIGTH - posData[3+4*i];
          if(postData[0]<postData[2]){
              quint32 t = postData[0];
              postData[0] = postData[2];
              postData[2] = t;
          }
-         buffer[1].append(new bufferCell);
-         bGrid[1].append(new bufGrid);
+         buffer[1][i] = new bufferCell;
+         bGrid[1][i] = new bufGrid;
          postData[0] -= 1;
          postData[1] -= 1;
          postData[2] -= 1;
-         buffer[1][buffer[1].size()-1]->setPos((TABLE_WIDTH - 10)*SIDE,postData[2]*SIDE);
-         bGrid[1][bGrid[1].size()-1]->setPos((TABLE_WIDTH - 20)*SIDE,postData[2]*SIDE);
+         buffer[1][i]->setPos((TABLE_WIDTH - 10)*SIDE,postData[2]*SIDE);
+         bGrid[1][i]->setPos((TABLE_WIDTH - 20)*SIDE,postData[2]*SIDE);
          postData[0] -= postData[2];
          postData[1] -= postData[2];
          postData[2] -= postData[2];
-         buffer[1][buffer[1].size()-1]->initialSet("VRB", posData[0], postData);
-         bGrid[1][bGrid[1].size()-1]->setPolyPos(postData);
-         bGrid[1][bGrid[1].size()-1]->setType(1);
-         scene->addItem(buffer[1][buffer[1].size()-1]);
-         scene->addItem(bGrid[1][bGrid[1].size()-1]);
-         posData.remove(0,4);
+         buffer[1][i]->initialSet("VRB", posData[0+4*i], postData);
+         bGrid[1][i]->setPolyPos(postData);
+         bGrid[1][i]->setType(1);
+         scene->addItem(buffer[1][i]);
+         scene->addItem(bGrid[1][i]);
     }
 
     posData = iniBufPos["HDB"];
-    while (posData.size()>2) {
-        postData[0] = posData[1];
-        postData[1] = posData[2];
-        postData[2] = posData[3];
+    for(quint32 i = 0; i < posData.size()/4; i++){
+        postData[0] = posData[1+4*i];
+        postData[1] = posData[2+4*i];
+        postData[2] = posData[3+4*i];
          if(postData[0]<postData[2]){
              quint32 t = postData[0];
              postData[0] = postData[2];
              postData[2] = t;
          }
 
-         buffer[2].append(new bufferCell);
-         bGrid[2].append(new bufGrid);
-         buffer[2][buffer[2].size()-1]->setPos(postData[2]*SIDE,(TABLE_HEIGTH - 10)*SIDE);
-         bGrid[2][bGrid[2].size()-1]->setPos(postData[2]*SIDE,(TABLE_HEIGTH - 20)*SIDE);
+         buffer[2][i] = new bufferCell;
+         bGrid[2][i] = new bufGrid;
+         buffer[2][i]->setPos(postData[2]*SIDE,(TABLE_HEIGTH - 10)*SIDE);
+         bGrid[2][i]->setPos(postData[2]*SIDE,(TABLE_HEIGTH - 20)*SIDE);
          postData[0] -= postData[2];
          postData[1] -= postData[2];
          postData[2] -= postData[2];
-         buffer[2][buffer[2].size()-1]->initialSet("HDB", posData[0], postData);
-         bGrid[2][bGrid[2].size()-1]->setPolyPos(postData);
-         bGrid[2][bGrid[2].size()-1]->setType(2);
-         scene->addItem(buffer[2][buffer[2].size()-1]);
-         scene->addItem(bGrid[2][bGrid[2].size()-1]);
-         posData.remove(0,4);
+         buffer[2][i]->initialSet("HDB", posData[0+4*i], postData);
+         bGrid[2][i]->setPolyPos(postData);
+         bGrid[2][i]->setType(2);
+         scene->addItem(buffer[2][i]);
+         scene->addItem(bGrid[2][i]);
     }
 
     posData = iniBufPos["HUB"];
-    while (posData.size()>2) {
-            postData[0] = posData[1];
-            postData[1] = posData[2];
-            postData[2] = posData[3];
+    for(quint32 i = 0; i < posData.size()/4; i++){
+            postData[0] = posData[1+4*i];
+            postData[1] = posData[2+4*i];
+            postData[2] = posData[3+4*i];
          if(postData[0]<postData[2]){
              quint32 t = postData[0];
              postData[0] = postData[2];
              postData[2] = t;
          }
-         buffer[3].append(new bufferCell);
-         bGrid[3].append(new bufGrid);
-         buffer[3][buffer[3].size()-1]->setPos(postData[2]*SIDE,0);
-         bGrid[3][bGrid[3].size()-1]->setPos(postData[2]*SIDE,10*SIDE);
+         buffer[3][i] = new bufferCell;
+         bGrid[3][i] = new bufGrid;
+         buffer[3][i]->setPos(postData[2]*SIDE,0);
+         bGrid[3][i]->setPos(postData[2]*SIDE,10*SIDE);
          postData[0] -= postData[2];
          postData[1] -= postData[2];
          postData[2] -= postData[2];
-         buffer[3][buffer[3].size()-1]->initialSet("HUB", posData[0], postData);
-         bGrid[3][bGrid[3].size()-1]->setPolyPos(postData);
-         bGrid[3][bGrid[3].size()-1]->setType(3);
-         scene->addItem(buffer[3][buffer[3].size()-1]);
-         scene->addItem(bGrid[3][bGrid[3].size()-1]);
-         posData.remove(0,4);
+         buffer[3][i]->initialSet("HUB", posData[0+4*i], postData);
+         bGrid[3][i]->setPolyPos(postData);
+         bGrid[3][i]->setType(3);
+         scene->addItem(buffer[3][i]);
+         scene->addItem(bGrid[3][i]);
     }
 
 
@@ -1087,14 +1082,19 @@ void MainWindow::loadFileMel(const QString &fileName)
                 query2.first();
                 //qDebug()<<query2.executedQuery()<<query2.boundValues()<<melUnitDDNum<<projectName<<fileName;
 
-
-                query.prepare("INSERT INTO unitPorts (unitId, portType, portName) "
-                              "VALUES (:id, :type, :name)");
-                query.bindValue(":id", query2.value(0));
-                query.bindValue(":type", rxPin.cap(1));
-                query.bindValue(":name", rxPin.cap(2));
+                query.prepare("SELECT COUNT(*) FROM unitPorts WHERE unitId = :id");
+                query.bindValue(":id",query2.value(0));
                 query.exec();
-                qDebug()<<query.executedQuery()<<query.boundValues();
+                query.first();
+                if(dbUnitPinsCnt.value(fortUnitNum) > query.value(0).toInt()){
+                    query.prepare("INSERT INTO unitPorts (unitId, portType, portName) "
+                                  "VALUES (:id, :type, :name)");
+                    query.bindValue(":id", query2.value(0));
+                    query.bindValue(":type", rxPin.cap(1));
+                    query.bindValue(":name", rxPin.cap(2));
+                    query.exec();
+                    qDebug()<<query.executedQuery()<<query.boundValues();
+                }
 
                 }
 
@@ -1380,54 +1380,69 @@ QString MainWindow::pointsDetection()
 
     QString area = "";
 
+    QString infoName = "";
+    QString infoPos = "";
+    QString infoMacro = "";
+    QString infoNames = "";
+    QString infoTypes = "";
+
     //Check if it in buffer area
     //Проверка простая: берем из хэша типа (типа буфера; координаты буферов такого типа по 4 на буфер) собственно
     //координаты и проверяем, находится ли наш курсор внутри оных.
     //Если нет, то переходим дальше.
-    /*
-    {
-    if ( y < 10 ){
-        QVector<quint32> temp = iniBufPos["HDB"];
-        while (temp.size()>=4){
-            if( ((temp[1] <= x) && (x <= temp[3])) || ((temp[3] <= x) && (x <= temp[1])) ){
-                area = "Down buffer";
-                unitType = "HDB";
+    if((coursorX <= 10 || coursorX >= TABLE_WIDTH - 10) || (coursorY <= 10 || coursorY >= TABLE_HEIGTH - 10)){
+        if ( coursorY <= 10){
+            for (quint32 j = 0; j< buffer.at(HUB).size(); j++){
+                if(buffer.at(HUB).at(j)->isUnderMouse()){
+                    type = "buffer";
+                    infoName = "Buffer cell under mouse!";
+
+                    infoPos = QString::number(buffer.at(HUB).at(j)->getNumber());
+                    infoPos.append(" at ");
+                    infoPos.append(buffer.at(HUB).at(j)->getOrientation());
+                }
             }
-            temp.remove(0,4);
+        }else if ( coursorY >= TABLE_HEIGTH - 10 ){
+            for (quint32 j = 0; j< buffer.at(HDB).size(); j++){
+                if(buffer.at(HDB).at(j)->isUnderMouse()){
+                    type = "buffer";
+                    infoName = "Buffer cell under mouse!";
+
+                    infoPos = QString::number(buffer.at(HDB).at(j)->getNumber());
+                    infoPos.append(" at ");
+                    infoPos.append(buffer.at(HDB).at(j)->getOrientation());
+                }
+            }
+        }
+
+        if ( coursorX >= TABLE_WIDTH - 10 ){
+            for (quint32 j = 0; j< buffer.at(VRB).size(); j++){
+                if(buffer.at(VRB).at(j)->isUnderMouse()){
+                    type = "buffer";
+                    infoName = "Buffer cell under mouse!";
+
+                    infoPos = QString::number(buffer.at(VRB).at(j)->getNumber());
+                    infoPos.append(" at ");
+                    infoPos.append(buffer.at(VRB).at(j)->getOrientation());
+                }
+            }
+        }else if ( coursorX <= 10 ){
+            for (quint32 j = 0; j< buffer.at(VLB).size(); j++){
+                if(buffer.at(VLB).at(j)->isUnderMouse()){
+                    type = "buffer";
+                    infoName = "Buffer cell under mouse!";
+
+                    infoPos = QString::number(buffer.at(VLB).at(j)->getNumber());
+                    infoPos.append(" at ");
+                    infoPos.append(buffer.at(VLB).at(j)->getOrientation());
+                }
+            }
+        }
+        if(type == "buffer"){
+            ui->unitNameLabel->setText(infoName);
+            ui->unitPosLabel->setText(infoPos);
         }
     }
-    if ( y >= TABLE_HEIGTH - 10 ){
-        QVector<quint32> temp = iniBufPos["HUB"];
-        while (temp.size()>=4){
-            if( ((temp[1] <= x) && (x <= temp[3])) || ((temp[3] <= x) && (x <= temp[1])) ){
-                area = "Up buffer";
-                unitType = "HUB";
-            }
-            temp.remove(0,4);
-        }
-    }
-    if ( x >= TABLE_WIDTH - 10 ){
-        QVector<quint32> temp = iniBufPos["VRB"];
-        while (temp.size()>=4){
-            if( ((temp[1] < y) && (y <= temp[3]+1)) || ((temp[3] < y) && (y <= temp[1]+1)) ){
-                area = "Right buffer";
-                unitType = "VRB";
-            }
-            temp.remove(0,4);
-        }
-    }
-    if ( x < 10 ){
-        QVector<quint32> temp = iniBufPos["VLB"];
-        while (temp.size()>=4){
-            if( ((temp[1] < y) && (y <= temp[3]+1)) || ((temp[3] < y) && (y <= temp[1]+1)) ){
-                area = "Left buffer";
-                unitType = "VLB";
-            }
-            temp.remove(0,4);
-        }
-    }
-    }
-*/
 
     //Show information
     ui->typeLabel->setText(area);
@@ -1489,15 +1504,10 @@ QString MainWindow::pointsDetection()
     }
 
     //Заполнение информации о размещенных юнитах.
-    if(lastPoint.y() >= verPeriodicBegin+traceChannel && lastPoint.x() >= horPeriodicBegin){
+    if(lastPoint.y() >= verPeriodicBegin+traceChannel && lastPoint.x() >= horPeriodicBegin && lastPoint.y() <= TABLE_HEIGTH - 10){
         quint32 coordX = (lastPoint.x() - horPeriodicBegin + 1)/unitWidth;
         quint32 coordY = (lastPoint.y() - verPeriodicBegin)/(cellHeigth + traceChannel);//8+6
         if(coordX < unitsInRow && coordY < unitsInColumn){
-            QString infoName = "";
-            QString infoPos = "";
-            QString infoMacro = "";
-            QString infoNames = "";
-            QString infoTypes = "";
             QVector<QString> melPinsInfo;
             QVector<QString> melPinsType;
             if(cell[coordX][coordY]->isUnderMouse()){
@@ -1506,7 +1516,7 @@ QString MainWindow::pointsDetection()
                 infoPos.append("x");
                 infoPos.append(QString::number(cell[coordX][coordY]->getRow()));
 
-                if(cell[coordX][coordY]->getName() != ""){
+                if(cell[coordX][coordY]->isActive()){
                     infoPos.append(", ");
                     infoPos.append(QString::number(cell[coordX][coordY]->getSize()));
 

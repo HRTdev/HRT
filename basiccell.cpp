@@ -41,7 +41,7 @@ void basicCell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
         str.append("/");
         str.append(m_cellDbName);
         if(m_active){
-            str.append("\nact");
+            //str.append("\nact");
         }
         str.append("\nM: ");
         str.append(m_cellMelMacro);
