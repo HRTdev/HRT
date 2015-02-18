@@ -170,6 +170,8 @@ private:
 
     QTimer* m_timer;
 
+    QVector<quint32> bufferInfo;
+
 signals:
    // void itemDoubleClicked(QTableWidgetItem *item);
     void fileNameCheckingResult(bool result);

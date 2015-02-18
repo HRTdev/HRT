@@ -26,10 +26,15 @@
 
 #define HALF SIDE / 2
 
+#define VLB 0
+#define VRB 1
+#define HDB 2
+#define HUB 3
+
 class bufferCell : public QObject, public QGraphicsItem
 {
     Q_OBJECT
-    Q_PROPERTY(QString orientation              READ getOrientation     WRITE setOrientation)
+    Q_PROPERTY(quint8 orientation              READ getOrientation     WRITE setOrientation)
     Q_PROPERTY(QVector<quint32> positionData    READ getPositionData    WRITE setPositionData)
     Q_PROPERTY(bool active                      READ isActive           WRITE setActive)
     Q_PROPERTY(bool selected                    READ isSelected         WRITE setSelected)
@@ -37,7 +42,7 @@ public:
     bufferCell( QGraphicsItem * parent = 0) : QGraphicsItem (parent){};
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;
-    QString getOrientation() const;
+    quint8 getOrientation() const;
     quint32 getNumber() const;
     QVector<quint32> getPositionData() const;
     bool isActive() const;
@@ -55,16 +60,16 @@ public slots:
     void setParams(QString cellMelName, QString cellDbName, quint32 cellDbPinsCnt,
                    QVector<QString> cellDbPinsInfo, QVector<QString> cellMelPinsInfo,
                    QVector<QString> cellMelPinsType, QString melMacro);
-    void setOrientation(QString arg);
+    void setOrientation(quint8 arg);
     void setPositionData(QVector<quint32> arg);
     void setActive(bool arg);
     void setSelected(bool arg);
     void setMacro(QString arg);
     //void setParams(QString bufferNetListName, QString);
-    void initialSet(QString orientation, quint16 number, QVector<quint32> positionData);
+    void initialSet(quint8 orientation, quint16 number, QVector<quint32> positionData);
 
 private:
-    QString m_orientation;
+    quint8 m_orientation;
     quint16 m_number;
     QVector<quint32> m_positionData;
 

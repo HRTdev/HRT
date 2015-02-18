@@ -152,57 +152,62 @@ void MainWindow::drawTable(){
     QVector<quint32> postData(3);
     posData = iniBufPos["VLB"];
     for(quint32 i = 0; i < posData.size()/4; i++){
-        postData[0] = TABLE_HEIGTH - posData[1+4*i];
-        postData[1] = TABLE_HEIGTH - posData[2+4*i];
-        postData[2] = TABLE_HEIGTH - posData[3+4*i];
+        postData[0] = TABLE_HEIGTH - posData[1+4*i] - 1;
+        postData[1] = TABLE_HEIGTH - posData[2+4*i] - 1;
+        postData[2] = TABLE_HEIGTH - posData[3+4*i] - 1;
         if(postData[0]<postData[2]){
             quint32 t = postData[0];
             postData[0] = postData[2];
             postData[2] = t;
         }
         buffer[0][i] = new bufferCell;
-        bGrid[0][i] = new bufGrid;
-
-        postData[0] -= 1;
-        postData[1] -= 1;
-        postData[2] -= 1;
         buffer[0][i]->setPos(0,postData[2]*SIDE);
+
+        bGrid[0][i] = new bufGrid;
         bGrid[0][i]->setPos(10*SIDE,postData[2]*SIDE);
+
         postData[0] -= postData[2];
         postData[1] -= postData[2];
         postData[2] -= postData[2];
-        buffer[0][i]->initialSet("VLB", posData[0+4*i], postData);
+
+        buffer[0][i]->initialSet(VLB, posData[0+4*i], postData);
+        buffer[0][i]->setActive(false);
+
         bGrid[0][i]->setPolyPos(postData);
         bGrid[0][i]->setType(0);
+
         scene->addItem(buffer[0][i]);
         scene->addItem(bGrid[0][i]);
     }
 
     posData = iniBufPos["VRB"];
     for(quint32 i = 0; i < posData.size()/4; i++){
-         postData[0] = TABLE_HEIGTH - posData[1+4*i];
-         postData[1] = TABLE_HEIGTH - posData[2+4*i];
-         postData[2] = TABLE_HEIGTH - posData[3+4*i];
-         if(postData[0]<postData[2]){
-             quint32 t = postData[0];
-             postData[0] = postData[2];
-             postData[2] = t;
-         }
-         buffer[1][i] = new bufferCell;
-         bGrid[1][i] = new bufGrid;
-         postData[0] -= 1;
-         postData[1] -= 1;
-         postData[2] -= 1;
-         buffer[1][i]->setPos((TABLE_WIDTH - 10)*SIDE,postData[2]*SIDE);
-         bGrid[1][i]->setPos((TABLE_WIDTH - 20)*SIDE,postData[2]*SIDE);
-         postData[0] -= postData[2];
-         postData[1] -= postData[2];
-         postData[2] -= postData[2];
-         buffer[1][i]->initialSet("VRB", posData[0+4*i], postData);
-         bGrid[1][i]->setPolyPos(postData);
-         bGrid[1][i]->setType(1);
-         scene->addItem(buffer[1][i]);
-         scene->addItem(bGrid[1][i]);
+        postData[0] = TABLE_HEIGTH - posData[1+4*i] - 1;
+        postData[1] = TABLE_HEIGTH - posData[2+4*i] - 1;
+        postData[2] = TABLE_HEIGTH - posData[3+4*i] - 1;
+        if(postData[0]<postData[2]){
+            quint32 t = postData[0];
+            postData[0] = postData[2];
+            postData[2] = t;
+        }
+        buffer[1][i] = new bufferCell;
+        buffer[1][i]->setPos((TABLE_WIDTH - 10)*SIDE,postData[2]*SIDE);
+
+        bGrid[1][i] = new bufGrid;
+        bGrid[1][i]->setPos((TABLE_WIDTH - 20)*SIDE,postData[2]*SIDE);
+
+        postData[0] -= postData[2];
+        postData[1] -= postData[2];
+        postData[2] -= postData[2];
+
+        buffer[1][i]->initialSet(VRB, posData[0+4*i], postData);
+        buffer[1][i]->setActive(false);
+
+        bGrid[1][i]->setPolyPos(postData);
+        bGrid[1][i]->setType(1);
+
+        scene->addItem(buffer[1][i]);
+        scene->addItem(bGrid[1][i]);
     }
 
     posData = iniBufPos["HDB"];
@@ -210,48 +215,60 @@ void MainWindow::drawTable(){
         postData[0] = posData[1+4*i];
         postData[1] = posData[2+4*i];
         postData[2] = posData[3+4*i];
-         if(postData[0]<postData[2]){
-             quint32 t = postData[0];
-             postData[0] = postData[2];
-             postData[2] = t;
-         }
+        if(postData[0]<postData[2]){
+            quint32 t = postData[0];
+            postData[0] = postData[2];
+            postData[2] = t;
+        }
 
-         buffer[2][i] = new bufferCell;
-         bGrid[2][i] = new bufGrid;
-         buffer[2][i]->setPos(postData[2]*SIDE,(TABLE_HEIGTH - 10)*SIDE);
-         bGrid[2][i]->setPos(postData[2]*SIDE,(TABLE_HEIGTH - 20)*SIDE);
-         postData[0] -= postData[2];
-         postData[1] -= postData[2];
-         postData[2] -= postData[2];
-         buffer[2][i]->initialSet("HDB", posData[0+4*i], postData);
-         bGrid[2][i]->setPolyPos(postData);
-         bGrid[2][i]->setType(2);
-         scene->addItem(buffer[2][i]);
-         scene->addItem(bGrid[2][i]);
+        buffer[2][i] = new bufferCell;
+        buffer[2][i]->setPos(postData[2]*SIDE,(TABLE_HEIGTH - 10)*SIDE);
+
+        bGrid[2][i] = new bufGrid;
+        bGrid[2][i]->setPos(postData[2]*SIDE,(TABLE_HEIGTH - 20)*SIDE);
+
+        postData[0] -= postData[2];
+        postData[1] -= postData[2];
+        postData[2] -= postData[2];
+
+        buffer[2][i]->initialSet(HDB, posData[0+4*i], postData);
+        buffer[2][i]->setActive(false);
+
+        bGrid[2][i]->setPolyPos(postData);
+        bGrid[2][i]->setType(2);
+
+        scene->addItem(buffer[2][i]);
+        scene->addItem(bGrid[2][i]);
     }
 
     posData = iniBufPos["HUB"];
     for(quint32 i = 0; i < posData.size()/4; i++){
-            postData[0] = posData[1+4*i];
-            postData[1] = posData[2+4*i];
-            postData[2] = posData[3+4*i];
-         if(postData[0]<postData[2]){
-             quint32 t = postData[0];
-             postData[0] = postData[2];
-             postData[2] = t;
-         }
-         buffer[3][i] = new bufferCell;
-         bGrid[3][i] = new bufGrid;
-         buffer[3][i]->setPos(postData[2]*SIDE,0);
-         bGrid[3][i]->setPos(postData[2]*SIDE,10*SIDE);
-         postData[0] -= postData[2];
-         postData[1] -= postData[2];
-         postData[2] -= postData[2];
-         buffer[3][i]->initialSet("HUB", posData[0+4*i], postData);
-         bGrid[3][i]->setPolyPos(postData);
-         bGrid[3][i]->setType(3);
-         scene->addItem(buffer[3][i]);
-         scene->addItem(bGrid[3][i]);
+        postData[0] = posData[1+4*i];
+        postData[1] = posData[2+4*i];
+        postData[2] = posData[3+4*i];
+        if(postData[0]<postData[2]){
+            quint32 t = postData[0];
+            postData[0] = postData[2];
+            postData[2] = t;
+        }
+        buffer[3][i] = new bufferCell;
+        buffer[3][i]->setPos(postData[2]*SIDE,0);
+
+        bGrid[3][i] = new bufGrid;
+        bGrid[3][i]->setPos(postData[2]*SIDE,10*SIDE);
+
+        postData[0] -= postData[2];
+        postData[1] -= postData[2];
+        postData[2] -= postData[2];
+
+        buffer[3][i]->initialSet(HUB, posData[0+4*i], postData);
+        buffer[3][i]->setActive(false);
+
+        bGrid[3][i]->setPolyPos(postData);
+        bGrid[3][i]->setType(3);
+
+        scene->addItem(buffer[3][i]);
+        scene->addItem(bGrid[3][i]);
     }
 
 
@@ -332,7 +349,9 @@ void MainWindow::drawTable(){
 
         lastPoint.setX(unitWidth * unitColumn + horPeriodicBegin - 1);
         lastPoint.setY((cellHeigth + traceChannel) * unitRow + verPeriodicBegin );
-        on_myScene_initialUnitPlacing();
+        if(dbUnitType.value(melUnitFName.value(melUnitChosenMacro).value(melUnitChosen)) != 1){
+            on_myScene_initialUnitPlacing();
+        }
         //qDebug() << "Note: Element loading function is working;";
     }
     ui->graphicsView->update();
@@ -1395,22 +1414,27 @@ QString MainWindow::pointsDetection()
             for (quint32 j = 0; j< buffer.at(HUB).size(); j++){
                 if(buffer.at(HUB).at(j)->isUnderMouse()){
                     type = "buffer";
+                    bufferInfo.clear();
+                    bufferInfo.append(HUB);
+                    bufferInfo.append(j);
                     infoName = "Buffer cell under mouse!";
 
                     infoPos = QString::number(buffer.at(HUB).at(j)->getNumber());
                     infoPos.append(" at ");
-                    infoPos.append(buffer.at(HUB).at(j)->getOrientation());
+                    infoPos.append(QString::number(buffer.at(HUB).at(j)->getOrientation()));
                 }
             }
         }else if ( coursorY >= TABLE_HEIGTH - 10 ){
             for (quint32 j = 0; j< buffer.at(HDB).size(); j++){
                 if(buffer.at(HDB).at(j)->isUnderMouse()){
-                    type = "buffer";
+                    bufferInfo.clear();
+                    bufferInfo.append(HDB);
+                    bufferInfo.append(j);
                     infoName = "Buffer cell under mouse!";
 
                     infoPos = QString::number(buffer.at(HDB).at(j)->getNumber());
                     infoPos.append(" at ");
-                    infoPos.append(buffer.at(HDB).at(j)->getOrientation());
+                    infoPos.append(QString::number(buffer.at(HDB).at(j)->getOrientation()));
                 }
             }
         }
@@ -1419,22 +1443,28 @@ QString MainWindow::pointsDetection()
             for (quint32 j = 0; j< buffer.at(VRB).size(); j++){
                 if(buffer.at(VRB).at(j)->isUnderMouse()){
                     type = "buffer";
+                    bufferInfo.clear();
+                    bufferInfo.append(VRB);
+                    bufferInfo.append(j);
                     infoName = "Buffer cell under mouse!";
 
                     infoPos = QString::number(buffer.at(VRB).at(j)->getNumber());
                     infoPos.append(" at ");
-                    infoPos.append(buffer.at(VRB).at(j)->getOrientation());
+                    infoPos.append(QString::number(buffer.at(VRB).at(j)->getOrientation()));
                 }
             }
         }else if ( coursorX <= 10 ){
             for (quint32 j = 0; j< buffer.at(VLB).size(); j++){
                 if(buffer.at(VLB).at(j)->isUnderMouse()){
                     type = "buffer";
+                    bufferInfo.clear();
+                    bufferInfo.append(VLB);
+                    bufferInfo.append(j);
                     infoName = "Buffer cell under mouse!";
 
                     infoPos = QString::number(buffer.at(VLB).at(j)->getNumber());
                     infoPos.append(" at ");
-                    infoPos.append(buffer.at(VLB).at(j)->getOrientation());
+                    infoPos.append(QString::number(buffer.at(VLB).at(j)->getOrientation()));
                 }
             }
         }
@@ -1605,6 +1635,67 @@ void MainWindow::on_myScene_unitPlacing()
     }
     /* End of check */
 
+    if (pointsDetection() == "buffer"){
+        bool cellsFreedomFlag = true;
+        QString fName;
+        fName = melUnitFName.value(melUnitChosenMacro).value(melUnitChosen);
+        quint32 bufLine = bufferInfo.at(0);
+        quint32 bufPos = bufferInfo.at(1);
+        if(buffer.at(bufLine).at(bufPos)->isActive()){
+                        cellsFreedomFlag = false;
+                        qDebug()<<"NOTE: This buffer cell is already occupied, try other free cell;";
+        }
+        if (dbUnitType.value(fName) != 1){
+            cellsFreedomFlag = false;
+            qDebug()<<"NOTE: Unit "<<fName<<" must be placed in matrix cell, not in buffer;";
+        }
+        if(cellsFreedomFlag){
+            qDebug()<<"NOTE: Cells are free, so we can place unit "<<melUnitChosen<<" macro "<<melUnitChosenMacro<<" here; Type of element is: "<<fName<<" ;";
+            qDebug()<<melUnitPinType.value(melUnitChosenMacro).value(melUnitChosen);
+            qDebug()<<bufLine<<bufPos;
+            buffer.at(bufLine).at(bufPos)->setParams(melUnitChosen,
+                                            fName,
+                                            dbUnitPinsCnt.value(fName),
+                                            dbUnitPinsInfo.value(fName),
+                                            melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen),
+                                            melUnitPinType.value(melUnitChosenMacro).value(melUnitChosen),
+                                            melUnitChosenMacro);
+
+            buffer.at(bufLine).at(bufPos)->setActive(true);
+            buffer.at(bufLine).at(bufPos)->update();
+qDebug()<<"hhhh";
+            QSqlQuery query4;
+            query4.prepare("SELECT A.unitId FROM unitNets A, sourceData B, projects C "
+                          "WHERE A.fileId = B.fileId AND C.projectName = :projName "
+                          "AND A.macroUnitName = :mname AND A.melUnitName = :name "
+                          "AND C.projectName = B.projectName");
+            query4.bindValue(":name", melUnitChosen);
+            query4.bindValue(":projName", projectName);
+            query4.bindValue(":mname", melUnitChosenMacro);
+            query4.exec();
+            quint32 unitId;
+            while (query4.next()) {
+                unitId = query4.value(0).toInt();
+            }
+
+
+            QSqlQuery query2;
+            query2.prepare("UPDATE unitNets SET isPlaced = 1 WHERE unitId = :id");
+            query2.bindValue(":id", unitId);
+            query2.exec();
+
+            fillInfoTable();
+
+            QSqlQuery query3;
+            query3.prepare("INSERT INTO unitPlacement (unitId, unitRow, unitColumn) "
+                           "VALUES (:id,:row,:col)");
+            query3.bindValue(":id", unitId);
+            query3.bindValue(":row", bufLine);
+            query3.bindValue(":col", bufPos);
+            query3.exec();
+        }
+    }
+
     if (pointsDetection() == "cell"){
         quint32 coordX = (lastPoint.x() - horPeriodicBegin + 1)/unitWidth;
         quint32 coordY = (lastPoint.y() - verPeriodicBegin)/(cellHeigth + traceChannel);//8+6
@@ -1734,7 +1825,7 @@ void MainWindow::on_myScene_unitPlacing()
     }
 }
 
-void MainWindow::on_myScene_initialUnitPlacing()
+void MainWindow::on_myScene_initialUnitPlacing()//Now it's usable only for grid filling, not for buffers!
 {
     quint32 coordX = (lastPoint.x() - horPeriodicBegin + 1)/unitWidth;
     quint32 coordY = (lastPoint.y() - verPeriodicBegin)/(cellHeigth + traceChannel);//8+6
@@ -1752,7 +1843,7 @@ void MainWindow::on_myScene_initialUnitPlacing()
     query.first();
     fName = query.value(0).toString();
 
-    cell[coordX][coordY]->setParams(melUnitChosen,
+    cell.at(coordX).at(coordY)->setParams(melUnitChosen,
                                     fName,
                                     dbUnitPinsCnt.value(fName),
                                     dbUnitCellCnt.value(fName),
@@ -1762,11 +1853,11 @@ void MainWindow::on_myScene_initialUnitPlacing()
                                     melUnitPinType.value(melUnitChosenMacro).value(melUnitChosen),
                                     melUnitChosenMacro);
 
-    cell[coordX][coordY]->setActive(true);
-    cell[coordX][coordY]->update();
+    cell.at(coordX).at(coordY)->setActive(true);
+    cell.at(coordX).at(coordY)->update();
 
     /* Some code to assign to Si+ names of nets, which belongs to corresponding unit we are placing now */
-    QVector<QString> temp = grid[coordX][coordY]->getNets();
+    QVector<QString> temp = grid.at(coordX).at(coordY)->getNets();
     quint32 pinNum;
 
     pinNum = dbUnitPinsInfo.value(fName).at(1+3).toInt();
@@ -1777,9 +1868,9 @@ void MainWindow::on_myScene_initialUnitPlacing()
     if(pinNum != 0 && pinNum != 65535)
         temp[1] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
 
-    grid[coordX][coordY]->setNets(temp);
+    grid.at(coordX).at(coordY)->setNets(temp);
     temp.clear();
-    temp = grid[coordX][coordY+1]->getNets();
+    temp = grid.at(coordX).at(coordY+1)->getNets();
 
     pinNum = dbUnitPinsInfo.value(fName).at(1+0).toInt();
     if(pinNum != 0 && pinNum != 65535)
@@ -1789,7 +1880,7 @@ void MainWindow::on_myScene_initialUnitPlacing()
     if(pinNum != 0 && pinNum != 65535)
         temp[2] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
 
-    grid[coordX][coordY+1]->setNets(temp);
+    grid.at(coordX).at(coordY+1)->setNets(temp);
 }
 
 void MainWindow::fillInfoTable()
