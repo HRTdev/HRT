@@ -66,7 +66,6 @@ private slots:
     void openDb();         //
     void openMel();        //
     void on_myScene_unitPlacing();
-    void on_myScene_initialUnitPlacing();
     void update();
     void on_tableWidget_itemDoubleClicked(QTableWidgetItem *item);
     void on_tableView_itemDoubleClicked(QModelIndex mi);
@@ -80,6 +79,7 @@ private slots:
     void on_openProjectWidget_openProject(QString project);
     void on_wiringAction();
     QString pointsDetection();
+    void fillTable();
 private:
     Ui::MainWindow *ui;
     QVector< QVector<SquareItem*> > square;
