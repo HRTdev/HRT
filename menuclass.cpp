@@ -26,21 +26,23 @@ newProjectMenu::newProjectMenu(QWidget *parent) :
     connect(projectName, SIGNAL(textChanged(QString)), this, SLOT(on_projectName_textChanged(QString)));
 
     QGridLayout *newProjectMenuLayout = new QGridLayout;
+    newProjectMenuLayout->setAlignment(Qt::AlignTop);
+    newProjectMenuLayout->setColumnMinimumWidth(1, 300);
     newProjectMenuLayout->addWidget(label,0,0,1,0);
     //newProjectMenuLayout->setVerticalSpacing(6);
     newProjectMenuLayout->addWidget(projectName,1,0);
-    newProjectMenuLayout->addWidget(projectNameChecking,1,1);
+    newProjectMenuLayout->addWidget(projectNameChecking,1,1,Qt::AlignCenter);
     newProjectMenuLayout->addWidget(comboBoxHeader,2,0,1,0);
     //newProjectMenuLayout->setVerticalSpacing(6);
     newProjectMenuLayout->addWidget(iniSelection,3,0,1,0);
-    newProjectMenuLayout->addWidget(selectMelButton,4,0,1,0);
-    newProjectMenuLayout->addWidget(fileNameField,5,0,1,0);
-    newProjectMenuLayout->addWidget(okButton,6,0);
-    newProjectMenuLayout->addWidget(cancelButton,6,1);
+    newProjectMenuLayout->addWidget(selectMelButton,4,0);
+    newProjectMenuLayout->addWidget(fileNameField,4,1);
+    newProjectMenuLayout->addWidget(okButton,5,0);
+    newProjectMenuLayout->addWidget(cancelButton,5,1);
     newProjectMenuLayout->setMargin(11);
     newProjectMenuLayout->setSpacing(6);
     this->setLayout(newProjectMenuLayout);
-    this->resize(300, 500);
+//    this->resize(500, this->geometry().height());
 }
 
 QString newProjectMenu::getText() const
@@ -70,9 +72,11 @@ void newProjectMenu::on_fileNameCheckingResult(bool isCorrect)
     //qDebug()<<"Checking"<<isCorrect;
     if(isCorrect){
         projectNameChecking->setText("Correct");
+        projectNameChecking->setStyleSheet("QLabel { color : green; }");
         okButton->setEnabled(true);
     }else{
         projectNameChecking->setText("Wrong");
+        projectNameChecking->setStyleSheet("QLabel { color : red; }");
         okButton->setEnabled(false);
 
     }

@@ -1391,7 +1391,9 @@ QString MainWindow::pointsDetection()
                     bufferInfo.clear();
                     bufferInfo.append(HUB);
                     bufferInfo.append(j);
-                    infoName = "Buffer cell under mouse!";
+                    infoName.append(buffer.at(HUB).at(j)->getName());
+                    infoName.append(", ");
+                    infoName.append(buffer.at(HUB).at(j)->getDBName());
 
                     infoPos = QString::number(buffer.at(HUB).at(j)->getNumber());
                     infoPos.append(" at ");
@@ -1405,7 +1407,9 @@ QString MainWindow::pointsDetection()
                     bufferInfo.clear();
                     bufferInfo.append(HDB);
                     bufferInfo.append(j);
-                    infoName = "Buffer cell under mouse!";
+                    infoName.append(buffer.at(HDB).at(j)->getName());
+                    infoName.append(", ");
+                    infoName.append(buffer.at(HDB).at(j)->getDBName());
 
                     infoPos = QString::number(buffer.at(HDB).at(j)->getNumber());
                     infoPos.append(" at ");
@@ -1421,7 +1425,9 @@ QString MainWindow::pointsDetection()
                     bufferInfo.clear();
                     bufferInfo.append(VRB);
                     bufferInfo.append(j);
-                    infoName = "Buffer cell under mouse!";
+                    infoName.append(buffer.at(VRB).at(j)->getName());
+                    infoName.append(", ");
+                    infoName.append(buffer.at(VRB).at(j)->getDBName());
 
                     infoPos = QString::number(buffer.at(VRB).at(j)->getNumber());
                     infoPos.append(" at ");
@@ -1435,7 +1441,9 @@ QString MainWindow::pointsDetection()
                     bufferInfo.clear();
                     bufferInfo.append(VLB);
                     bufferInfo.append(j);
-                    infoName = "Buffer cell under mouse!";
+                    infoName.append(buffer.at(VLB).at(j)->getName());
+                    infoName.append(", ");
+                    infoName.append(buffer.at(VLB).at(j)->getDBName());
 
                     infoPos = QString::number(buffer.at(VLB).at(j)->getNumber());
                     infoPos.append(" at ");
@@ -1692,8 +1700,8 @@ void MainWindow::on_myScene_unitPlacing()
         quint32 bufLine = bufferInfo.at(0);
         quint32 bufPos = bufferInfo.at(1);
         if(buffer.at(bufLine).at(bufPos)->isActive()){
-                        cellsFreedomFlag = false;
-                        qDebug()<<"NOTE: This buffer cell is already occupied, try other free cell;";
+            cellsFreedomFlag = false;
+            qDebug()<<"NOTE: This buffer cell is already occupied, try other free cell;";
         }
         if (dbUnitType.value(fName) != 1){
             cellsFreedomFlag = false;
@@ -1701,8 +1709,8 @@ void MainWindow::on_myScene_unitPlacing()
         }
         if(cellsFreedomFlag){
             qDebug()<<"NOTE: Cells are free, so we can place unit "<<melUnitChosen<<" macro "<<melUnitChosenMacro<<" here; Type of element is: "<<fName<<" ;";
-            qDebug()<<melUnitPinType.value(melUnitChosenMacro).value(melUnitChosen);
-            qDebug()<<bufLine<<bufPos;
+//            qDebug()<<melUnitPinType.value(melUnitChosenMacro).value(melUnitChosen);
+//            qDebug()<<bufLine<<bufPos;
             buffer.at(bufLine).at(bufPos)->setParams(melUnitChosen,
                                             fName,
                                             dbUnitPinsCnt.value(fName),
@@ -1713,7 +1721,7 @@ void MainWindow::on_myScene_unitPlacing()
 
             buffer.at(bufLine).at(bufPos)->setActive(true);
             buffer.at(bufLine).at(bufPos)->update();
-qDebug()<<"hhhh";
+//            qDebug()<<"hhhh";
             QSqlQuery query4;
             query4.prepare("SELECT A.unitId FROM unitNets A, sourceData B, projects C "
                           "WHERE A.fileId = B.fileId AND C.projectName = :projName "

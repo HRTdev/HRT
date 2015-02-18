@@ -19,13 +19,18 @@
 #include <QSqlError>
 #include <QSqlQueryModel>
 #include <QSqlTableModel>
+//#include "ui_openprojectmenu.h"
+
+//namespace Ui {
+//    class openProjectMenu;
+//}
 
 class openProjectMenu : public QWidget
 {
     Q_OBJECT
 public:
     explicit openProjectMenu(QWidget *parent = 0);
-
+//    ~openProjectMenu();
     QTableView *projectsList;
     QPushButton *okButton;
     QPushButton *cancelButton;
@@ -35,6 +40,7 @@ public slots:
     void on_projectsList_clicked(QModelIndex mi);
     void on_okButton_clicked();
 private:
+//    Ui::openProjectMenu *m_ui;
     QLabel *titleProjects;
     QLabel *titleProjectsInfo;
     QLabel *titleProjectName;

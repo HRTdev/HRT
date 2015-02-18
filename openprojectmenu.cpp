@@ -2,7 +2,10 @@
 
 openProjectMenu::openProjectMenu(QWidget *parent) :
     QWidget(parent)
+    //m_ui(new Ui::openProjectMenu())
 {
+    //m_ui->setupUi(this);
+
     this->setWindowTitle("Open...");
     projectsList = new QTableView;
     okButton = new QPushButton("OK");
@@ -23,11 +26,15 @@ openProjectMenu::openProjectMenu(QWidget *parent) :
     projectsList->resizeColumnsToContents();
     projectsList->show();
 
-    QGridLayout *openProjectLayout = new QGridLayout;
-    openProjectLayout->addWidget(projectsList,0,0,0,1);
-    openProjectLayout->addWidget(okButton,1,0);
-    openProjectLayout->addWidget(cancelButton,1,1);
-    this->setLayout(openProjectLayout);
+    QGridLayout *layout = new QGridLayout;
+    layout->addWidget(okButton,1,0);
+    layout->addWidget(cancelButton,1,1);
+
+    layout->addWidget(projectsList,0,0,1,0);
+
+
+
+    this->setLayout(layout);
 
 
     connect(projectsList, SIGNAL(clicked(QModelIndex)), this, SLOT(on_projectsList_clicked(QModelIndex)));
@@ -59,3 +66,9 @@ void openProjectMenu::on_okButton_clicked()
 {
     emit openProject(projectSelected);
 }
+
+//openProjectMenu::~openProjectMenu()
+//{
+//    delete m_ui;
+//    m_ui = 0;
+//}
