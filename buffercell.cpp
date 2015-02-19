@@ -10,6 +10,7 @@ void bufferCell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
     cellPen = QPen(Qt::yellow);
     cellBrush = QBrush(Qt::darkCyan);
+    contBrush = QBrush(Qt::green);
 
     QRect basic;
     QRect contact1;
@@ -73,11 +74,17 @@ void bufferCell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
         painter->drawRect(contact1);
         painter->drawRect(contact2);
         painter->drawRect(contact3);
-
         painter->setPen(borderPen);
+        if(m_order){
+            painter->drawText(contact2, Qt::AlignCenter, m_cellDbPinsInfo.at(6));
+            painter->drawText(contact3, Qt::AlignCenter, m_cellDbPinsInfo.at(3));
+        }else{
+            painter->drawText(contact2, Qt::AlignCenter, m_cellDbPinsInfo.at(3));
+            painter->drawText(contact3, Qt::AlignCenter, m_cellDbPinsInfo.at(6));
+        }
         painter->drawText(contact1, Qt::AlignCenter, m_cellDbPinsInfo.at(0));
-        painter->drawText(contact2, Qt::AlignCenter, m_cellDbPinsInfo.at(3));
-        painter->drawText(contact3, Qt::AlignCenter, m_cellDbPinsInfo.at(6));
+
+
 
         QString str;
         str.append(m_cellMelName);
@@ -86,9 +93,18 @@ void bufferCell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
         painter->drawText(basic, Qt::AlignCenter, str);
     }else{
         painter->drawRect(basic);
+        if(m_order){
+            painter->setBrush(contBrush);
+            painter->drawRect(contact3);
+            painter->setBrush(Qt::NoBrush);
+            painter->drawRect(contact2);
+        }else{
+            painter->setBrush(contBrush);
+            painter->drawRect(contact2);
+            painter->setBrush(Qt::NoBrush);
+            painter->drawRect(contact3);
+        }
         painter->drawRect(contact1);
-        painter->drawRect(contact2);
-        painter->drawRect(contact3);
         painter->drawText(basic, Qt::AlignCenter, QString::number(m_number));
     }
 
@@ -107,7 +123,7 @@ void bufferCell::setParams(QString cellMelName, QString cellDbName, quint32 cell
     //qDebug()<<m_cellMelPinsInfo;
     m_cellMelPinsType   = cellMelPinsType;//Тип пина: вход, выход, двунаправленный
     m_cellMelMacro      = melMacro;       //Имя макроэлемента, которому принадлежит элемент
-    qDebug()<<"set"<<m_cellMelName<<m_cellDbName<<m_cellDbPinsCnt<<m_cellDbPinsInfo;
+//    qDebug()<<"set"<<m_cellMelName<<m_cellDbName<<m_cellDbPinsCnt<<m_cellDbPinsInfo;
 
     m_nets.clear();
 //    if(m_cellMelPinsInfo.size()>=2 && m_cellDbPinsInfo.size()>=9){
@@ -200,6 +216,11 @@ void bufferCell::setSelected(bool arg)
     m_selected = arg;
 }
 
+void bufferCell::setContactsOrder(bool arg)
+{
+    m_order = arg;
+}
+
 void bufferCell::setMacro(QString arg)
 {
     m_cellMelMacro = arg;
@@ -215,6 +236,11 @@ void bufferCell::initialSet(quint8 orientation, quint16 number, QVector<quint32>
 QString bufferCell::getMacro() const
 {
     return m_cellMelMacro;
+}
+
+bool bufferCell::getContactsOrder() const
+{
+    return m_order;
 }
 
 QString bufferCell::getName() const

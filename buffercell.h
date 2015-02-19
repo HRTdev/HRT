@@ -38,6 +38,7 @@ class bufferCell : public QObject, public QGraphicsItem
     Q_PROPERTY(QVector<quint32> positionData    READ getPositionData    WRITE setPositionData)
     Q_PROPERTY(bool active                      READ isActive           WRITE setActive)
     Q_PROPERTY(bool selected                    READ isSelected         WRITE setSelected)
+
 public:
     bufferCell( QGraphicsItem * parent = 0) : QGraphicsItem (parent){};
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
@@ -53,6 +54,7 @@ public:
     QVector<QString> getMelPinsInfo() const;
     QVector<QString> getMelPinsType() const;
     QString getMacro() const;
+    bool getContactsOrder() const;
 
 signals:
     
@@ -64,6 +66,7 @@ public slots:
     void setPositionData(QVector<quint32> arg);
     void setActive(bool arg);
     void setSelected(bool arg);
+    void setContactsOrder(bool arg);
     void setMacro(QString arg);
     //void setParams(QString bufferNetListName, QString);
     void initialSet(quint8 orientation, quint16 number, QVector<quint32> positionData);
@@ -78,6 +81,7 @@ private:
     QPen cellPen;
     QPen mePen;
     QBrush cellBrush;
+    QBrush contBrush;
 
     quint32 m_cellDbPinsCnt;
     QString m_cellMelName;
@@ -93,6 +97,8 @@ private:
 
     bool m_active;
     bool m_selected;
+
+    bool m_order;
 };
 
 #endif // BUFFERCELL_H

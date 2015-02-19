@@ -172,6 +172,8 @@ void MainWindow::drawTable(){
 
         buffer[0][i]->initialSet(VLB, posData[0+4*i], postData);
         buffer[0][i]->setActive(false);
+        buffer[0][i]->setContactsOrder(i%2);
+//        qDebug()<<i%2;
 
         bGrid[0][i]->setPolyPos(postData);
         bGrid[0][i]->setType(0);
@@ -202,6 +204,7 @@ void MainWindow::drawTable(){
 
         buffer[1][i]->initialSet(VRB, posData[0+4*i], postData);
         buffer[1][i]->setActive(false);
+        buffer[1][i]->setContactsOrder(i%2);
 
         bGrid[1][i]->setPolyPos(postData);
         bGrid[1][i]->setType(1);
@@ -233,6 +236,7 @@ void MainWindow::drawTable(){
 
         buffer[2][i]->initialSet(HDB, posData[0+4*i], postData);
         buffer[2][i]->setActive(false);
+        buffer[2][i]->setContactsOrder(i%2);
 
         bGrid[2][i]->setPolyPos(postData);
         bGrid[2][i]->setType(2);
@@ -263,12 +267,25 @@ void MainWindow::drawTable(){
 
         buffer[3][i]->initialSet(HUB, posData[0+4*i], postData);
         buffer[3][i]->setActive(false);
+        buffer[3][i]->setContactsOrder(i%2);
 
         bGrid[3][i]->setPolyPos(postData);
         bGrid[3][i]->setType(3);
 
         scene->addItem(buffer[3][i]);
         scene->addItem(bGrid[3][i]);
+    }
+
+    QVector<QString> tempNet;
+    QString emptyNet = "";
+    tempNet.append(emptyNet);
+    tempNet.append(emptyNet);
+    tempNet.append(emptyNet);
+
+    for(quint32 i = 0; i < bGrid.size(); i++){
+        for(quint32 j = 0; j < bGrid.at(i).size(); j++){
+            bGrid.at(i).at(j)->setNets(tempNet);
+        }
     }
 
 
@@ -933,12 +950,12 @@ void MainWindow::loadFileDb(const QString &fileName)
         }
     } while (!line.isNull());
     //
-    qDebug()<<"Name: 3028";
-    qDebug()<<"Type: "<<dbUnitType.value("F3028");
-    qDebug()<<"Cell_cnt: "<<dbUnitCellCnt.value("F3028");
-    qDebug()<<"Inner_trs: :"<<dbUnitInnerTrs.value("F3028");
-    qDebug()<<"Pins_cnt: "<<dbUnitPinsCnt.value("F3028");
-    qDebug()<<"Pins info: "<<dbUnitPinsInfo.value("F3028");
+//    qDebug()<<"Name: 3028";
+//    qDebug()<<"Type: "<<dbUnitType.value("F3028");
+//    qDebug()<<"Cell_cnt: "<<dbUnitCellCnt.value("F3028");
+//    qDebug()<<"Inner_trs: :"<<dbUnitInnerTrs.value("F3028");
+//    qDebug()<<"Pins_cnt: "<<dbUnitPinsCnt.value("F3028");
+//    qDebug()<<"Pins info: "<<dbUnitPinsInfo.value("F3028");
     //cell[2][2]->setParams(3006,1,dbUnitPinsCnt.value(3006),dbUnitPinsInfo.value(3006));
 #ifndef QT_NO_CURSOR
     QApplication::setOverrideCursor(Qt::WaitCursor);
@@ -1382,6 +1399,12 @@ QString MainWindow::pointsDetection()
     QString infoNames = "";
     QString infoTypes = "";
 
+    QString gridInfoPos = "";
+    QString gridInfoOwner = "";
+    QString gridInfoName = "";
+    QString gridInfoNet = "";
+    QString gridInfoMetal = "";
+
     //Check if it in buffer area
     if((coursorX <= 10 || coursorX >= TABLE_WIDTH - 10) || (coursorY <= 10 || coursorY >= TABLE_HEIGTH - 10)){
         if ( coursorY <= 10){
@@ -1457,6 +1480,83 @@ QString MainWindow::pointsDetection()
         }
     }
 
+
+    //Check if it in buffer's grid area
+    if(((coursorX > 10 && coursorX < horPeriodicBegin)|| (coursorX < TABLE_WIDTH - 10 && coursorX >= TABLE_WIDTH - horPeriodicBegin))
+            || ((coursorY > 10 && coursorY <= verPeriodicBegin)|| (coursorY < TABLE_HEIGTH - 10 && coursorY > TABLE_HEIGTH - verPeriodicBegin))){
+        if ( coursorY <= verPeriodicBegin){
+            for (quint32 j = 0; j< bGrid.at(HUB).size(); j++){
+                if(bGrid.at(HUB).at(j)->isUnderMouse()){
+                    type = "bGrid";
+                    qDebug()<<bGrid.at(HUB).at(j)->getNets();
+
+                    for (qint32 i = 0; i < bGrid.at(HUB).at(j)->getNets().size(); ++i) {
+                        gridInfoName.append(bGrid.at(HUB).at(j)->getNets().at(i));
+                        if (i != bGrid.at(HUB).at(j)->getNets().size() - 1){
+                            gridInfoName.append(", ");
+                        }
+                    }
+
+                }
+            }
+        }
+//        }else if ( coursorY >= TABLE_HEIGTH - 10 ){
+//            for (quint32 j = 0; j< buffer.at(HDB).size(); j++){
+//                if(buffer.at(HDB).at(j)->isUnderMouse()){
+//                    type = "buffer";
+//                    bufferInfo.clear();
+//                    bufferInfo.append(HDB);
+//                    bufferInfo.append(j);
+//                    infoName.append(buffer.at(HDB).at(j)->getName());
+//                    infoName.append(", ");
+//                    infoName.append(buffer.at(HDB).at(j)->getDBName());
+
+//                    infoPos = QString::number(buffer.at(HDB).at(j)->getNumber());
+//                    infoPos.append(" at ");
+//                    infoPos.append(QString::number(buffer.at(HDB).at(j)->getOrientation()));
+//                }
+//            }
+//        }
+
+//        if ( coursorX >= TABLE_WIDTH - 10 ){
+//            for (quint32 j = 0; j< buffer.at(VRB).size(); j++){
+//                if(buffer.at(VRB).at(j)->isUnderMouse()){
+//                    type = "buffer";
+//                    bufferInfo.clear();
+//                    bufferInfo.append(VRB);
+//                    bufferInfo.append(j);
+//                    infoName.append(buffer.at(VRB).at(j)->getName());
+//                    infoName.append(", ");
+//                    infoName.append(buffer.at(VRB).at(j)->getDBName());
+
+//                    infoPos = QString::number(buffer.at(VRB).at(j)->getNumber());
+//                    infoPos.append(" at ");
+//                    infoPos.append(QString::number(buffer.at(VRB).at(j)->getOrientation()));
+//                }
+//            }
+//        }else if ( coursorX <= 10 ){
+//            for (quint32 j = 0; j< buffer.at(VLB).size(); j++){
+//                if(buffer.at(VLB).at(j)->isUnderMouse()){
+//                    type = "buffer";
+//                    bufferInfo.clear();
+//                    bufferInfo.append(VLB);
+//                    bufferInfo.append(j);
+//                    infoName.append(buffer.at(VLB).at(j)->getName());
+//                    infoName.append(", ");
+//                    infoName.append(buffer.at(VLB).at(j)->getDBName());
+
+//                    infoPos = QString::number(buffer.at(VLB).at(j)->getNumber());
+//                    infoPos.append(" at ");
+//                    infoPos.append(QString::number(buffer.at(VLB).at(j)->getOrientation()));
+//                }
+//            }
+//        }
+        if(type == "bGrid"){
+            ui->pinNameLabel->setText(gridInfoName);
+        }
+    }
+
+
     //Show information
     ui->typeLabel->setText(area);
     area = "";
@@ -1470,11 +1570,11 @@ QString MainWindow::pointsDetection()
 
         //qDebug()<<"X-Y: "<<gCoordX<<"-"<<gCoordY;
         if(gCoordX < unitsInRow && gCoordY < unitsInColumn+1){
-            QString gridInfoPos = "";
-            QString gridInfoOwner = "";
-            QString gridInfoName = "";
-            QString gridInfoNet = "";
-            QString gridInfoMetal = "";
+            gridInfoPos = "";
+            gridInfoOwner = "";
+            gridInfoName = "";
+            gridInfoNet = "";
+            gridInfoMetal = "";
             QVector< QVector<quint8> > traceMetal;
 
             gridInfoNet.append(QString::number(gCoordX));
@@ -1642,6 +1742,25 @@ void MainWindow::fillTable()
                                                         melUnitChosenMacro);
             buffer.at(unitRow).at(unitColumn)->setActive(true);
             buffer.at(unitRow).at(unitColumn)->update();
+
+            /* Some code to assign to Si+ names of nets, which belongs to corresponding unit we are placing now */
+            QVector<QString> temp = bGrid.at(unitRow).at(unitColumn)->getNets();
+            quint32 pinNum;
+
+            for (quint32 i = 0; i < dbUnitPinsInfo.value(fName).size() / 3; i++){
+                pinNum = dbUnitPinsInfo.value(fName).at(1+3*i).toInt();
+                if(pinNum != 0 && pinNum != 65535){
+                    if(buffer.at(unitRow).at(unitColumn)->getContactsOrder()){
+                        temp[i] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
+                        //qDebug()<<melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
+                    }else{
+                        temp[dbUnitPinsInfo.value(fName).size() / 3 - i] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
+                    }
+
+                }
+            }
+            bGrid.at(unitRow).at(unitColumn)->setNets(temp);
+
         }
         //qDebug() << "Note: Element loading function is working;";
     }
@@ -1751,6 +1870,24 @@ void MainWindow::on_myScene_unitPlacing()
             query3.bindValue(":row", bufLine);
             query3.bindValue(":col", bufPos);
             query3.exec();
+
+            /* Some code to assign to Si+ names of nets, which belongs to corresponding unit we are placing now */
+            QVector<QString> temp = bGrid.at(bufLine).at(bufPos)->getNets();
+            quint32 pinNum;
+
+            for (quint32 i = 0; i < dbUnitPinsInfo.value(fName).size() / 3; i++){
+                pinNum = dbUnitPinsInfo.value(fName).at(1+3*i).toInt();
+                if(pinNum != 0 && pinNum != 65535){
+                    if(buffer.at(bufLine).at(bufPos)->getContactsOrder()){
+                        temp[i] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
+                        //qDebug()<<melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
+                    }else{
+                        temp[dbUnitPinsInfo.value(fName).size() / 3 - i] = melUnitPinName.value(melUnitChosenMacro).value(melUnitChosen).at(pinNum-1);
+                    }
+
+                }
+            }
+            bGrid.at(bufLine).at(bufPos)->setNets(temp);
         }
     }
 
@@ -1982,7 +2119,7 @@ void MainWindow::on_tableView_itemDoubleClicked(QModelIndex mi){
 
     QModelIndex index = ui->tableView->model()->index(mi.row(), mi.column()+3, QModelIndex());
     melUnitChosenMacro = ui->tableView->model()->data(index).toString();
-    qDebug()<<melUnitChosenMacro<<melUnitChosen;
+//    qDebug()<<melUnitChosenMacro<<melUnitChosen;
 }
 
 void MainWindow::adjustTableSize()
