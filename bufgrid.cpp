@@ -2,7 +2,30 @@
 
 QRectF bufGrid::boundingRect() const
 {
-    return QRectF(0,0,4*SIDE,m_heigth*SIDE);
+    QRectF basic = QRectF(0,0,10*SIDE,10*SIDE);
+    if(m_polyPos.size()>0){
+        switch(m_type){
+        case VLB:{
+            basic = QRectF(0,0,10*SIDE, (m_polyPos[0]+1)*SIDE);
+            break;
+        }
+        case VRB:{
+            basic = QRectF(0,0,10*SIDE, (m_polyPos[0]+1)*SIDE);
+            break;
+        }
+        case HDB:{
+            basic = QRectF(0,0,(m_polyPos[0]+1)*SIDE,10*SIDE);
+            break;
+        }
+        case HUB:{
+            basic = QRectF(0,0,(m_polyPos[0]+1)*SIDE,10*SIDE);
+            break;
+        }
+        default:
+            break;
+        }
+    }
+    return basic;
 }
 
 void bufGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
