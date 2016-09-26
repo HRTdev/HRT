@@ -1126,30 +1126,6 @@ C2P1: Y 4 0
 C2P2: CE 3 0
 C2P3: * 65535 0
 
-Name: F3067
-Num: 67
-Type: 0
-Buff_num: 0
-Cell_cnt: 5
-Inner_tr: 1
-Pins_cnt: 7
-Pins_inf:
-C1P1: C 3 0
-C1P2: A 1 1
-C1P3: * 65535 0
-C2P1: NC 4 0
-C2P2: * 65535 0
-C2P3: A 1 1
-C3P1: A 1 1
-C3P2: * 65535 0
-C3P3: * 65535 0
-C4P1: B 2 1
-C4P2: * 65535 0
-C4P3: * 65535 0
-C5P1: S 5 0
-C5P2: NP 7 0
-C5P3: P 6 0
-
 Name: F3101
 Num: 101
 Type: 0
